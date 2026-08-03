@@ -1,0 +1,105 @@
+@import "tailwindcss";
+@custom-variant dark (&:is(.dark, .dark *));
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+@layer utilities {
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in {
+    animation: fadeIn 0.25s ease-out forwards;
+  }
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.font-serif {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Hide web UI controls during print preview mode */
+.print-preview-mode .no-print {
+  display: none !important;
+}
+
+/* Hide web UI during browser print to produce clean PDF */
+@media print {
+  body {
+    background-color: white !important;
+    color: black !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-container {
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  @page {
+    margin: 1.5cm;
+  }
+}
+
+/* PDF Page Break & Typography Helpers */
+.pdf-keep-together, section, table, tr {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.pdf-page-break-before {
+  break-before: page;
+  page-break-before: always;
+}
+
+.pdf-page-break-after {
+  break-after: page;
+  page-break-after: always;
+}
+
+
+/* PDF Compact Density */
+.pdf-compact-density {
+  padding: 1rem !important;
+}
+.pdf-compact-density * {
+  line-height: 1.3 !important;
+}
+.pdf-compact-density h1, .pdf-compact-density h2, .pdf-compact-density h3 {
+  margin-bottom: 0.5rem !important;
+}
+.pdf-compact-density p, .pdf-compact-density ul {
+  margin-bottom: 0.5rem !important;
+}
+.pdf-compact-density .p-4 {
+  padding: 0.5rem !important;
+}
+.pdf-compact-density .p-8 {
+  padding: 1rem !important;
+}
+.pdf-compact-density .p-12 {
+  padding: 1.5rem !important;
+}
+.pdf-compact-density .mb-8 {
+  margin-bottom: 1rem !important;
+}
+.pdf-compact-density .mb-12 {
+  margin-bottom: 1.5rem !important;
+}
+.pdf-compact-density .py-10 {
+  padding-top: 1.5rem !important;
+  padding-bottom: 1.5rem !important;
+}
+.pdf-compact-density .space-y-6 > * + * {
+  margin-top: 0.75rem !important;
+}
+.pdf-compact-density .space-y-4 > * + * {
+  margin-top: 0.5rem !important;
+}

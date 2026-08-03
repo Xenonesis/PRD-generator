@@ -1,0 +1,6 @@
+{
+  "name": "PRD Generator & Agreement Builder",
+  "description": "Professional Product Requirements Document (PRD) and Project Agreement Generator following standard 33-section structure with AI generation, live preview, and export.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
