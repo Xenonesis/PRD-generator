@@ -115,7 +115,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
             <div className="min-w-0">
               <div className="flex items-center gap-1.5">
-                <span className="font-black text-xs sm:text-sm uppercase tracking-widest text-[#1A1A1A] dark:text-[#F4F1EE] truncate">
+                <span className="inline-block font-black text-xs sm:text-sm uppercase tracking-widest text-[#1A1A1A] dark:text-[#F4F1EE] truncate max-w-[100px] sm:max-w-[150px]">
                   PRD ARCHITECT <span className="text-black/40 dark:text-white/40 text-[10px] sm:text-xs hidden xl:inline">v1.0</span>
                 </span>
                 <span className="hidden xl:inline-block text-[9px] uppercase font-bold tracking-widest bg-black/5 dark:bg-white/5 text-black/70 dark:text-white/70 border border-black dark:border-white/10 px-1.5 py-0.5">
@@ -129,7 +129,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* Center: Desktop View Switcher */}
-          <div className="hidden lg:flex items-center bg-[#EFECE7] dark:bg-[#1E1E1E] p-1 border border-black dark:border-white/10 text-[10px] font-bold uppercase tracking-wider">
+          <div className="hidden xl:flex items-center bg-[#EFECE7] dark:bg-[#1E1E1E] p-1 border border-black dark:border-white/10 text-[10px] font-bold uppercase tracking-wider">
             <button
               onClick={() => setViewMode('editor')}
               className={`flex items-center space-x-1 px-3 py-1.5 transition-all ${
@@ -294,7 +294,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
 
             {/* Print Mode Toggle */}
-            <div className="hidden md:flex items-center space-x-1 border border-black dark:border-white/20 bg-white dark:bg-[#2A2A2A] p-0.5">
+            <div className="hidden xl:flex items-center space-x-1 border border-black dark:border-white/20 bg-white dark:bg-[#2A2A2A] p-0.5">
               <button
                 type="button"
                 onClick={() => setPrintMode('full')}
@@ -546,6 +546,14 @@ export const Navbar: React.FC<NavbarProps> = ({
                   <button onClick={() => setIsWatermarkEnabled(!isWatermarkEnabled)} className="text-left px-4 py-2.5 text-xs font-bold uppercase tracking-wider border-b border-black/10 dark:border-white/10 hover:bg-white dark:hover:bg-[#1E1E1E] flex items-center gap-2 text-black dark:text-white">
                     <Palette className="w-4 h-4" /> Toggle Watermark
                   </button>
+                  
+                  <div className="px-4 py-2.5 flex items-center justify-between text-black dark:text-white border-b border-black/10 dark:border-white/10">
+                    <span className="text-xs font-bold uppercase tracking-wider">Print Mode</span>
+                    <div className="flex bg-[#EFECE7] dark:bg-[#1E1E1E] border border-black/20 dark:border-white/20">
+                      <button onClick={() => setPrintMode('full')} className={`px-2 py-1 text-[9px] font-bold uppercase tracking-wider ${printMode === 'full' ? 'bg-black text-white dark:bg-white dark:text-[#121212]' : 'text-black/60 dark:text-white/60'}`}>Full</button>
+                      <button onClick={() => setPrintMode('agreement')} className={`px-2 py-1 text-[9px] font-bold uppercase tracking-wider ${printMode === 'agreement' ? 'bg-black text-white dark:bg-white dark:text-[#121212]' : 'text-black/60 dark:text-white/60'}`}>Agreement</button>
+                    </div>
+                  </div>
                   <div className="px-4 py-2.5 flex items-center justify-between text-black dark:text-white">
                     <span className="text-xs font-bold uppercase tracking-wider">Theme</span>
                     <ThemeToggle />
@@ -558,7 +566,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       </div>
 
       {/* Mobile View Switcher Sub-bar */}
-      <div className="md:hidden flex items-center justify-around bg-[#EFECE7] dark:bg-[#1E1E1E] border-t border-black dark:border-white/10 px-2 py-1.5 text-[10px] font-bold uppercase tracking-wider">
+      <div className="xl:hidden flex items-center justify-around bg-[#EFECE7] dark:bg-[#1E1E1E] border-t border-black dark:border-white/10 px-2 py-1.5 text-[10px] font-bold uppercase tracking-wider">
         <button
           onClick={() => setViewMode('editor')}
           className={`flex items-center space-x-1 px-2.5 py-1 transition-all ${
