@@ -25,22 +25,8 @@ import { exportToDocx } from "@/lib/exportDocx";
 import { Sparkles, CheckCircle, FileText, ArrowRight } from "lucide-react";
 
 export default function Home() {
-  const [prdData, setPrdData] = useState<PRDData>(() => {
-    if (typeof window !== "undefined") {
-      try {
-        const draft = localStorage.getItem("prdforge_current_draft");
-        if (draft) {
-          const parsed = JSON.parse(draft);
-          if (parsed && parsed.projectName) {
-            return parsed;
-          }
-        }
-      } catch (e) {
-        console.error("Failed to load draft from localStorage", e);
-      }
-    }
-    return EMPTY_PRD;
-  });
+  const [prdData, setPrdData] = useState<PRDData>(EMPTY_PRD);
+  const [isHydrated, setIsHydrated] = useState(false);
 
   const [viewMode, setViewMode] = useState<
     "editor" | "split" | "preview" | "markdown" | "insights"
@@ -71,6 +57,22 @@ export default function Home() {
   const [pendingPdfWatermark, setPendingPdfWatermark] = useState<
     string | undefined
   >();
+
+  // Load saved draft from localStorage after hydration (avoids SSR mismatch)
+  useEffect(() => {
+    try {
+      const draft = localStorage.getItem("prdforge_current_draft");
+      if (draft) {
+        const parsed = JSON.parse(draft);
+        if (parsed && parsed.projectName) {
+          setPrdData(parsed);
+        }
+      }
+    } catch (e) {
+      console.error("Failed to load draft from localStorage", e);
+    }
+    setIsHydrated(true);
+  }, []);
 
   useEffect(() => {
     const t = setTimeout(() => {

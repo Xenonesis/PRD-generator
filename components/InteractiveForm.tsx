@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { 
   Plus, 
   Trash2, 
@@ -377,6 +377,9 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [isAutoFilling, setIsAutoFilling] = useState(false);
 
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const sidebarRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const handleSetTab = (e: any) => {
       if (e.detail) setActiveTab(e.detail);
@@ -384,6 +387,21 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
     window.addEventListener('SET_ACTIVE_TAB', handleSetTab);
     return () => window.removeEventListener('SET_ACTIVE_TAB', handleSetTab);
   }, []);
+
+  // Reset scroll position when activeTab changes
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTo({ top: 0, behavior: 'auto' });
+    }
+    if (sidebarRef.current) {
+      const activeBtn = sidebarRef.current.querySelector(`button[data-tab-id="${activeTab}"]`) as HTMLElement;
+      if (activeBtn) {
+        const container = sidebarRef.current;
+        const offsetTop = activeBtn.offsetTop - container.offsetTop;
+        container.scrollTo({ top: offsetTop - 40, behavior: 'smooth' });
+      }
+    }
+  }, [activeTab]);
 
   const wordCount = useMemo(() => {
     const md = prdToMarkdown(data);
@@ -402,8 +420,11 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
       setActiveTab(nextMissingAudit.tab as any);
       setTimeout(() => {
         const el = document.getElementById(`section-card-${nextMissingAudit.id}`);
-        if (el) {
-          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (el && scrollContainerRef.current) {
+          // Scroll the internal container instead of the whole window
+          const container = scrollContainerRef.current;
+          const offsetTop = el.offsetTop - container.offsetTop;
+          container.scrollTo({ top: offsetTop - 20, behavior: 'smooth' });
         }
       }, 100);
     }
@@ -550,7 +571,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
   ];
 
   return (
-    <div id="prd-editor-top" className={`bg-white dark:bg-[#161616] border border-neutral-200 dark:border-white/10 text-neutral-900 dark:text-neutral-100 shadow-md rounded-xl overflow-hidden w-full min-w-0 no-print ${isFocusMode ? "fixed inset-0 z-[200] overflow-y-auto" : ""}`}>
+    <div id="prd-editor-top" className={`bg-white dark:bg-[#161616] border border-neutral-200 dark:border-white/10 text-neutral-900 dark:text-neutral-100 shadow-md rounded-xl overflow-hidden w-full min-w-0 no-print flex flex-col ${isFocusMode ? "fixed inset-0 z-[200]" : "h-[calc(100vh-240px)] min-h-[500px]"}`}>
       {isFocusMode && (
         <div className="sticky top-0 z-[210] flex justify-between items-center p-4 bg-[#EFECE7]/90 dark:bg-[#1E1E1E]/90 backdrop-blur-sm border-b border-black/10 dark:border-white/10">
           <div className="flex items-center gap-4">
@@ -573,57 +594,64 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
         </div>
       )}
       
-      {/* Category Tabs Header */}
-      {!isFocusMode && (
-        <div className="bg-neutral-100/80 dark:bg-black/30 border-b border-neutral-200 dark:border-white/10 p-2.5 flex relative w-full pr-12 backdrop-blur-xs">
-          <div className="flex overflow-x-auto gap-1.5 no-scrollbar flex-grow py-0.5">
-            {tabs.map((tab) => {
-              const Icon = tab.icon;
-              const isActive = activeTab === tab.id;
-              const tabAudits = audits.filter(a => a.tab === tab.id);
-              const tabCompleted = tabAudits.filter(a => a.isComplete).length;
-              const tabTotal = tabAudits.length;
-              const isTabComplete = tabTotal > 0 && tabCompleted === tabTotal;
+      {/* Vertical Sidebar + Content Layout */}
+      <div className={`flex flex-1 min-h-0 ${isFocusMode ? 'flex-col overflow-y-auto' : 'overflow-hidden'}`}>
 
-              return (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id as typeof activeTab)}
-                  className={`flex flex-col items-center justify-center min-h-[46px] px-3.5 py-1.5 rounded-lg transition-all space-y-1 shrink-0 ${
-                    isActive ? 'bg-black text-white dark:bg-white dark:text-black shadow-xs font-bold' : 'text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200/60 dark:hover:bg-white/10 font-medium'
-                  }`}
-                >
-                  <div className="flex items-center gap-1.5">
-                    <Icon className="w-4 h-4 sm:w-4 sm:h-4" />
+        {/* LEFT: Vertical Tab Sidebar (hidden in focus mode) */}
+        {!isFocusMode && (
+          <div className="flex flex-col w-[52px] sm:w-44 shrink-0 bg-neutral-50 dark:bg-black/20 border-r border-neutral-200 dark:border-white/10 overflow-y-auto">
+            <div className="flex flex-col gap-0.5 p-1.5 sm:p-2 flex-1">
+              {tabs.map((tab) => {
+                const Icon = tab.icon;
+                const isActive = activeTab === tab.id;
+                const tabAudits = audits.filter(a => a.tab === tab.id);
+                const tabCompleted = tabAudits.filter(a => a.isComplete).length;
+                const tabTotal = tabAudits.length;
+                const isTabComplete = tabTotal > 0 && tabCompleted === tabTotal;
+
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id as typeof activeTab)}
+                    title={tab.label}
+                    className={`group flex items-center gap-2.5 w-full px-2 py-2.5 rounded-lg transition-all text-left ${
+                      isActive
+                        ? 'bg-black text-white dark:bg-white dark:text-black shadow-xs'
+                        : 'text-neutral-500 dark:text-neutral-400 hover:bg-neutral-200/60 dark:hover:bg-white/10 hover:text-neutral-900 dark:hover:text-white'
+                    }`}
+                  >
+                    <Icon className="w-4 h-4 shrink-0" />
+                    <span className="hidden sm:block text-[10px] font-bold uppercase tracking-wide leading-tight flex-1">{tab.label}</span>
                     {tabTotal > 0 && (
-                      <span className={`text-[9px] px-1.5 py-0.2 rounded-full font-mono ${
+                      <span className={`hidden sm:flex shrink-0 text-[8px] font-mono font-bold items-center justify-center w-5 h-5 rounded-full ${
                         isTabComplete
-                          ? 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 font-bold'
-                          : 'bg-amber-500/20 text-amber-600 dark:text-amber-300 font-bold'
+                          ? isActive ? 'bg-white/20 text-white dark:bg-black/20 dark:text-black' : 'bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300'
+                          : isActive ? 'bg-white/20 text-white dark:bg-black/20 dark:text-black' : 'bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300'
                       }`}>
-                        {isTabComplete ? '✓' : `${tabCompleted}/${tabTotal}`}
+                        {isTabComplete ? '✓' : `${tabCompleted}`}
                       </span>
                     )}
-                  </div>
-                  <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-center whitespace-nowrap">{tab.label}</span>
-                </button>
-              );
-            })}
-          </div>
-          <div className="absolute right-0 top-0 h-full flex items-center justify-center bg-gradient-to-l from-[#F4F1EE] dark:from-[#121212] to-transparent pl-4 pr-2">
-            <button 
-              onClick={() => setIsFocusMode(true)} 
-              className="flex flex-col items-center justify-center p-2 space-y-1 text-black/80 dark:text-white/80 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors rounded-lg" 
-              title="Enter Focus Mode"
-            >
-              <Maximize2 className="w-4 h-4 sm:w-5 sm:h-5" />
-              <span className="text-[9px] sm:text-xs font-bold uppercase tracking-wider text-center">Focus</span>
-            </button>
-          </div>
-        </div>
-      )}
+                  </button>
+                );
+              })}
+            </div>
 
-      <div className={`p-4 sm:p-6 overflow-y-auto ${isFocusMode ? "h-full max-w-4xl mx-auto xl:flex-none" : "max-h-[calc(100vh-280px)] xl:max-h-none xl:flex-1"}`}>
+            {/* Focus Mode Button at bottom */}
+            <div className="p-1.5 sm:p-2 border-t border-neutral-200 dark:border-white/10">
+              <button
+                onClick={() => setIsFocusMode(true)}
+                className="flex items-center gap-2.5 w-full px-2 py-2.5 rounded-lg text-neutral-500 dark:text-neutral-400 hover:bg-neutral-200/60 dark:hover:bg-white/10 hover:text-neutral-900 dark:hover:text-white transition-colors"
+                title="Enter Focus Mode"
+              >
+                <Maximize2 className="w-4 h-4 shrink-0" />
+                <span className="hidden sm:block text-[10px] font-bold uppercase tracking-wide">Focus</span>
+              </button>
+            </div>
+          </div>
+        )}
+
+          {/* RIGHT: Tab Content (always renders) */}
+          <div ref={scrollContainerRef} className={`flex-1 min-w-0 overflow-y-auto p-4 sm:p-6 ${isFocusMode ? 'max-w-4xl mx-auto w-full' : ''}`}>
         
         {/* TAB 0: HEADER & OVERVIEW */}
         {activeTab === 'header' && (
@@ -1489,12 +1517,10 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
           </div>
         )}
 
-      </div>
-
       {/* =========================================
           PRD SECTION COMPLETION AUDIT & SUMMARY
          ========================================= */}
-      <div id="prd-audit-summary" className="bg-neutral-50 dark:bg-white/5 border-t-2 border-black dark:border-white/20 p-4 sm:p-6 space-y-5">
+      <div id="prd-audit-summary" className="bg-neutral-50 dark:bg-white/5 border-t-2 border-black dark:border-white/20 p-4 sm:p-6 space-y-5 mt-8">
         
         {/* Header & Overall Metric */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-black dark:border-white/10 pb-4">
@@ -1675,12 +1701,6 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                     type="button"
                     onClick={() => {
                       setActiveTab(audit.tab);
-                      const top = document.getElementById('prd-editor-top');
-                      if (top) {
-                        top.scrollIntoView({ behavior: 'smooth' });
-                      } else {
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                      }
                     }}
                     className={`text-[10px] shrink-0 font-bold uppercase tracking-wider px-2.5 py-1 flex items-center space-x-1 transition-colors ${
                       audit.isComplete
@@ -1697,6 +1717,8 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
         </div>
 
       </div>
+          </div>
+        </div>
 
       {/* Editor Word Count Footer */}
       <div className="bg-white dark:bg-white/5 border-t border-black dark:border-white/10 px-4 py-3 flex flex-wrap items-center justify-between no-print sticky bottom-0 z-20 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] pb-safe">
