@@ -1322,7 +1322,7 @@ export const DocumentView: React.FC<DocumentViewProps> = ({
             AUTOMATIC HIGH-END COVER PAGE LAYOUT
            ======================================================== */}
         <div 
-          className="pdf-page-break-after p-4 sm:p-12 md:p-16 print:p-8 min-h-0 sm:min-h-[920px] print:min-h-[240mm] print:h-[240mm] flex flex-col justify-between text-center relative bg-[#FAF9F6] dark:bg-[#121212] mb-8 sm:mb-12 print:mb-0 shadow-sm"
+          className="pdf-page-break-after p-4 sm:p-12 md:p-16 print:p-8 min-h-0 sm:min-h-[920px] print:min-h-0 print:h-auto flex flex-col justify-between text-center relative bg-[#FAF9F6] dark:bg-[#121212] mb-8 sm:mb-12 print:mb-0 shadow-sm"
           style={{
             border: d.brandingHeaderStyle === 'minimal'
               ? `1px solid ${d.brandingPrimaryColor || '#000000'}40`
