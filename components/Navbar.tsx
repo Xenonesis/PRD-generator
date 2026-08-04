@@ -116,9 +116,9 @@ export const Navbar: React.FC<NavbarProps> = ({
             <div className="min-w-0">
               <div className="flex items-center gap-1.5">
                 <span className="font-black text-xs sm:text-sm uppercase tracking-widest text-[#1A1A1A] dark:text-[#F4F1EE] truncate">
-                  PRD ARCHITECT <span className="text-black/40 dark:text-white/40 text-[10px] sm:text-xs hidden sm:inline">v1.0</span>
+                  PRD ARCHITECT <span className="text-black/40 dark:text-white/40 text-[10px] sm:text-xs hidden xl:inline">v1.0</span>
                 </span>
-                <span className="hidden sm:inline-block text-[9px] uppercase font-bold tracking-widest bg-black/5 dark:bg-white/5 text-black/70 dark:text-white/70 border border-black dark:border-white/10 px-1.5 py-0.5">
+                <span className="hidden xl:inline-block text-[9px] uppercase font-bold tracking-widest bg-black/5 dark:bg-white/5 text-black/70 dark:text-white/70 border border-black dark:border-white/10 px-1.5 py-0.5">
                   33 SECTIONS
                 </span>
               </div>
@@ -186,11 +186,11 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Translate Button */}
             <button
               onClick={onOpenTranslate}
-              className="hidden sm:flex items-center space-x-1 sm:space-x-1.5 bg-[#F4F1EE] dark:bg-[#2A2A2A] hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-[#121212] border border-black dark:border-white/20 text-[#1A1A1A] dark:text-[#F4F1EE] px-2.5 sm:px-3.5 py-1.5 text-[10px] uppercase font-bold tracking-wider transition active:scale-95"
+              className="hidden xl:flex items-center space-x-1 sm:space-x-1.5 bg-[#F4F1EE] dark:bg-[#2A2A2A] hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-[#121212] border border-black dark:border-white/20 text-[#1A1A1A] dark:text-[#F4F1EE] px-2.5 sm:px-3.5 py-1.5 text-[10px] uppercase font-bold tracking-wider transition active:scale-95"
               title="Translate Document"
             >
               <Languages className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Translate</span>
+              <span className="hidden xl:inline">Translate</span>
             </button>
 
             {/* AI Generator Button */}
@@ -199,12 +199,12 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="flex items-center space-x-1 sm:space-x-1.5 bg-black dark:bg-white hover:bg-neutral-800 text-white dark:text-[#121212] px-2.5 sm:px-3.5 py-1.5 text-[10px] uppercase font-bold tracking-wider transition active:scale-95 border border-black dark:border-white/30"
             >
               <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-              <span className="hidden sm:inline">AI Generator</span>
+              <span className="hidden xl:inline">AI Generator</span>
               <span className="sm:hidden">AI</span>
             </button>
 
             {/* Template Dropdown */}
-            <div className="hidden sm:block relative">
+            <div className="hidden xl:block relative">
               <button
                 onClick={() => setShowTemplateMenu(!showTemplateMenu)}
                 className="flex items-center space-x-1 bg-white dark:bg-[#2A2A2A] hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-[#121212] border border-black dark:border-white/20 text-[#1A1A1A] dark:text-[#F4F1EE] px-2 sm:px-2.5 py-1.5 text-[10px] uppercase font-bold tracking-wider transition"
@@ -254,7 +254,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={onCleanupFormat}
               title="Cleanup Formatting"
-              className="bg-white dark:bg-[#2A2A2A] hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-[#121212] border border-black dark:border-white/20 text-[#1A1A1A] dark:text-[#F4F1EE] p-1.5 text-[10px] transition hidden sm:inline-block"
+              className="bg-white dark:bg-[#2A2A2A] hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-[#121212] border border-black dark:border-white/20 text-[#1A1A1A] dark:text-[#F4F1EE] p-1.5 text-[10px] transition hidden xl:inline-block"
             >
               <Wand2 className="w-3.5 h-3.5" />
             </button>
@@ -262,7 +262,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={onOpenHistory}
               title="Version History"
-              className="bg-white dark:bg-[#2A2A2A] hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-[#121212] border border-black dark:border-white/20 text-[#1A1A1A] dark:text-[#F4F1EE] p-1.5 text-[10px] transition hidden sm:inline-block"
+              className="bg-white dark:bg-[#2A2A2A] hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-[#121212] border border-black dark:border-white/20 text-[#1A1A1A] dark:text-[#F4F1EE] p-1.5 text-[10px] transition hidden xl:inline-block"
             >
               <History className="w-3.5 h-3.5" />
             </button>
@@ -270,7 +270,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={onOpenSavedDocs}
               title="Saved documents library"
-              className="bg-white dark:bg-[#2A2A2A] hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-[#121212] border border-black dark:border-white/20 text-[#1A1A1A] dark:text-[#F4F1EE] p-1.5 text-[10px] transition hidden sm:inline-block"
+              className="bg-white dark:bg-[#2A2A2A] hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-[#121212] border border-black dark:border-white/20 text-[#1A1A1A] dark:text-[#F4F1EE] p-1.5 text-[10px] transition hidden xl:inline-block"
             >
               <FolderOpen className="w-3.5 h-3.5" />
             </button>
@@ -279,7 +279,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={onCopyMarkdown}
               title="Copy Markdown"
-              className="hidden sm:flex bg-white dark:bg-[#2A2A2A] hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-[#121212] border border-black dark:border-white/20 text-[#1A1A1A] dark:text-[#F4F1EE] px-2 sm:px-2.5 py-1.5 text-[10px] uppercase font-bold tracking-wider transition items-center space-x-1"
+              className="hidden xl:flex bg-white dark:bg-[#2A2A2A] hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-[#121212] border border-black dark:border-white/20 text-[#1A1A1A] dark:text-[#F4F1EE] px-2 sm:px-2.5 py-1.5 text-[10px] uppercase font-bold tracking-wider transition items-center space-x-1"
             >
               {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
               <span className="hidden xl:inline">{copied ? 'Copied' : 'Copy'}</span>
@@ -288,7 +288,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={onDownloadMarkdown}
               title="Download .md file"
-              className="bg-white dark:bg-[#2A2A2A] hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-[#121212] border border-black dark:border-white/20 text-[#1A1A1A] dark:text-[#F4F1EE] p-1.5 text-[10px] transition hidden sm:inline-block"
+              className="bg-white dark:bg-[#2A2A2A] hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-[#121212] border border-black dark:border-white/20 text-[#1A1A1A] dark:text-[#F4F1EE] p-1.5 text-[10px] transition hidden xl:inline-block"
             >
               <Download className="w-3.5 h-3.5" />
             </button>
@@ -320,7 +320,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               type="button"
               onClick={() => setIsWatermarkEnabled(!isWatermarkEnabled)}
               title={isWatermarkEnabled ? `PDF Watermark Active: "${watermark || 'DRAFT'}" (Click to toggle)` : 'PDF Watermark Disabled (Click to enable)'}
-              className={`hidden sm:flex px-2 sm:px-2.5 py-1.5 text-[10px] font-mono font-bold uppercase tracking-wider border transition items-center space-x-1 sm:space-x-1.5 ${
+              className={`hidden xl:flex px-2 sm:px-2.5 py-1.5 text-[10px] font-mono font-bold uppercase tracking-wider border transition items-center space-x-1 sm:space-x-1.5 ${
                 isWatermarkEnabled
                   ? 'bg-amber-100 text-amber-900 border-amber-400 hover:bg-amber-200'
                   : 'bg-white dark:bg-[#2A2A2A] text-black/40 dark:text-white/40 border-black dark:border-white/20 hover:border-black dark:border-white/50'
@@ -331,13 +331,13 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span className="max-w-[50px] sm:max-w-[70px] truncate">{isWatermarkEnabled ? (watermark || 'DRAFT') : 'OFF'}</span>
             </button>
 
-            <div className="hidden sm:block"><ThemeToggle /></div>
+            <div className="hidden xl:block"><ThemeToggle /></div>
 
             {/* Fullscreen Toggle */}
             <button
               onClick={onToggleFullscreen}
               title={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
-              className="bg-white dark:bg-[#2A2A2A] hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-[#121212] border border-black dark:border-white/20 text-[#1A1A1A] dark:text-[#F4F1EE] p-1.5 text-[10px] transition hidden sm:flex items-center justify-center"
+              className="bg-white dark:bg-[#2A2A2A] hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-[#121212] border border-black dark:border-white/20 text-[#1A1A1A] dark:text-[#F4F1EE] p-1.5 text-[10px] transition hidden xl:flex items-center justify-center"
             >
               {isFullscreen ? <Minimize className="w-3.5 h-3.5" /> : <Maximize className="w-3.5 h-3.5" />}
             </button>
@@ -353,12 +353,12 @@ export const Navbar: React.FC<NavbarProps> = ({
                 {isExportingPdf ? (
                   <>
                     <span className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin inline-block" />
-                    <span className="hidden sm:inline">Rendering...</span>
+                    <span className="hidden xl:inline">Rendering...</span>
                   </>
                 ) : (
                   <>
                     <Printer className="w-3.5 h-3.5" />
-                    <span className="hidden sm:inline">Export PDF</span>
+                    <span className="hidden xl:inline">Export PDF</span>
                   </>
                 )}
               </button>
@@ -512,7 +512,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               )}
             </div>
             {/* Mobile Hamburger Menu */}
-            <div className="sm:hidden relative">
+            <div className="xl:hidden relative">
               <button
                 onClick={() => setShowMobileMenu(!showMobileMenu)}
                 className="bg-black dark:bg-white hover:bg-black/80 text-white dark:text-[#121212] p-1.5 transition border border-black dark:border-white/30"
