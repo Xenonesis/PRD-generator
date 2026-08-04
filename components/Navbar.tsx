@@ -90,6 +90,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [isWatermarkEnabled, setIsWatermarkEnabled] = useState<boolean>(true);
   const [watermark, setWatermark] = useState<string>('DRAFT');
   const [lastSaved, setLastSaved] = useState<string | null>(null);
+  const headerRef = React.useRef<HTMLElement>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -97,6 +98,36 @@ export const Navbar: React.FC<NavbarProps> = ({
     }, 0);
     return () => clearTimeout(timer);
   }, [prdData]);
+
+  useEffect(() => {
+    const node = headerRef.current;
+    if (!node) return;
+
+    const isInsideMenu = (target: EventTarget | null) => {
+      if (!(target instanceof HTMLElement)) return false;
+      return !!target.closest(
+        '[class*="shadow-2xl"], [class*="z-[60]"], .lg\\:hidden.border-t, .fixed.inset-0'
+      );
+    };
+
+    const onWheel = (event: WheelEvent) => {
+      if (isInsideMenu(event.target)) return;
+      event.preventDefault();
+    };
+
+    const onTouchMove = (event: TouchEvent) => {
+      if (isInsideMenu(event.target)) return;
+      event.preventDefault();
+    };
+
+    node.addEventListener('wheel', onWheel, { passive: false });
+    node.addEventListener('touchmove', onTouchMove, { passive: false });
+
+    return () => {
+      node.removeEventListener('wheel', onWheel);
+      node.removeEventListener('touchmove', onTouchMove);
+    };
+  }, []);
 
   const activeWatermark = isWatermarkEnabled ? (watermark.trim() || 'DRAFT') : undefined;
 
@@ -108,7 +139,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <header className="no-print bg-white/95 dark:bg-[#1A1A1A]/95 backdrop-blur-md border-b border-black/10 dark:border-white/10 text-[#1A1A1A] dark:text-[#F4F1EE] sticky top-0 z-40 shadow-xs">
+    <header ref={headerRef} className="no-print bg-white/95 dark:bg-[#1A1A1A]/95 backdrop-blur-md border-b border-black/10 dark:border-white/10 text-[#1A1A1A] dark:text-[#F4F1EE] sticky top-0 z-40 shadow-xs overscroll-behavior-contain">
       {/* Backdrop overlay for menus */}
       {(showExportMenu || showToolsMenu || showMobileMenu) && (
         <div className="fixed inset-0 z-40 bg-transparent" onClick={closeAllMenus} />
