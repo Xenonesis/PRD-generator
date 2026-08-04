@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { PRDData } from '@/types/prd';
-import { X, Clock, RotateCcw } from 'lucide-react';
+import { X, Clock, RotateCcw, AlertTriangle } from 'lucide-react';
 
 interface VersionHistoryDrawerProps {
   isOpen: boolean;
@@ -15,6 +15,8 @@ export const VersionHistoryDrawer: React.FC<VersionHistoryDrawerProps> = ({
   history,
   onRevert
 }) => {
+  const [confirmIndex, setConfirmIndex] = useState<number | null>(null);
+
   if (!isOpen) return null;
 
   return (
@@ -41,6 +43,7 @@ export const VersionHistoryDrawer: React.FC<VersionHistoryDrawerProps> = ({
             [...history].reverse().map((item, index) => {
               const d = new Date(item.timestamp);
               const isLatest = index === 0;
+              const isConfirming = confirmIndex === index;
               return (
                 <div key={item.timestamp} className="p-3 border border-black/10 dark:border-white/10 bg-[#F4F1EE] dark:bg-[#121212] flex flex-col gap-2">
                   <div className="flex items-center justify-between">
@@ -58,19 +61,43 @@ export const VersionHistoryDrawer: React.FC<VersionHistoryDrawerProps> = ({
                     {item.data.projectName || 'Untitled Project'}
                   </div>
                   
-                  {!isLatest && (
+                  {!isLatest && !isConfirming && (
                     <button 
-                      onClick={() => {
-                        if (confirm('Are you sure you want to revert to this version? Your current changes will be lost unless they were saved.')) {
-                          onRevert(item.data);
-                          onClose();
-                        }
-                      }}
+                      onClick={() => setConfirmIndex(index)}
                       className="mt-2 text-xs flex items-center justify-center gap-1.5 w-full py-1.5 border border-black/20 dark:border-white/20 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition"
                     >
                       <RotateCcw className="w-3.5 h-3.5" />
                       Restore Version
                     </button>
+                  )}
+
+                  {!isLatest && isConfirming && (
+                    <div className="mt-2 p-2 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-sm">
+                      <div className="flex items-start gap-2 mb-2">
+                        <AlertTriangle className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
+                        <p className="text-[11px] text-amber-800 dark:text-amber-300">
+                          This will overwrite your current changes. Are you sure?
+                        </p>
+                      </div>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => {
+                            onRevert(item.data);
+                            setConfirmIndex(null);
+                            onClose();
+                          }}
+                          className="flex-1 py-1 text-[11px] font-bold bg-black dark:bg-white text-white dark:text-black transition"
+                        >
+                          Yes, Restore
+                        </button>
+                        <button
+                          onClick={() => setConfirmIndex(null)}
+                          className="flex-1 py-1 text-[11px] font-bold border border-black/20 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/10 transition"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
                   )}
                 </div>
               );

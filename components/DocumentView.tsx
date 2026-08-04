@@ -1321,9 +1321,21 @@ export const DocumentView: React.FC<DocumentViewProps> = ({
         {/* ========================================================
             AUTOMATIC HIGH-END COVER PAGE LAYOUT
            ======================================================== */}
-        <div className="pdf-page-break-after border-2 sm:border-4 border-black dark:border-white/30 p-4 sm:p-12 md:p-16 min-h-0 sm:min-h-[920px] flex flex-col justify-between text-center relative bg-[#FAF9F6] dark:bg-[#121212] mb-8 sm:mb-12 shadow-sm">
+        <div 
+          className="pdf-page-break-after p-4 sm:p-12 md:p-16 min-h-0 sm:min-h-[920px] flex flex-col justify-between text-center relative bg-[#FAF9F6] dark:bg-[#121212] mb-8 sm:mb-12 shadow-sm"
+          style={{
+            border: d.brandingHeaderStyle === 'minimal'
+              ? `1px solid ${d.brandingPrimaryColor || '#000000'}40`
+              : d.brandingHeaderStyle === 'bold'
+              ? `6px solid ${d.brandingPrimaryColor || '#000000'}`
+              : `3px solid ${d.brandingPrimaryColor || '#000000'}`,
+          }}
+        >
           {/* Inner Decorative Framing Border */}
-          <div className="absolute top-3 left-3 right-3 bottom-3 border border-black dark:border-white/20 pointer-events-none" />
+          <div 
+            className="absolute top-3 left-3 right-3 bottom-3 pointer-events-none"
+            style={{ border: `1px solid ${d.brandingPrimaryColor || '#000000'}30` }}
+          />
 
           {d.brandingLogoUrl && (
             <div className="absolute top-12 left-0 right-0 flex justify-center pointer-events-none">
@@ -1350,7 +1362,10 @@ export const DocumentView: React.FC<DocumentViewProps> = ({
               {d.projectName || "UNTITLED PROJECT"}
             </h1>
 
-            <div className="w-24 h-1 bg-black dark:bg-white mx-auto my-4" />
+            <div 
+              className="w-24 h-1 mx-auto my-4" 
+              style={{ background: d.brandingPrimaryColor || '#000000' }}
+            />
 
             <p className="font-serif italic text-base sm:text-xl text-black/80 dark:text-white/80 max-w-xl mx-auto leading-relaxed">
               {d.coverDescription || "Comprehensive Technical Architecture, Functional Requirements & Commercial Scope Agreement"}

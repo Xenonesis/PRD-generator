@@ -27,6 +27,7 @@ export const SavedDocumentsModal: React.FC<SavedDocumentsModalProps> = ({
 }) => {
   const [docs, setDocs] = useState<SavedDocItem[]>([]);
   const [newTitle, setNewTitle] = useState(currentPRD.projectName || 'My Project PRD');
+  const [saveSuccess, setSaveSuccess] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
@@ -60,7 +61,8 @@ export const SavedDocumentsModal: React.FC<SavedDocumentsModalProps> = ({
     const updated = [newDocItem, ...docs];
     setDocs(updated);
     localStorage.setItem('prdforge_saved_docs', JSON.stringify(updated));
-    alert('PRD saved successfully to browser storage!');
+    setSaveSuccess(true);
+    setTimeout(() => setSaveSuccess(false), 2500);
   };
 
   const handleDelete = (id: string) => {
@@ -111,6 +113,12 @@ export const SavedDocumentsModal: React.FC<SavedDocumentsModalProps> = ({
               <span>Save Document</span>
             </button>
           </div>
+          {saveSuccess && (
+            <div className="mt-2 flex items-center gap-2 text-[11px] text-emerald-700 dark:text-emerald-400 font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+              PRD saved successfully to browser storage!
+            </div>
+          )}
         </div>
 
         {/* Saved List */}

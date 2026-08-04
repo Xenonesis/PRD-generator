@@ -285,7 +285,6 @@ export default function Home() {
       await exportToDocx(prdData, watermark);
     } catch (err) {
       console.error("Word export error:", err);
-      alert("Failed to export to Word. Please try again.");
     }
   };
 
