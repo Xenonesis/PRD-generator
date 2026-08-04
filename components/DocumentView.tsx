@@ -1616,39 +1616,39 @@ export const DocumentView: React.FC<DocumentViewProps> = ({
           </div>
 
           {/* DOCUMENT APPROVAL METADATA BOX */}
-          <div className="border border-black dark:border-white/30 p-4 bg-black dark:bg-white text-white dark:text-[#121212] text-xs">
-            <h3 className="font-bold uppercase tracking-widest mb-2 text-white dark:text-[#121212]/80 text-[10px]">
+          <div className="border border-black dark:border-white/30 p-4 bg-black print:bg-transparent dark:bg-white text-white print:text-black dark:text-[#121212] text-xs">
+            <h3 className="font-bold uppercase tracking-widest mb-2 text-white print:text-black dark:text-[#121212]/80 text-[10px]">
               DOCUMENT APPROVAL METADATA
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3 text-[11px]">
               <p>
-                <span className="text-white dark:text-[#121212]/50 block font-mono text-[9px] uppercase">
+                <span className="text-white print:text-black/60 dark:text-[#121212]/50 block font-mono text-[9px] uppercase">
                   PRD Version
                 </span>{" "}
                 {d.documentApproval.prdVersion}
               </p>
               <p>
-                <span className="text-white dark:text-[#121212]/50 block font-mono text-[9px] uppercase">
+                <span className="text-white print:text-black/60 dark:text-[#121212]/50 block font-mono text-[9px] uppercase">
                   Status
                 </span>{" "}
-                <span className="font-bold text-amber-300">
+                <span className="font-bold text-amber-300 print:text-black">
                   {d.documentApproval.status}
                 </span>
               </p>
               <p>
-                <span className="text-white dark:text-[#121212]/50 block font-mono text-[9px] uppercase">
+                <span className="text-white print:text-black/60 dark:text-[#121212]/50 block font-mono text-[9px] uppercase">
                   Approval Date
                 </span>{" "}
                 {d.documentApproval.clientApprovalDate}
               </p>
               <p>
-                <span className="text-white dark:text-[#121212]/50 block font-mono text-[9px] uppercase">
+                <span className="text-white print:text-black/60 dark:text-[#121212]/50 block font-mono text-[9px] uppercase">
                   Start Date
                 </span>{" "}
                 {d.documentApproval.projectStartDate}
               </p>
               <p className="col-span-2">
-                <span className="text-white dark:text-[#121212]/50 block font-mono text-[9px] uppercase">
+                <span className="text-white print:text-black/60 dark:text-[#121212]/50 block font-mono text-[9px] uppercase">
                   Expected Delivery
                 </span>{" "}
                 {d.documentApproval.expectedDeliveryDate}
