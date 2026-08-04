@@ -559,6 +559,8 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
     updateField(key, arr as PRDData[typeof key]);
   };
 
+  const [isAuditExpanded, setIsAuditExpanded] = useState(false);
+
   const tabs = [
     { id: 'header', label: '0. Header & Basic Terms', icon: FileCheck2 },
     { id: 'overview', label: '1 & 2. Overview & Platforms', icon: Layers },
@@ -567,7 +569,8 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
     { id: 'design', label: '7 & 8. Design & Tech Stack', icon: Palette },
     { id: 'timeline', label: '14 & 15. Timeline & Pricing', icon: DollarSign },
     { id: 'policies', label: '16 - 32. Policies & Support', icon: Shield },
-    { id: 'signoff', label: '33. Signatures & Approval', icon: Clock }
+    { id: 'signoff', label: '33. Signatures & Approval', icon: Clock },
+    { id: 'audit', label: 'Quality Audit Summary', icon: CheckCircle2 }
   ];
 
   return (
@@ -1516,209 +1519,251 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
             </div>
           </div>
         )}
-
-      {/* =========================================
+              {/* =========================================
           PRD SECTION COMPLETION AUDIT & SUMMARY
          ========================================= */}
-      <div id="prd-audit-summary" className="bg-neutral-50 dark:bg-white/5 border-t-2 border-black dark:border-white/20 p-4 sm:p-6 space-y-5 mt-8">
+      <div id="prd-audit-summary" className="bg-neutral-50 dark:bg-white/5 border-t border-neutral-200 dark:border-white/10 p-4 sm:p-5 mt-10 rounded-xl space-y-4">
         
-        {/* Header & Overall Metric */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-black dark:border-white/10 pb-4">
-          <div>
-            <div className="flex items-center space-x-2">
-              <span className="bg-black dark:bg-white text-white dark:text-[#121212] px-2 py-0.5 text-[9px] font-mono uppercase tracking-widest font-bold">
-                Quality Audit
-              </span>
-              <h3 className="text-sm sm:text-base font-bold text-[#1A1A1A] dark:text-[#F4F1EE] uppercase tracking-wider font-sans">
-                PRD Section Completion Summary
-              </h3>
-            </div>
-            <p className="text-xs text-black/80 dark:text-white/80 mt-1">
-              Real-time completeness verification across all 33 required PRD document sections.
-            </p>
+        {/* Header Bar with Toggle & Navigation */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-black/10 dark:border-white/10">
+          <div 
+            className="flex items-center space-x-2 cursor-pointer select-none group" 
+            onClick={() => {
+              if (activeTab !== 'audit') setIsAuditExpanded(!isAuditExpanded);
+            }}
+          >
+            <span className="bg-black dark:bg-white text-white dark:text-[#121212] px-2 py-0.5 text-[9px] font-mono uppercase tracking-widest font-bold rounded-xs">
+              Quality Audit
+            </span>
+            <h3 className="text-xs sm:text-sm font-bold text-[#1A1A1A] dark:text-[#F4F1EE] uppercase tracking-wider font-sans group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+              PRD Section Completion Summary
+            </h3>
+            <span className="text-xs font-mono font-bold text-neutral-500 dark:text-neutral-400">
+              ({completedCount} / {audits.length})
+            </span>
           </div>
 
-          <div className="flex items-center space-x-3 bg-white dark:bg-white/5 border border-black/15 dark:border-white/15 px-4 py-2.5 shadow-2xs shrink-0">
-            <div className="text-right">
-              <div className="text-xs font-mono font-bold text-[#1A1A1A] dark:text-[#F4F1EE]">
-                {completedCount} / {audits.length} Sections
-              </div>
-              <div className="text-[10px] text-black/70 dark:text-white/70 uppercase tracking-wider font-medium">
-                {completionPercentage === 100
-                  ? '100% Complete'
-                  : `${incompleteCount} Missing Section${incompleteCount > 1 ? 's' : ''}`}
-              </div>
-            </div>
-            <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-xs ${
-              completionPercentage === 100 
-                ? 'bg-black dark:bg-white text-white dark:text-[#121212]' 
-                : completionPercentage >= 80 
-                ? 'bg-emerald-800 text-white dark:text-[#121212]' 
-                : 'bg-amber-600 text-white dark:text-[#121212]'
-            }`}>
-              {completionPercentage}%
-            </div>
-          </div>
-        </div>
-
-        {/* Progress Bar */}
-        <div className="space-y-1.5">
-          <div className="flex justify-between text-[10px] uppercase font-bold text-black/80 dark:text-white/80 tracking-wider font-mono">
-            <span>Overall Completeness</span>
-            <span>{completedCount} of {audits.length} Sections Filled ({completionPercentage}%)</span>
-          </div>
-          <div className="w-full h-2.5 bg-black/10 dark:bg-white/10 border border-black dark:border-white/20 overflow-hidden">
-            <div
-              className={`h-full transition-all duration-500 ${
-                completionPercentage === 100 ? 'bg-black dark:bg-white' : completionPercentage >= 80 ? 'bg-emerald-700' : 'bg-amber-600'
-              }`}
-              style={{ width: `${completionPercentage}%` }}
-            />
-          </div>
-        </div>
-
-        {/* Filter Controls & Search */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-2">
-          <div className="flex items-center gap-1.5 overflow-x-auto">
-            <button
-              type="button"
-              onClick={() => setSummaryFilter('all')}
-              className={`px-3 py-1.5 text-xs font-bold uppercase tracking-wider border transition-colors rounded-md ${
-                summaryFilter === 'all'
-                  ? 'bg-black dark:bg-white text-white dark:text-[#121212] border-black dark:border-white/30'
-                  : 'bg-white dark:bg-white/5 text-black/90 dark:text-white/90 border-black/15 dark:border-white/15 hover:border-black dark:hover:border-white/30'
-              }`}
-            >
-              All Sections ({audits.length})
-            </button>
-            <button
-              type="button"
-              onClick={() => setSummaryFilter('incomplete')}
-              className={`px-3 py-1.5 text-xs font-bold uppercase tracking-wider border transition-colors flex items-center space-x-1.5 rounded-md ${
-                summaryFilter === 'incomplete'
-                  ? 'bg-amber-600 text-white border-amber-700'
-                  : 'bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-500/30 hover:border-amber-500/50'
-              }`}
-            >
-              <AlertTriangle className="w-3.5 h-3.5" />
-              <span>Missing ({incompleteCount})</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => setSummaryFilter('complete')}
-              className={`px-3 py-1.5 text-xs font-bold uppercase tracking-wider border transition-colors flex items-center space-x-1.5 rounded-md ${
-                summaryFilter === 'complete'
-                  ? 'bg-emerald-600 text-white border-emerald-700'
-                  : 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-500/30 hover:border-emerald-500/50'
-              }`}
-            >
-              <CheckCircle2 className="w-3.5 h-3.5" />
-              <span>Completed ({completedCount})</span>
-            </button>
-            {incompleteCount > 0 && (
+          <div className="flex items-center space-x-2 shrink-0">
+            {activeTab !== 'audit' && (
               <button
                 type="button"
-                onClick={handleAutoFillAllMissing}
-                disabled={isAutoFilling}
-                className="px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white rounded-md shadow-xs flex items-center space-x-1.5 disabled:opacity-50 transition-all ml-1 shrink-0"
+                onClick={() => setIsAuditExpanded(!isAuditExpanded)}
+                className="px-3 py-1 text-xs font-bold uppercase tracking-wider bg-white dark:bg-white/10 text-neutral-800 dark:text-neutral-200 border border-neutral-300 dark:border-white/20 hover:bg-neutral-100 dark:hover:bg-white/20 transition-all rounded-md flex items-center space-x-1.5"
               >
-                {isAutoFilling ? (
-                  <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Auto-Filling...</>
-                ) : (
-                  <><Sparkles className="w-3.5 h-3.5 text-amber-300 animate-pulse" /> Auto-Fill Missing with AI</>
-                )}
+                <span>{isAuditExpanded ? 'Hide Details' : 'Show Details'}</span>
+                {isAuditExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
               </button>
             )}
-          </div>
-
-          <div className="relative w-full sm:w-64">
-            <Search className="w-3.5 h-3.5 absolute left-2.5 top-2.5 text-black/40 dark:text-white/40" />
-            <input
-              type="text"
-              placeholder="Filter section title..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/20 focus:border-black dark:border-white/30 pl-8 pr-3 py-1.5 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 font-sans"
-            />
+            {activeTab !== 'audit' ? (
+              <button
+                type="button"
+                onClick={() => setActiveTab('audit')}
+                className="px-3 py-1 text-xs font-bold uppercase tracking-wider bg-black dark:bg-white text-white dark:text-black hover:opacity-90 transition-all rounded-md"
+              >
+                Full Audit Tab →
+              </button>
+            ) : (
+              <span className="text-[10px] font-mono uppercase font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-sm">
+                Dedicated Audit Mode
+              </span>
+            )}
           </div>
         </div>
 
-        {/* Section Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 pt-1">
-          {audits
-            .filter((audit) => {
-              if (summaryFilter === 'incomplete') return !audit.isComplete;
-              if (summaryFilter === 'complete') return audit.isComplete;
-              return true;
-            })
-            .filter((audit) => {
-              if (!searchQuery.trim()) return true;
-              const q = searchQuery.toLowerCase();
-              return (
-                audit.title.toLowerCase().includes(q) ||
-                (audit.missingDetail && audit.missingDetail.toLowerCase().includes(q))
-              );
-            })
-            .map((audit) => (
-              <div
-                key={audit.id}
-                className={`p-3 bg-white dark:bg-white/5 border transition flex flex-col justify-between ${
-                  audit.isComplete
-                    ? 'border-black dark:border-white/10 hover:border-black dark:border-white/40'
-                    : 'border-amber-400 bg-amber-50/30 hover:border-amber-600'
-                }`}
-              >
-                <div>
-                  <div className="flex items-start justify-between gap-2">
-                    <span className="text-xs font-bold text-[#1A1A1A] dark:text-[#F4F1EE] line-clamp-1">
-                      {audit.title}
-                    </span>
-                    {audit.isComplete ? (
-                      <span className="shrink-0 text-[10px] bg-emerald-100 text-emerald-900 border border-emerald-300 font-bold px-1.5 py-0.5 uppercase tracking-wider flex items-center space-x-1 font-mono">
-                        <Check className="w-3 h-3 inline" />
-                        <span>Filled</span>
-                      </span>
-                    ) : (
-                      <span className="shrink-0 text-[10px] bg-amber-100 text-amber-900 border border-amber-300 font-bold px-1.5 py-0.5 uppercase tracking-wider flex items-center space-x-1 font-mono">
-                        <AlertTriangle className="w-3 h-3 inline" />
-                        <span>Empty</span>
-                      </span>
-                    )}
+        {/* Collapsible / Tab Content Body */}
+        {(isAuditExpanded || activeTab === 'audit') && (
+          <div className="space-y-5 pt-2 animate-fade-in">
+            {/* Header Description & Overall Metric */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-black/10 dark:border-white/10 pb-4">
+              <div>
+                <p className="text-xs text-black/80 dark:text-white/80">
+                  Real-time completeness verification across all 33 required PRD document sections.
+                </p>
+              </div>
+
+              <div className="flex items-center space-x-3 bg-white dark:bg-white/5 border border-black/15 dark:border-white/15 px-4 py-2.5 shadow-2xs shrink-0 rounded-lg">
+                <div className="text-right">
+                  <div className="text-xs font-mono font-bold text-[#1A1A1A] dark:text-[#F4F1EE]">
+                    {completedCount} / {audits.length} Sections
                   </div>
-
-                  <p className="text-[11px] text-black/80 dark:text-white/80 mt-1.5 min-h-[32px] line-clamp-2">
-                    {audit.isComplete
-                      ? 'Section requirement satisfied and validated.'
-                      : audit.missingDetail || 'Missing required details.'}
-                  </p>
+                  <div className="text-[10px] text-black/70 dark:text-white/70 uppercase tracking-wider font-medium">
+                    {completionPercentage === 100
+                      ? '100% Complete'
+                      : `${incompleteCount} Missing Section${incompleteCount > 1 ? 's' : ''}`}
+                  </div>
                 </div>
-
-                <div className="mt-3 pt-2 border-t border-black dark:border-white/30/5 flex items-center justify-between gap-2 min-w-0">
-                  <span className="text-[9px] font-mono text-black/40 dark:text-white/40 uppercase tracking-wider truncate">
-                    Tab: {tabs.find((t) => t.id === audit.tab)?.label.split('.')[0] || audit.tab}
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setActiveTab(audit.tab);
-                    }}
-                    className={`text-[10px] shrink-0 font-bold uppercase tracking-wider px-2.5 py-1 flex items-center space-x-1 transition-colors ${
-                      audit.isComplete
-                        ? 'text-black/80 dark:text-white/80 hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-[#121212] border border-black dark:border-white/10'
-                        : 'bg-black dark:bg-white text-white dark:text-[#121212] hover:bg-black dark:hover:bg-white/80'
-                    }`}
-                  >
-                    <span>{audit.isComplete ? 'Edit Section' : 'Fix Field'}</span>
-                    <ArrowRight className="w-3 h-3" />
-                  </button>
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-xs ${
+                  completionPercentage === 100 
+                    ? 'bg-black dark:bg-white text-white dark:text-[#121212]' 
+                    : completionPercentage >= 80 
+                    ? 'bg-emerald-800 text-white dark:text-[#121212]' 
+                    : 'bg-amber-600 text-white dark:text-[#121212]'
+                }`}>
+                  {completionPercentage}%
                 </div>
               </div>
-            ))}
-        </div>
+            </div>
+
+            {/* Progress Bar */}
+            <div className="space-y-1.5">
+              <div className="flex justify-between text-[10px] uppercase font-bold text-black/80 dark:text-white/80 tracking-wider font-mono">
+                <span>Overall Completeness</span>
+                <span>{completedCount} of {audits.length} Sections Filled ({completionPercentage}%)</span>
+              </div>
+              <div className="w-full h-2.5 bg-black/10 dark:bg-white/10 border border-black dark:border-white/20 rounded-full overflow-hidden">
+                <div
+                  className={`h-full transition-all duration-500 ${
+                    completionPercentage === 100 ? 'bg-black dark:bg-white' : completionPercentage >= 80 ? 'bg-emerald-700' : 'bg-amber-600'
+                  }`}
+                  style={{ width: `${completionPercentage}%` }}
+                />
+              </div>
+            </div>
+
+            {/* Filter Controls & Search */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-2">
+              <div className="flex items-center gap-1.5 overflow-x-auto">
+                <button
+                  type="button"
+                  onClick={() => setSummaryFilter('all')}
+                  className={`px-3 py-1.5 text-xs font-bold uppercase tracking-wider border transition-colors rounded-md ${
+                    summaryFilter === 'all'
+                      ? 'bg-black dark:bg-white text-white dark:text-[#121212] border-black dark:border-white/30'
+                      : 'bg-white dark:bg-white/5 text-black/90 dark:text-white/90 border-black/15 dark:border-white/15 hover:border-black dark:hover:border-white/30'
+                  }`}
+                >
+                  All Sections ({audits.length})
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setSummaryFilter('incomplete')}
+                  className={`px-3 py-1.5 text-xs font-bold uppercase tracking-wider border transition-colors flex items-center space-x-1.5 rounded-md ${
+                    summaryFilter === 'incomplete'
+                      ? 'bg-amber-600 text-white border-amber-700'
+                      : 'bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-500/30 hover:border-amber-500/50'
+                  }`}
+                >
+                  <AlertTriangle className="w-3.5 h-3.5" />
+                  <span>Missing ({incompleteCount})</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setSummaryFilter('complete')}
+                  className={`px-3 py-1.5 text-xs font-bold uppercase tracking-wider border transition-colors flex items-center space-x-1.5 rounded-md ${
+                    summaryFilter === 'complete'
+                      ? 'bg-emerald-600 text-white border-emerald-700'
+                      : 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-500/30 hover:border-emerald-500/50'
+                  }`}
+                >
+                  <CheckCircle2 className="w-3.5 h-3.5" />
+                  <span>Completed ({completedCount})</span>
+                </button>
+                {incompleteCount > 0 && (
+                  <button
+                    type="button"
+                    onClick={handleAutoFillAllMissing}
+                    disabled={isAutoFilling}
+                    className="px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white rounded-md shadow-xs flex items-center space-x-1.5 disabled:opacity-50 transition-all ml-1 shrink-0"
+                  >
+                    {isAutoFilling ? (
+                      <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Auto-Filling...</>
+                    ) : (
+                      <><Sparkles className="w-3.5 h-3.5 text-amber-300 animate-pulse" /> Auto-Fill Missing with AI</>
+                    )}
+                  </button>
+                )}
+              </div>
+
+              <div className="relative w-full sm:w-64">
+                <Search className="w-3.5 h-3.5 absolute left-2.5 top-2.5 text-black/40 dark:text-white/40" />
+                <input
+                  type="text"
+                  placeholder="Filter section title..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/20 focus:border-black dark:border-white/30 pl-8 pr-3 py-1.5 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 font-sans rounded-md"
+                />
+              </div>
+            </div>
+
+            {/* Section Cards Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 pt-1">
+              {audits
+                .filter((audit) => {
+                  if (summaryFilter === 'incomplete') return !audit.isComplete;
+                  if (summaryFilter === 'complete') return audit.isComplete;
+                  return true;
+                })
+                .filter((audit) => {
+                  if (!searchQuery.trim()) return true;
+                  const q = searchQuery.toLowerCase();
+                  return (
+                    audit.title.toLowerCase().includes(q) ||
+                    (audit.missingDetail && audit.missingDetail.toLowerCase().includes(q))
+                  );
+                })
+                .map((audit) => (
+                  <div
+                    key={audit.id}
+                    className={`p-3 bg-white dark:bg-white/5 border rounded-lg transition flex flex-col justify-between ${
+                      audit.isComplete
+                        ? 'border-neutral-200 dark:border-white/10 hover:border-black dark:hover:border-white/40'
+                        : 'border-amber-400 bg-amber-50/30 dark:bg-amber-950/20 hover:border-amber-600'
+                    }`}
+                  >
+                    <div>
+                      <div className="flex items-start justify-between gap-2">
+                        <span className="text-xs font-bold text-[#1A1A1A] dark:text-[#F4F1EE] line-clamp-1">
+                          {audit.title}
+                        </span>
+                        {audit.isComplete ? (
+                          <span className="shrink-0 text-[10px] bg-emerald-100 dark:bg-emerald-900/40 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700 font-bold px-1.5 py-0.5 uppercase tracking-wider flex items-center space-x-1 font-mono rounded-xs">
+                            <Check className="w-3 h-3 inline" />
+                            <span>Filled</span>
+                          </span>
+                        ) : (
+                          <span className="shrink-0 text-[10px] bg-amber-100 dark:bg-amber-900/40 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-700 font-bold px-1.5 py-0.5 uppercase tracking-wider flex items-center space-x-1 font-mono rounded-xs">
+                            <AlertTriangle className="w-3.5 h-3.5 inline" />
+                            <span>Empty</span>
+                          </span>
+                        )}
+                      </div>
+
+                      <p className="text-[11px] text-black/80 dark:text-white/80 mt-1.5 min-h-[32px] line-clamp-2">
+                        {audit.isComplete
+                          ? 'Section requirement satisfied and validated.'
+                          : audit.missingDetail || 'Missing required details.'}
+                      </p>
+                    </div>
+
+                    <div className="mt-3 pt-2 border-t border-black/10 dark:border-white/10 flex items-center justify-between gap-2 min-w-0">
+                      <span className="text-[9px] font-mono text-black/40 dark:text-white/40 uppercase tracking-wider truncate">
+                        Tab: {tabs.find((t) => t.id === audit.tab)?.label.split('.')[0] || audit.tab}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setActiveTab(audit.tab);
+                        }}
+                        className={`text-[10px] shrink-0 font-bold uppercase tracking-wider px-2.5 py-1 rounded-md flex items-center space-x-1 transition-colors ${
+                          audit.isComplete
+                            ? 'text-black/80 dark:text-white/80 hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-[#121212] border border-neutral-300 dark:border-white/20'
+                            : 'bg-black dark:bg-white text-white dark:text-[#121212] hover:bg-neutral-800 dark:hover:bg-white/80'
+                        }`}
+                      >
+                        <span>{audit.isComplete ? 'Edit Section' : 'Fix Field'}</span>
+                        <ArrowRight className="w-3 h-3" />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+            </div>
+          </div>
+        )}
 
       </div>
-          </div>
-        </div>
+    </div>
+  </div>
 
       {/* Editor Word Count Footer */}
       <div className="bg-white dark:bg-white/5 border-t border-black dark:border-white/10 px-4 py-3 flex flex-wrap items-center justify-between no-print sticky bottom-0 z-20 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] pb-safe">

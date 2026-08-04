@@ -61,12 +61,19 @@ export default function Home() {
   // Load saved draft from localStorage after hydration (avoids SSR mismatch)
   useEffect(() => {
     try {
+      const bizbuddyTmpl = PRD_TEMPLATES.find((t) => t.id === "bizbuddy-loan-crm");
       const draft = localStorage.getItem("prdforge_current_draft");
       if (draft) {
         const parsed = JSON.parse(draft);
         if (parsed && parsed.projectName) {
           setPrdData(parsed);
+          setIsHydrated(true);
+          return;
         }
+      }
+      if (bizbuddyTmpl) {
+        setPrdData(bizbuddyTmpl.data);
+        localStorage.setItem("prdforge_current_draft", JSON.stringify(bizbuddyTmpl.data));
       }
     } catch (e) {
       console.error("Failed to load draft from localStorage", e);
