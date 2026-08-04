@@ -139,7 +139,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <header ref={headerRef} className="no-print bg-white/95 dark:bg-[#1A1A1A]/95 backdrop-blur-md border-b border-black/10 dark:border-white/10 text-[#1A1A1A] dark:text-[#F4F1EE] sticky top-0 z-40 shadow-xs overscroll-behavior-contain">
+    <header ref={headerRef} className="no-print bg-white/95 dark:bg-[#1A1A1A]/95 backdrop-blur-md border-b border-black/10 dark:border-white/10 text-[#1A1A1A] dark:text-[#F4F1EE] fixed top-0 left-0 right-0 w-full z-50 shadow-xs overscroll-behavior-contain">
       {/* Backdrop overlay for menus */}
       {(showExportMenu || showToolsMenu || showMobileMenu) && (
         <div className="fixed inset-0 z-40 bg-transparent" onClick={closeAllMenus} />
