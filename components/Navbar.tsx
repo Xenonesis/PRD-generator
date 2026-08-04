@@ -18,7 +18,9 @@ import {
   Palette,
   Maximize,
   Minimize,
-  Wand2
+  Wand2,
+  Menu,
+  X
 } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { PRD_TEMPLATES } from '@/lib/templates';
@@ -77,6 +79,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [showTemplateMenu, setShowTemplateMenu] = useState(false);
   const [showExportMenu, setShowExportMenu] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [isWatermarkEnabled, setIsWatermarkEnabled] = useState<boolean>(true);
   const [watermark, setWatermark] = useState<string>('DRAFT');
   const [lastSaved, setLastSaved] = useState<string | null>(null);
@@ -92,12 +95,13 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header className="no-print bg-white dark:bg-[#2A2A2A] border-b border-black dark:border-white/10 text-[#1A1A1A] dark:text-[#F4F1EE] sticky top-0 z-40 shadow-xs overflow-visible">
-      {(showExportMenu || showTemplateMenu) && (
+      {(showExportMenu || showTemplateMenu || showMobileMenu) && (
         <div
           className="fixed inset-0 z-40 bg-transparent"
           onClick={() => {
             setShowExportMenu(false);
             setShowTemplateMenu(false);
+            setShowMobileMenu(false);
           }}
         />
       )}
@@ -178,11 +182,11 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* Right Actions */}
-          <div className="flex items-center space-x-1 sm:space-x-2 overflow-x-auto no-scrollbar py-1">
+          <div className="flex items-center space-x-1 sm:space-x-2 shrink-0 py-1">
             {/* Translate Button */}
             <button
               onClick={onOpenTranslate}
-              className="flex items-center space-x-1 sm:space-x-1.5 bg-[#F4F1EE] dark:bg-[#2A2A2A] hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-[#121212] border border-black dark:border-white/20 text-[#1A1A1A] dark:text-[#F4F1EE] px-2.5 sm:px-3.5 py-1.5 text-[10px] uppercase font-bold tracking-wider transition active:scale-95"
+              className="hidden sm:flex items-center space-x-1 sm:space-x-1.5 bg-[#F4F1EE] dark:bg-[#2A2A2A] hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-[#121212] border border-black dark:border-white/20 text-[#1A1A1A] dark:text-[#F4F1EE] px-2.5 sm:px-3.5 py-1.5 text-[10px] uppercase font-bold tracking-wider transition active:scale-95"
               title="Translate Document"
             >
               <Languages className="w-3.5 h-3.5" />
@@ -200,7 +204,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
 
             {/* Template Dropdown */}
-            <div className="relative">
+            <div className="hidden sm:block relative">
               <button
                 onClick={() => setShowTemplateMenu(!showTemplateMenu)}
                 className="flex items-center space-x-1 bg-white dark:bg-[#2A2A2A] hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-[#121212] border border-black dark:border-white/20 text-[#1A1A1A] dark:text-[#F4F1EE] px-2 sm:px-2.5 py-1.5 text-[10px] uppercase font-bold tracking-wider transition"
@@ -275,7 +279,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={onCopyMarkdown}
               title="Copy Markdown"
-              className="bg-white dark:bg-[#2A2A2A] hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-[#121212] border border-black dark:border-white/20 text-[#1A1A1A] dark:text-[#F4F1EE] px-2 sm:px-2.5 py-1.5 text-[10px] uppercase font-bold tracking-wider transition flex items-center space-x-1"
+              className="hidden sm:flex bg-white dark:bg-[#2A2A2A] hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-[#121212] border border-black dark:border-white/20 text-[#1A1A1A] dark:text-[#F4F1EE] px-2 sm:px-2.5 py-1.5 text-[10px] uppercase font-bold tracking-wider transition items-center space-x-1"
             >
               {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
               <span className="hidden xl:inline">{copied ? 'Copied' : 'Copy'}</span>
@@ -316,7 +320,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               type="button"
               onClick={() => setIsWatermarkEnabled(!isWatermarkEnabled)}
               title={isWatermarkEnabled ? `PDF Watermark Active: "${watermark || 'DRAFT'}" (Click to toggle)` : 'PDF Watermark Disabled (Click to enable)'}
-              className={`px-2 sm:px-2.5 py-1.5 text-[10px] font-mono font-bold uppercase tracking-wider border transition flex items-center space-x-1 sm:space-x-1.5 ${
+              className={`hidden sm:flex px-2 sm:px-2.5 py-1.5 text-[10px] font-mono font-bold uppercase tracking-wider border transition items-center space-x-1 sm:space-x-1.5 ${
                 isWatermarkEnabled
                   ? 'bg-amber-100 text-amber-900 border-amber-400 hover:bg-amber-200'
                   : 'bg-white dark:bg-[#2A2A2A] text-black/40 dark:text-white/40 border-black dark:border-white/20 hover:border-black dark:border-white/50'
@@ -327,7 +331,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span className="max-w-[50px] sm:max-w-[70px] truncate">{isWatermarkEnabled ? (watermark || 'DRAFT') : 'OFF'}</span>
             </button>
 
-            <ThemeToggle />
+            <div className="hidden sm:block"><ThemeToggle /></div>
 
             {/* Fullscreen Toggle */}
             <button
@@ -504,6 +508,48 @@ export const Navbar: React.FC<NavbarProps> = ({
                       Use browser standard print dialog to save PDF or print directly
                     </span>
                   </button>
+                </div>
+              )}
+            </div>
+            {/* Mobile Hamburger Menu */}
+            <div className="sm:hidden relative">
+              <button
+                onClick={() => setShowMobileMenu(!showMobileMenu)}
+                className="bg-black dark:bg-white hover:bg-black/80 text-white dark:text-[#121212] p-1.5 transition border border-black dark:border-white/30"
+              >
+                {showMobileMenu ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+              </button>
+
+              {showMobileMenu && (
+                <div className="absolute right-0 mt-2 w-56 bg-[#F4F1EE] dark:bg-[#2A2A2A] border border-black dark:border-white/30 shadow-2xl py-1 z-[60] flex flex-col">
+                  <button onClick={onOpenTranslate} className="text-left px-4 py-2.5 text-xs font-bold uppercase tracking-wider border-b border-black/10 dark:border-white/10 hover:bg-white dark:hover:bg-[#1E1E1E] flex items-center gap-2 text-black dark:text-white">
+                    <Languages className="w-4 h-4" /> Translate
+                  </button>
+                  <button onClick={() => { setShowMobileMenu(false); setShowTemplateMenu(true); }} className="text-left px-4 py-2.5 text-xs font-bold uppercase tracking-wider border-b border-black/10 dark:border-white/10 hover:bg-white dark:hover:bg-[#1E1E1E] flex items-center gap-2 text-black dark:text-white">
+                    <BookOpen className="w-4 h-4" /> Templates
+                  </button>
+                  <button onClick={onCopyMarkdown} className="text-left px-4 py-2.5 text-xs font-bold uppercase tracking-wider border-b border-black/10 dark:border-white/10 hover:bg-white dark:hover:bg-[#1E1E1E] flex items-center gap-2 text-black dark:text-white">
+                    <Copy className="w-4 h-4" /> Copy Markdown
+                  </button>
+                  <button onClick={onDownloadMarkdown} className="text-left px-4 py-2.5 text-xs font-bold uppercase tracking-wider border-b border-black/10 dark:border-white/10 hover:bg-white dark:hover:bg-[#1E1E1E] flex items-center gap-2 text-black dark:text-white">
+                    <Download className="w-4 h-4" /> Download .md
+                  </button>
+                  <button onClick={onCleanupFormat} className="text-left px-4 py-2.5 text-xs font-bold uppercase tracking-wider border-b border-black/10 dark:border-white/10 hover:bg-white dark:hover:bg-[#1E1E1E] flex items-center gap-2 text-black dark:text-white">
+                    <Wand2 className="w-4 h-4" /> Cleanup Format
+                  </button>
+                  <button onClick={onOpenHistory} className="text-left px-4 py-2.5 text-xs font-bold uppercase tracking-wider border-b border-black/10 dark:border-white/10 hover:bg-white dark:hover:bg-[#1E1E1E] flex items-center gap-2 text-black dark:text-white">
+                    <History className="w-4 h-4" /> History
+                  </button>
+                  <button onClick={onOpenSavedDocs} className="text-left px-4 py-2.5 text-xs font-bold uppercase tracking-wider border-b border-black/10 dark:border-white/10 hover:bg-white dark:hover:bg-[#1E1E1E] flex items-center gap-2 text-black dark:text-white">
+                    <FolderOpen className="w-4 h-4" /> Saved Docs
+                  </button>
+                  <button onClick={() => setIsWatermarkEnabled(!isWatermarkEnabled)} className="text-left px-4 py-2.5 text-xs font-bold uppercase tracking-wider border-b border-black/10 dark:border-white/10 hover:bg-white dark:hover:bg-[#1E1E1E] flex items-center gap-2 text-black dark:text-white">
+                    <Palette className="w-4 h-4" /> Toggle Watermark
+                  </button>
+                  <div className="px-4 py-2.5 flex items-center justify-between text-black dark:text-white">
+                    <span className="text-xs font-bold uppercase tracking-wider">Theme</span>
+                    <ThemeToggle />
+                  </div>
                 </div>
               )}
             </div>
