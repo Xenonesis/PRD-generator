@@ -501,7 +501,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
       {/* Category Tabs Header */}
       {!isFocusMode && (
         <div className="bg-neutral-100/80 dark:bg-black/30 border-b border-neutral-200 dark:border-white/10 p-2.5 flex relative w-full pr-12 backdrop-blur-xs">
-          <div className="flex overflow-x-auto gap-1 no-scrollbar flex-grow">
+          <div className="flex overflow-x-auto gap-1.5 no-scrollbar flex-grow py-0.5">
             {tabs.map((tab) => {
               const Icon = tab.icon;
               const isActive = activeTab === tab.id;
@@ -509,12 +509,12 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as typeof activeTab)}
-                  className={`flex flex-col items-center justify-center min-h-[44px] px-3 py-2 rounded-lg transition-all space-y-1 ${
+                  className={`flex flex-col items-center justify-center min-h-[44px] px-3.5 py-1.5 rounded-lg transition-all space-y-1 shrink-0 ${
                     isActive ? 'bg-black text-white dark:bg-white dark:text-black shadow-xs font-bold' : 'text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200/60 dark:hover:bg-white/10 font-medium'
                   }`}
                 >
-                  <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
-                  <span className="text-[9px] sm:text-xs font-bold uppercase tracking-wider text-center line-clamp-1">{tab.label}</span>
+                  <Icon className="w-4 h-4 sm:w-4 sm:h-4" />
+                  <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-center whitespace-nowrap">{tab.label}</span>
                 </button>
               );
             })}
@@ -522,7 +522,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
           <div className="absolute right-0 top-0 h-full flex items-center justify-center bg-gradient-to-l from-[#F4F1EE] dark:from-[#121212] to-transparent pl-4 pr-2">
             <button 
               onClick={() => setIsFocusMode(true)} 
-              className="flex flex-col items-center justify-center p-2 space-y-1 text-black/80 dark:text-white/80 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors" 
+              className="flex flex-col items-center justify-center p-2 space-y-1 text-black/80 dark:text-white/80 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors rounded-lg" 
               title="Enter Focus Mode"
             >
               <Maximize2 className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -538,7 +538,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
         {activeTab === 'header' && (
           <div className="space-y-6 animate-fade-in">
             {/* Meta */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-black/80 dark:text-white/80 mb-1">Project Name</label>
                 <input
@@ -584,28 +584,26 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                   className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                 />
               </div>
-              <div className="flex space-x-2">
-                <div className="w-1/3">
-                  <label className="block text-xs font-bold uppercase tracking-wider text-black/80 dark:text-white/80 mb-1">Currency</label>
-                  <input
-                    type="text"
-                    value={data.currencySymbol}
-                    onChange={(e) => updateField('currencySymbol', e.target.value)}
-                    className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 text-center"
-                  />
-                </div>
-                <div className="w-2/3">
-                  <label className="block text-xs font-bold uppercase tracking-wider text-black/80 dark:text-white/80 mb-1">Total Project Cost</label>
-                  <input
-                    type="text"
-                    value={data.projectCost}
-                    onChange={(e) => updateField('projectCost', e.target.value)}
-                    className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
-                  />
-                </div>
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-black/80 dark:text-white/80 mb-1">Currency</label>
+                <input
+                  type="text"
+                  value={data.currencySymbol}
+                  onChange={(e) => updateField('currencySymbol', e.target.value)}
+                  className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 text-center"
+                />
               </div>
-              <div className="md:col-span-3">
-                <label className="block text-xs font-bold uppercase tracking-wider text-black/80 dark:text-white/80 mb-1">Estimated Timeline Summary</label>
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-black/80 dark:text-white/80 mb-1">Total Project Cost</label>
+                <input
+                  type="text"
+                  value={data.projectCost}
+                  onChange={(e) => updateField('projectCost', e.target.value)}
+                  className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-black/80 dark:text-white/80 mb-1">Estimated Timeline</label>
                 <input
                   type="text"
                   value={data.estimatedTimeline}
@@ -1468,7 +1466,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
             <button
               type="button"
               onClick={() => setSummaryFilter('all')}
-              className={`px-3 py-1.5 text-xs font-bold uppercase tracking-wider border transition-colors ${
+              className={`px-3 py-1.5 text-xs font-bold uppercase tracking-wider border transition-colors rounded-md ${
                 summaryFilter === 'all'
                   ? 'bg-black dark:bg-white text-white dark:text-[#121212] border-black dark:border-white/30'
                   : 'bg-white dark:bg-white/5 text-black/90 dark:text-white/90 border-black/15 dark:border-white/15 hover:border-black dark:hover:border-white/30'
@@ -1479,10 +1477,10 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
             <button
               type="button"
               onClick={() => setSummaryFilter('incomplete')}
-              className={`px-3 py-1.5 text-xs font-bold uppercase tracking-wider border transition-colors flex items-center space-x-1.5 ${
+              className={`px-3 py-1.5 text-xs font-bold uppercase tracking-wider border transition-colors flex items-center space-x-1.5 rounded-md ${
                 summaryFilter === 'incomplete'
-                  ? 'bg-amber-800 text-white dark:text-[#121212] border-amber-900'
-                  : 'bg-white dark:bg-white/5 text-amber-900 border-amber-600/30 hover:border-amber-700'
+                  ? 'bg-amber-600 text-white border-amber-700'
+                  : 'bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-500/30 hover:border-amber-500/50'
               }`}
             >
               <AlertTriangle className="w-3.5 h-3.5" />
@@ -1491,10 +1489,10 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
             <button
               type="button"
               onClick={() => setSummaryFilter('complete')}
-              className={`px-3 py-1.5 text-xs font-bold uppercase tracking-wider border transition-colors flex items-center space-x-1.5 ${
+              className={`px-3 py-1.5 text-xs font-bold uppercase tracking-wider border transition-colors flex items-center space-x-1.5 rounded-md ${
                 summaryFilter === 'complete'
-                  ? 'bg-emerald-800 text-white dark:text-[#121212] border-emerald-900'
-                  : 'bg-white dark:bg-white/5 text-emerald-800 border-emerald-600/30 hover:border-emerald-700'
+                  ? 'bg-emerald-600 text-white border-emerald-700'
+                  : 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-500/30 hover:border-emerald-500/50'
               }`}
             >
               <CheckCircle2 className="w-3.5 h-3.5" />
