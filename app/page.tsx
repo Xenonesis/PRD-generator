@@ -62,15 +62,6 @@ export default function Home() {
   useEffect(() => {
     try {
       const bizbuddyTmpl = PRD_TEMPLATES.find((t) => t.id === "bizbuddy-loan-crm");
-      const draft = localStorage.getItem("prdforge_current_draft");
-      if (draft) {
-        const parsed = JSON.parse(draft);
-        if (parsed && parsed.projectName) {
-          setPrdData(parsed);
-          setIsHydrated(true);
-          return;
-        }
-      }
       if (bizbuddyTmpl) {
         setPrdData(bizbuddyTmpl.data);
         localStorage.setItem("prdforge_current_draft", JSON.stringify(bizbuddyTmpl.data));
@@ -403,12 +394,12 @@ export default function Home() {
 
         {viewMode === "split" && (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 animate-fade-in w-full min-w-0">
-            <div className="lg:col-span-5 no-print min-w-0">
+            <div className="lg:col-span-6 xl:col-span-5 no-print min-w-0">
               <div className="lg:sticky lg:top-20 min-w-0">
                 <InteractiveForm data={prdData} onChange={handlePRDChange} />
               </div>
             </div>
-            <div className="lg:col-span-7 min-w-0">
+            <div className="lg:col-span-6 xl:col-span-7 min-w-0">
               <DocumentView data={prdData} printMode={printMode} />
             </div>
           </div>

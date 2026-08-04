@@ -660,77 +660,77 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
         {activeTab === 'header' && (
           <div className="space-y-6 animate-fade-in">
             {/* Meta */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4">
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-black/80 dark:text-white/80 mb-1">Project Name</label>
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-black/80 dark:text-white/80 mb-1 truncate">Project Name</label>
                 <input
                   type="text"
                   value={data.projectName}
                   onChange={(e) => updateField('projectName', e.target.value)}
-                  className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                  className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg px-3 py-2 text-xs sm:text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 transition-all truncate"
                 />
               </div>
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-black/80 dark:text-white/80 mb-1">Client / Company Name</label>
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-black/80 dark:text-white/80 mb-1 truncate">Client / Company Name</label>
                 <input
                   type="text"
                   value={data.clientName}
                   onChange={(e) => updateField('clientName', e.target.value)}
-                  className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                  className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg px-3 py-2 text-xs sm:text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 transition-all truncate"
                 />
               </div>
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-black/80 dark:text-white/80 mb-1">Service Provider</label>
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-black/80 dark:text-white/80 mb-1 truncate">Service Provider</label>
                 <input
                   type="text"
                   value={data.serviceProvider}
                   onChange={(e) => updateField('serviceProvider', e.target.value)}
-                  className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                  className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg px-3 py-2 text-xs sm:text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 transition-all truncate"
                 />
               </div>
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-black/80 dark:text-white/80 mb-1">Document Version</label>
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-black/80 dark:text-white/80 mb-1 truncate">Document Version</label>
                 <input
                   type="text"
                   value={data.docVersion}
                   onChange={(e) => updateField('docVersion', e.target.value)}
-                  className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                  className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg px-3 py-2 text-xs sm:text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 transition-all truncate"
                 />
               </div>
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-black/80 dark:text-white/80 mb-1">Date (DD/MM/YYYY)</label>
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-black/80 dark:text-white/80 mb-1 truncate">Date (DD/MM/YYYY)</label>
                 <input
                   type="text"
                   value={data.date}
                   onChange={(e) => updateField('date', e.target.value)}
-                  className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                  className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg px-3 py-2 text-xs sm:text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 transition-all truncate"
                 />
               </div>
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-black/80 dark:text-white/80 mb-1">Currency</label>
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-black/80 dark:text-white/80 mb-1 truncate">Currency</label>
                 <input
                   type="text"
                   value={data.currencySymbol}
                   onChange={(e) => updateField('currencySymbol', e.target.value)}
-                  className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 text-center"
+                  className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg px-3 py-2 text-xs sm:text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 text-center font-bold transition-all truncate"
                 />
               </div>
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-black/80 dark:text-white/80 mb-1">Total Project Cost</label>
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-black/80 dark:text-white/80 mb-1 truncate">Total Project Cost</label>
                 <input
                   type="text"
                   value={data.projectCost}
                   onChange={(e) => updateField('projectCost', e.target.value)}
-                  className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                  className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg px-3 py-2 text-xs sm:text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 transition-all truncate"
                 />
               </div>
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-black/80 dark:text-white/80 mb-1">Estimated Timeline</label>
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-black/80 dark:text-white/80 mb-1 truncate">Estimated Timeline</label>
                 <input
                   type="text"
                   value={data.estimatedTimeline}
                   onChange={(e) => updateField('estimatedTimeline', e.target.value)}
-                  className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                  className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg px-3 py-2 text-xs sm:text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 transition-all truncate"
                 />
               </div>
             </div>
@@ -1525,48 +1525,50 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
       <div id="prd-audit-summary" className="bg-neutral-50 dark:bg-white/5 border-t border-neutral-200 dark:border-white/10 p-4 sm:p-5 mt-10 rounded-xl space-y-4">
         
         {/* Header Bar with Toggle & Navigation */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-black/10 dark:border-white/10">
-          <div 
-            className="flex items-center space-x-2 cursor-pointer select-none group" 
-            onClick={() => {
-              if (activeTab !== 'audit') setIsAuditExpanded(!isAuditExpanded);
-            }}
-          >
-            <span className="bg-black dark:bg-white text-white dark:text-[#121212] px-2 py-0.5 text-[9px] font-mono uppercase tracking-widest font-bold rounded-xs">
-              Quality Audit
-            </span>
-            <h3 className="text-xs sm:text-sm font-bold text-[#1A1A1A] dark:text-[#F4F1EE] uppercase tracking-wider font-sans group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
-              PRD Section Completion Summary
-            </h3>
-            <span className="text-xs font-mono font-bold text-neutral-500 dark:text-neutral-400">
-              ({completedCount} / {audits.length})
-            </span>
-          </div>
-
-          <div className="flex items-center space-x-2 shrink-0">
-            {activeTab !== 'audit' && (
-              <button
-                type="button"
-                onClick={() => setIsAuditExpanded(!isAuditExpanded)}
-                className="px-3 py-1 text-xs font-bold uppercase tracking-wider bg-white dark:bg-white/10 text-neutral-800 dark:text-neutral-200 border border-neutral-300 dark:border-white/20 hover:bg-neutral-100 dark:hover:bg-white/20 transition-all rounded-md flex items-center space-x-1.5"
-              >
-                <span>{isAuditExpanded ? 'Hide Details' : 'Show Details'}</span>
-                {isAuditExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
-              </button>
-            )}
-            {activeTab !== 'audit' ? (
-              <button
-                type="button"
-                onClick={() => setActiveTab('audit')}
-                className="px-3 py-1 text-xs font-bold uppercase tracking-wider bg-black dark:bg-white text-white dark:text-black hover:opacity-90 transition-all rounded-md"
-              >
-                Full Audit Tab →
-              </button>
-            ) : (
-              <span className="text-[10px] font-mono uppercase font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-sm">
-                Dedicated Audit Mode
+        <div className="flex flex-col gap-3 pb-3 border-b border-black/10 dark:border-white/10 min-w-0">
+          <div className="flex flex-wrap items-center justify-between gap-2 min-w-0">
+            <div 
+              className="flex flex-wrap items-center gap-2 cursor-pointer select-none group min-w-0 flex-1" 
+              onClick={() => {
+                if (activeTab !== 'audit') setIsAuditExpanded(!isAuditExpanded);
+              }}
+            >
+              <span className="bg-black dark:bg-white text-white dark:text-[#121212] px-2 py-0.5 text-[9px] font-mono uppercase tracking-widest font-bold rounded-xs shrink-0">
+                Quality Audit
               </span>
-            )}
+              <h3 className="text-xs sm:text-sm font-bold text-[#1A1A1A] dark:text-[#F4F1EE] uppercase tracking-wider font-sans group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+                PRD Section Completion Summary
+              </h3>
+              <span className="text-xs font-mono font-bold text-neutral-500 dark:text-neutral-400 shrink-0">
+                ({completedCount}/{audits.length})
+              </span>
+            </div>
+
+            <div className="flex items-center space-x-1.5 shrink-0">
+              {activeTab !== 'audit' && (
+                <button
+                  type="button"
+                  onClick={() => setIsAuditExpanded(!isAuditExpanded)}
+                  className="px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider bg-white dark:bg-white/10 text-neutral-800 dark:text-neutral-200 border border-neutral-300 dark:border-white/20 hover:bg-neutral-100 dark:hover:bg-white/20 transition-all rounded-md flex items-center space-x-1 shrink-0"
+                >
+                  <span>{isAuditExpanded ? 'Hide' : 'Details'}</span>
+                  {isAuditExpanded ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+                </button>
+              )}
+              {activeTab !== 'audit' ? (
+                <button
+                  type="button"
+                  onClick={() => setActiveTab('audit')}
+                  className="px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider bg-black dark:bg-white text-white dark:text-black hover:opacity-90 transition-all rounded-md shrink-0"
+                >
+                  Audit Tab →
+                </button>
+              ) : (
+                <span className="text-[10px] font-mono uppercase font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-sm shrink-0">
+                  Audit Mode
+                </span>
+              )}
+            </div>
           </div>
         </div>
 
