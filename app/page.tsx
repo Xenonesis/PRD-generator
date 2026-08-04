@@ -344,7 +344,7 @@ export default function Home() {
       />
 
       {/* Main Workspace Area */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 pb-6">
+      <main className="flex-1 w-full mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 pb-6">
         {/* Workflow Stepper */}
         {!isFullscreen && (
           <WorkflowStepper 
@@ -388,7 +388,7 @@ export default function Home() {
 
         {/* View Layouts */}
         {viewMode === "editor" && (
-          <div className="animate-fade-in max-w-4xl mx-auto w-full min-w-0">
+          <div className="animate-fade-in max-w-5xl mx-auto w-full min-w-0">
             <InteractiveForm data={prdData} onChange={handlePRDChange} />
           </div>
         )}
@@ -421,13 +421,13 @@ export default function Home() {
 
         
         {viewMode === "insights" && (
-          <div className="animate-fade-in max-w-6xl mx-auto w-full min-w-0">
+          <div className="animate-fade-in w-full min-w-0">
             <InsightsDashboard data={prdData} />
           </div>
         )}
 
         {viewMode === "markdown" && (
-          <div className="animate-fade-in max-w-5xl mx-auto w-full min-w-0">
+          <div className="animate-fade-in w-full min-w-0">
             <MarkdownView
               markdownText={prdToMarkdown(prdData)}
               onMarkdownChange={(newMd) => {

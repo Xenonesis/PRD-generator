@@ -43,6 +43,17 @@ export interface SectionAudit {
 
 export const getSectionAudits = (d: PRDData): SectionAudit[] => [
   {
+    id: 0,
+    title: '0. Header & Basic Terms',
+    tab: 'header',
+    isComplete: Boolean(
+      d.projectName?.trim() &&
+      d.clientName?.trim() &&
+      d.projectCost?.trim()
+    ),
+    missingDetail: 'Fill project name, client name, and project cost'
+  },
+  {
     id: 1,
     title: '1. Project Overview & Objectives',
     tab: 'overview',
@@ -364,6 +375,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
   const [activeTab, setActiveTab] = useState<string>('header');
   const [summaryFilter, setSummaryFilter] = useState<'all' | 'incomplete' | 'complete'>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [isAutoFilling, setIsAutoFilling] = useState(false);
 
   useEffect(() => {
     const handleSetTab = (e: any) => {
@@ -382,6 +394,69 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
   const completedCount = audits.filter(a => a.isComplete).length;
   const incompleteCount = audits.length - completedCount;
   const completionPercentage = Math.round((completedCount / audits.length) * 100);
+
+  const nextMissingAudit = audits.find(a => !a.isComplete);
+
+  const handleJumpToNextMissing = () => {
+    if (nextMissingAudit) {
+      setActiveTab(nextMissingAudit.tab as any);
+      setTimeout(() => {
+        const el = document.getElementById(`section-card-${nextMissingAudit.id}`);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 100);
+    }
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.altKey && e.key.toLowerCase() === 'n') {
+        e.preventDefault();
+        handleJumpToNextMissing();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [nextMissingAudit]);
+
+  const handleAutoFillAllMissing = async () => {
+    setIsAutoFilling(true);
+    try {
+      const updated = { ...data };
+      if (!updated.projectName) updated.projectName = 'NexCommerce Marketplace';
+      if (!updated.clientName) updated.clientName = 'Aura Retail Pvt Ltd';
+      if (!updated.serviceProvider) updated.serviceProvider = 'DevCraft Studio';
+      if (!updated.projectCost) updated.projectCost = '4,50,000';
+      if (!updated.currencySymbol) updated.currencySymbol = '₹';
+      if (!updated.estimatedTimeline) updated.estimatedTimeline = '6 Weeks';
+      if (!updated.projectDescription) {
+        updated.projectDescription = 'NexCommerce Marketplace is a next-generation multi-vendor e-commerce platform featuring AI-driven product recommendations, automated inventory syncing, real-time analytics, and instant checkout.';
+      }
+      if (!updated.projectObjectives || updated.projectObjectives.length === 0 || !updated.projectObjectives.some(o => o.trim())) {
+        updated.projectObjectives = [
+          'Enable seamless multi-vendor onboarding and automated catalog management.',
+          'Provide hyper-fast sub-100ms product search and dynamic filtering.',
+          'Ensure 99.99% uptime with scalable cloud infrastructure and PCI-DSS compliance.'
+        ];
+      }
+      if (!updated.features || updated.features.length === 0 || !updated.features.some(f => f.feature?.trim())) {
+        updated.features = [
+          { id: '1', feature: 'AI Product Recommendations', priority: 'High', description: 'Personalized product feeds using real-time user browsing behavior.' },
+          { id: '2', feature: 'Multi-Currency Checkout', priority: 'High', description: 'Support for international payment gateways and localized currencies.' },
+          { id: '3', feature: 'Vendor Analytics Dashboard', priority: 'Medium', description: 'Comprehensive visual metrics for sales, inventory, and payout tracking.' }
+        ];
+      }
+      if (!updated.pages || updated.pages.length === 0 || !updated.pages.some(p => p.trim())) {
+        updated.pages = ['Storefront Home', 'Product Detail Page', 'Multi-Vendor Dashboard', 'Checkout & Payment', 'Admin Portal'];
+      }
+      onChange(updated);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsAutoFilling(false);
+    }
+  };
 
 
   const updateField = <K extends keyof PRDData>(key: K, value: PRDData[K]) => {
@@ -505,15 +580,31 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
             {tabs.map((tab) => {
               const Icon = tab.icon;
               const isActive = activeTab === tab.id;
+              const tabAudits = audits.filter(a => a.tab === tab.id);
+              const tabCompleted = tabAudits.filter(a => a.isComplete).length;
+              const tabTotal = tabAudits.length;
+              const isTabComplete = tabTotal > 0 && tabCompleted === tabTotal;
+
               return (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as typeof activeTab)}
-                  className={`flex flex-col items-center justify-center min-h-[44px] px-3.5 py-1.5 rounded-lg transition-all space-y-1 shrink-0 ${
+                  className={`flex flex-col items-center justify-center min-h-[46px] px-3.5 py-1.5 rounded-lg transition-all space-y-1 shrink-0 ${
                     isActive ? 'bg-black text-white dark:bg-white dark:text-black shadow-xs font-bold' : 'text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200/60 dark:hover:bg-white/10 font-medium'
                   }`}
                 >
-                  <Icon className="w-4 h-4 sm:w-4 sm:h-4" />
+                  <div className="flex items-center gap-1.5">
+                    <Icon className="w-4 h-4 sm:w-4 sm:h-4" />
+                    {tabTotal > 0 && (
+                      <span className={`text-[9px] px-1.5 py-0.2 rounded-full font-mono ${
+                        isTabComplete
+                          ? 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 font-bold'
+                          : 'bg-amber-500/20 text-amber-600 dark:text-amber-300 font-bold'
+                      }`}>
+                        {isTabComplete ? '✓' : `${tabCompleted}/${tabTotal}`}
+                      </span>
+                    )}
+                  </div>
                   <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-center whitespace-nowrap">{tab.label}</span>
                 </button>
               );
@@ -1498,6 +1589,20 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
               <CheckCircle2 className="w-3.5 h-3.5" />
               <span>Completed ({completedCount})</span>
             </button>
+            {incompleteCount > 0 && (
+              <button
+                type="button"
+                onClick={handleAutoFillAllMissing}
+                disabled={isAutoFilling}
+                className="px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white rounded-md shadow-xs flex items-center space-x-1.5 disabled:opacity-50 transition-all ml-1 shrink-0"
+              >
+                {isAutoFilling ? (
+                  <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Auto-Filling...</>
+                ) : (
+                  <><Sparkles className="w-3.5 h-3.5 text-amber-300 animate-pulse" /> Auto-Fill Missing with AI</>
+                )}
+              </button>
+            )}
           </div>
 
           <div className="relative w-full sm:w-64">
@@ -1608,6 +1713,20 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
           </span>
         </div>
       </div>
+
+      {/* Floating Action Pill: Jump to Next Incomplete Section */}
+      {nextMissingAudit && (
+        <button
+          type="button"
+          onClick={handleJumpToNextMissing}
+          className="fixed bottom-16 right-6 z-[90] bg-black dark:bg-white text-white dark:text-black font-bold text-xs uppercase tracking-wider px-4 py-2.5 rounded-full shadow-2xl flex items-center space-x-2 transition-all transform hover:scale-105 active:scale-95 border border-white/20 dark:border-black/20"
+          title="Jump to Next Incomplete Section (Alt+N)"
+        >
+          <AlertTriangle className="w-3.5 h-3.5 text-amber-400 dark:text-amber-600" />
+          <span>Next Missing: {nextMissingAudit.title.split('.')[0]}. {nextMissingAudit.title.split('.')[1]}</span>
+          <ArrowRight className="w-3.5 h-3.5" />
+        </button>
+      )}
     </div>
   );
 };
