@@ -10,8 +10,6 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false, // often helps with mobile scaling issues
 };
 
 export default function RootLayout({children}: {children: React.ReactNode}) {

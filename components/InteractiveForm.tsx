@@ -509,7 +509,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as typeof activeTab)}
-                  className={`flex flex-col items-center justify-center min-w-[70px] sm:min-w-[90px] p-2 space-y-1 transition-colors ${
+                  className={`flex flex-col items-center justify-center min-h-[44px] min-w-[70px] sm:min-w-[90px] p-2 space-y-1 transition-colors ${
                     isActive 
                       ? 'bg-black text-white dark:bg-white dark:text-[#121212]' 
                       : 'text-black/60 hover:bg-black/5 dark:text-white/60 dark:hover:bg-white/10'
@@ -1598,7 +1598,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
       </div>
 
       {/* Editor Word Count Footer */}
-      <div className="bg-white dark:bg-[#2A2A2A] border-t border-black dark:border-white/10 px-4 py-3 flex flex-wrap items-center justify-between no-print sticky bottom-0 z-20 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+      <div className="bg-white dark:bg-[#2A2A2A] border-t border-black dark:border-white/10 px-4 py-3 flex flex-wrap items-center justify-between no-print sticky bottom-0 z-20 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] pb-safe">
         <div className="flex items-center space-x-2">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
           <span className="text-[10px] uppercase tracking-widest font-bold text-black/60 dark:text-white/60">Live Word Count Tracker</span>

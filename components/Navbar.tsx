@@ -186,7 +186,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Translate Button */}
             <button
               onClick={onOpenTranslate}
-              className="hidden xl:flex items-center space-x-1 sm:space-x-1.5 bg-[#F4F1EE] dark:bg-[#2A2A2A] hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-[#121212] border border-black dark:border-white/20 text-[#1A1A1A] dark:text-[#F4F1EE] px-2.5 sm:px-3.5 py-1.5 text-[10px] uppercase font-bold tracking-wider transition active:scale-95"
+              className="touch-manipulation hidden xl:flex items-center space-x-1 sm:space-x-1.5 bg-[#F4F1EE] dark:bg-[#2A2A2A] hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-[#121212] border border-black dark:border-white/20 text-[#1A1A1A] dark:text-[#F4F1EE] px-2.5 sm:px-3.5 py-1.5 text-[10px] uppercase font-bold tracking-wider transition active:scale-95"
               title="Translate Document"
             >
               <Languages className="w-3.5 h-3.5" />
@@ -521,7 +521,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               </button>
 
               {showMobileMenu && (
-                <div className="absolute right-0 mt-2 w-56 bg-[#F4F1EE] dark:bg-[#2A2A2A] border border-black dark:border-white/30 shadow-2xl py-1 z-[60] flex flex-col">
+                <div className="absolute right-0 mt-2 w-full max-w-sm bg-[#F4F1EE] dark:bg-[#2A2A2A] border border-black dark:border-white/30 shadow-2xl py-1 z-[60] flex flex-col">
                   <button onClick={onOpenTranslate} className="text-left px-4 py-2.5 text-xs font-bold uppercase tracking-wider border-b border-black/10 dark:border-white/10 hover:bg-white dark:hover:bg-[#1E1E1E] flex items-center gap-2 text-black dark:text-white">
                     <Languages className="w-4 h-4" /> Translate
                   </button>

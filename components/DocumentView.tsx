@@ -234,20 +234,20 @@ const sectionBlocks = [
             </span>
           </h2>
 
-          <div className="overflow-x-auto mb-3">
+          <div className="min-w-0 max-w-full overflow-x-auto mb-3">
             <table className="w-full text-left border-collapse text-xs">
               <thead>
                 <tr className="bg-black dark:bg-white text-white dark:text-[#121212]">
-                  <th className="p-2.5 font-bold uppercase tracking-wider w-16">
+                  <th className="p-2.5 font-bold uppercase tracking-wider w-16 sm:w-16">
                     ID
                   </th>
-                  <th className="p-2.5 font-bold uppercase tracking-wider w-1/4">
+                  <th className="p-2.5 font-bold uppercase tracking-wider w-1/4 sm:w-1/4">
                     Feature
                   </th>
-                  <th className="p-2.5 font-bold uppercase tracking-wider">
+                  <th className="p-2.5 font-bold uppercase tracking-wider min-w-0">
                     Description
                   </th>
-                  <th className="p-2.5 font-bold uppercase tracking-wider w-24 text-center">
+                  <th className="p-2.5 font-bold uppercase tracking-wider w-24 sm:w-24 text-center">
                     Priority
                   </th>
                 </tr>
@@ -262,16 +262,16 @@ const sectionBlocks = [
                         : "bg-[#F4F1EE] dark:bg-[#121212] border-b border-black dark:border-white/10"
                     }
                   >
-                    <td className="p-2.5 font-mono font-bold text-black dark:text-white">
+                    <td className="p-2.5 font-mono font-bold text-black dark:text-white min-w-0">
                       {f.id}
                     </td>
-                    <td className="p-2.5 font-bold text-[#1A1A1A] dark:text-[#F4F1EE]">
+                    <td className="p-2.5 font-bold text-[#1A1A1A] dark:text-[#F4F1EE] min-w-0">
                       {f.feature}
                     </td>
-                    <td className="p-2.5 text-black/80 dark:text-white/80 leading-snug">
+                    <td className="p-2.5 text-black/80 dark:text-white/80 leading-snug min-w-0">
                       {f.description}
                     </td>
-                    <td className="p-2.5 text-center">
+                    <td className="p-2.5 text-center min-w-0">
                       <span
                         className={`inline-block px-2 py-0.5 text-[9px] uppercase tracking-wider font-bold border ${getPriorityBadge(f.priority)}`}
                       >

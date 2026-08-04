@@ -82,7 +82,7 @@ export const AIMagicModal: React.FC<AIMagicModalProps> = ({ isOpen, onClose, onG
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 dark:bg-white/60 backdrop-blur-xs animate-fade-in no-print">
-      <div className="bg-[#F4F1EE] dark:bg-[#121212] border border-black dark:border-white/30 text-[#1A1A1A] dark:text-[#F4F1EE] max-w-2xl w-full p-4 sm:p-6 shadow-2xl relative overflow-y-auto max-h-[92vh]">
+      <div className="bg-[#F4F1EE] dark:bg-[#121212] border border-black dark:border-white/30 text-[#1A1A1A] dark:text-[#F4F1EE] max-w-2xl w-full p-4 sm:p-6 shadow-2xl relative overflow-y-auto max-h-[92vh]" style="overscroll-behavior: contain">
         
         {/* Top Accent Line */}
         <div className="absolute top-0 left-0 right-0 h-1 bg-black dark:bg-white" />
