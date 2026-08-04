@@ -475,7 +475,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
   ];
 
   return (
-    <div id="prd-editor-top" className={`bg-white dark:bg-[#1A1A1A] border border-black dark:border-white/10 text-[#1A1A1A] dark:text-[#F4F1EE] shadow-sm overflow-hidden w-full min-w-0 no-print ${isFocusMode ? "fixed inset-0 z-[200] overflow-y-auto" : ""}`}>
+    <div id="prd-editor-top" className={`bg-white dark:bg-[#161616] border border-neutral-200 dark:border-white/10 text-neutral-900 dark:text-neutral-100 shadow-md rounded-xl overflow-hidden w-full min-w-0 no-print ${isFocusMode ? "fixed inset-0 z-[200] overflow-y-auto" : ""}`}>
       {isFocusMode && (
         <div className="sticky top-0 z-[210] flex justify-between items-center p-4 bg-[#EFECE7]/90 dark:bg-[#1E1E1E]/90 backdrop-blur-sm border-b border-black/10 dark:border-white/10">
           <div className="flex items-center gap-4">
@@ -500,7 +500,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
       
       {/* Category Tabs Header */}
       {!isFocusMode && (
-        <div className="bg-neutral-50 dark:bg-white/5 border-b border-black dark:border-white/10 p-2 flex relative w-full pr-12">
+        <div className="bg-neutral-100/80 dark:bg-black/30 border-b border-neutral-200 dark:border-white/10 p-2.5 flex relative w-full pr-12 backdrop-blur-xs">
           <div className="flex overflow-x-auto gap-1 no-scrollbar flex-grow">
             {tabs.map((tab) => {
               const Icon = tab.icon;
@@ -509,10 +509,8 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as typeof activeTab)}
-                  className={`flex flex-col items-center justify-center min-h-[44px] min-w-[70px] sm:min-w-[90px] p-2 space-y-1 transition-colors ${
-                    isActive 
-                      ? 'bg-black text-white dark:bg-white dark:text-[#121212]' 
-                      : 'text-black/60 hover:bg-black/5 dark:text-white/60 dark:hover:bg-white/10'
+                  className={`flex flex-col items-center justify-center min-h-[44px] px-3 py-2 rounded-lg transition-all space-y-1 ${
+                    isActive ? 'bg-black text-white dark:bg-white dark:text-black shadow-xs font-bold' : 'text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200/60 dark:hover:bg-white/10 font-medium'
                   }`}
                 >
                   <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -547,7 +545,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                   type="text"
                   value={data.projectName}
                   onChange={(e) => updateField('projectName', e.target.value)}
-                  className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                  className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                 />
               </div>
               <div>
@@ -556,7 +554,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                   type="text"
                   value={data.clientName}
                   onChange={(e) => updateField('clientName', e.target.value)}
-                  className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                  className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                 />
               </div>
               <div>
@@ -565,7 +563,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                   type="text"
                   value={data.serviceProvider}
                   onChange={(e) => updateField('serviceProvider', e.target.value)}
-                  className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                  className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                 />
               </div>
               <div>
@@ -574,7 +572,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                   type="text"
                   value={data.docVersion}
                   onChange={(e) => updateField('docVersion', e.target.value)}
-                  className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                  className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                 />
               </div>
               <div>
@@ -583,7 +581,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                   type="text"
                   value={data.date}
                   onChange={(e) => updateField('date', e.target.value)}
-                  className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                  className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                 />
               </div>
               <div className="flex space-x-2">
@@ -593,7 +591,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                     type="text"
                     value={data.currencySymbol}
                     onChange={(e) => updateField('currencySymbol', e.target.value)}
-                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 text-center"
+                    className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 text-center"
                   />
                 </div>
                 <div className="w-2/3">
@@ -602,7 +600,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                     type="text"
                     value={data.projectCost}
                     onChange={(e) => updateField('projectCost', e.target.value)}
-                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                    className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                   />
                 </div>
               </div>
@@ -612,7 +610,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                   type="text"
                   value={data.estimatedTimeline}
                   onChange={(e) => updateField('estimatedTimeline', e.target.value)}
-                  className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                  className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                 />
               </div>
             </div>
@@ -634,7 +632,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                 value={data.projectDescription}
                 onChange={(e) => updateField('projectDescription', e.target.value)}
                 rows={4}
-                className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 focus:border-black dark:border-white/30 p-3 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg focus:border-black dark:border-white/30 p-3 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
               />
             </div>
 
@@ -662,7 +660,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                       type="text"
                       value={obj}
                       onChange={(e) => handleListChange('projectObjectives', idx, e.target.value)}
-                      className="flex-1 bg-white dark:bg-white/5 border border-black dark:border-white/10 focus:border-black dark:border-white/30 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                      className="flex-1 bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg focus:border-black dark:border-white/30 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                     />
                     <button
                       type="button"
@@ -686,7 +684,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                     type="text"
                     value={data.targetUsers.primary}
                     onChange={(e) => updateNestedField('targetUsers', 'primary', e.target.value)}
-                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 focus:border-black dark:border-white/30 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                    className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg focus:border-black dark:border-white/30 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                   />
                 </div>
                 <div>
@@ -695,7 +693,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                     type="text"
                     value={data.targetUsers.secondary}
                     onChange={(e) => updateNestedField('targetUsers', 'secondary', e.target.value)}
-                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 focus:border-black dark:border-white/30 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                    className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg focus:border-black dark:border-white/30 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                   />
                 </div>
                 <div>
@@ -704,7 +702,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                     type="text"
                     value={data.targetUsers.admin}
                     onChange={(e) => updateNestedField('targetUsers', 'admin', e.target.value)}
-                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 focus:border-black dark:border-white/30 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                    className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg focus:border-black dark:border-white/30 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                   />
                 </div>
               </div>
@@ -740,7 +738,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                   value={data.includedPlatforms.other}
                   onChange={(e) => updateNestedField('includedPlatforms', 'other', e.target.value)}
                   placeholder="e.g. Chrome Browser Extension"
-                  className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 focus:border-black dark:border-white/30 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                  className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg focus:border-black dark:border-white/30 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                 />
               </div>
             </div>
@@ -769,7 +767,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
 
               <div className="space-y-3">
                 {data.features.map((f, idx) => (
-                  <div key={idx} className="bg-white dark:bg-white/5 border border-black dark:border-white/10 p-3 text-sm space-y-2">
+                  <div key={idx} className="bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-3 text-sm space-y-2">
                     <div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-2">
                       <input
                         type="text"
@@ -782,12 +780,12 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                         value={f.feature}
                         onChange={(e) => updateFeature(idx, 'feature', e.target.value)}
                         placeholder="Feature Name"
-                        className="flex-1 bg-white dark:bg-white/5 border border-black dark:border-white/10 px-2 py-1 font-semibold text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 text-xs"
+                        className="flex-1 bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg px-2 py-1 font-semibold text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 text-xs"
                       />
                       <select
                         value={f.priority}
                         onChange={(e) => updateFeature(idx, 'priority', e.target.value as 'High' | 'Medium' | 'Low')}
-                        className="bg-white dark:bg-white/5 border border-black dark:border-white/10 text-[#1A1A1A] dark:text-[#F4F1EE] px-2 py-1 font-semibold text-xs outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                        className="bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg text-[#1A1A1A] dark:text-[#F4F1EE] px-2 py-1 font-semibold text-xs outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                       >
                         <option value="High">High</option>
                         <option value="Medium">Medium</option>
@@ -806,7 +804,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                       onChange={(e) => updateFeature(idx, 'description', e.target.value)}
                       placeholder="Feature functional behavior & details..."
                       rows={2}
-                      className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-[#1A1A1A] dark:text-[#F4F1EE] text-xs outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                      className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-[#1A1A1A] dark:text-[#F4F1EE] text-xs outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                     />
                   </div>
                 ))}
@@ -868,7 +866,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                     value={data.userRoles[role.key as keyof typeof data.userRoles]}
                     onChange={(e) => updateNestedField('userRoles', role.key, e.target.value)}
                     rows={2}
-                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                    className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                   />
                 </div>
               ))}
@@ -883,7 +881,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                     type="text"
                     value={data.userFlows.registration}
                     onChange={(e) => updateNestedField('userFlows', 'registration', e.target.value)}
-                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 font-mono text-xs text-[#1A1A1A] dark:text-[#F4F1EE] p-2.5 outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                    className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg font-mono text-xs text-[#1A1A1A] dark:text-[#F4F1EE] p-2.5 outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                   />
                 </div>
                 <div>
@@ -892,7 +890,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                     type="text"
                     value={data.userFlows.primaryProductFlow}
                     onChange={(e) => updateNestedField('userFlows', 'primaryProductFlow', e.target.value)}
-                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 font-mono text-xs text-[#1A1A1A] dark:text-[#F4F1EE] p-2.5 outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                    className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg font-mono text-xs text-[#1A1A1A] dark:text-[#F4F1EE] p-2.5 outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                   />
                 </div>
                 <div>
@@ -901,7 +899,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                     type="text"
                     value={data.userFlows.adminFlow}
                     onChange={(e) => updateNestedField('userFlows', 'adminFlow', e.target.value)}
-                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 font-mono text-xs text-[#1A1A1A] dark:text-[#F4F1EE] p-2.5 outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                    className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg font-mono text-xs text-[#1A1A1A] dark:text-[#F4F1EE] p-2.5 outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                   />
                 </div>
               </div>
@@ -920,7 +918,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                   type="text"
                   value={data.design.style}
                   onChange={(e) => updateNestedField('design', 'style', e.target.value)}
-                  className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                  className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                 />
               </div>
               <div>
@@ -929,7 +927,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                   type="text"
                   value={data.design.primaryColor}
                   onChange={(e) => updateNestedField('design', 'primaryColor', e.target.value)}
-                  className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                  className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                 />
               </div>
               <div>
@@ -938,7 +936,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                   type="text"
                   value={data.design.secondaryColor}
                   onChange={(e) => updateNestedField('design', 'secondaryColor', e.target.value)}
-                  className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                  className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                 />
               </div>
               <div>
@@ -947,7 +945,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                   type="text"
                   value={data.design.typography}
                   onChange={(e) => updateNestedField('design', 'typography', e.target.value)}
-                  className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                  className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                 />
               </div>
               <div className="sm:col-span-2">
@@ -956,7 +954,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                   type="text"
                   value={data.design.referenceWebsites}
                   onChange={(e) => updateNestedField('design', 'referenceWebsites', e.target.value)}
-                  className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                  className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                 />
               </div>
             </div>
@@ -984,7 +982,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                       type="text"
                       value={data.techStack[item.key as keyof typeof data.techStack]}
                       onChange={(e) => updateNestedField('techStack', item.key, e.target.value)}
-                      className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                      className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                     />
                   </div>
                 ))}
@@ -1061,7 +1059,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
 
               <div className="space-y-3">
                 {data.paymentStructure.map((p, idx) => (
-                  <div key={idx} className="bg-white dark:bg-white/5 border border-black dark:border-white/10 p-3 space-y-2">
+                  <div key={idx} className="bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-3 space-y-2">
                     <div className="flex flex-wrap sm:flex-nowrap items-center gap-2">
                       <input
                         type="text"
@@ -1081,7 +1079,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                           updated[idx].milestone = e.target.value;
                           updateField('paymentStructure', updated);
                         }}
-                        className="flex-1 min-w-[120px] bg-white dark:bg-white/5 border border-black dark:border-white/10 text-[#1A1A1A] dark:text-[#F4F1EE] font-semibold px-2 py-1 text-xs outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                        className="flex-1 min-w-[120px] bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg text-[#1A1A1A] dark:text-[#F4F1EE] font-semibold px-2 py-1 text-xs outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                       />
                       <button
                         type="button"
@@ -1099,7 +1097,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                         updated[idx].description = e.target.value;
                         updateField('paymentStructure', updated);
                       }}
-                      className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                      className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                     />
                   </div>
                 ))}
@@ -1142,7 +1140,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                       type="text"
                       value={item}
                       onChange={(e) => handleListChange('securityPractices', idx, e.target.value)}
-                      className="flex-1 bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                      className="flex-1 bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                     />
                     <button
                       type="button"
@@ -1165,7 +1163,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                   type="text"
                   value={data.designRevisions}
                   onChange={(e) => updateField('designRevisions', e.target.value)}
-                  className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                  className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                 />
               </div>
               <div>
@@ -1174,7 +1172,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                   type="text"
                   value={data.devRevisions}
                   onChange={(e) => updateField('devRevisions', e.target.value)}
-                  className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                  className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                 />
               </div>
             </div>
@@ -1185,7 +1183,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                 type="text"
                 value={data.supportPeriod}
                 onChange={(e) => updateField('supportPeriod', e.target.value)}
-                className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] font-semibold outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] font-semibold outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                 placeholder="30 Days"
               />
             </div>
@@ -1209,7 +1207,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                       type="text"
                       value={o}
                       onChange={(e) => handleListChange('outOfScope', idx, e.target.value)}
-                      className="flex-1 bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                      className="flex-1 bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                     />
                     <button
                       type="button"
@@ -1296,7 +1294,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                     value={data.clientSignoff.name}
                     onChange={(e) => updateNestedField('clientSignoff', 'name', e.target.value)}
                     placeholder="e.g. Rahul Sharma"
-                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                    className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                   />
                 </div>
                 <div>
@@ -1305,7 +1303,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                     type="text"
                     value={data.clientSignoff.company}
                     onChange={(e) => updateNestedField('clientSignoff', 'company', e.target.value)}
-                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                    className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                   />
                 </div>
                 <div>
@@ -1315,7 +1313,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                     value={data.clientSignoff.signatureDate}
                     onChange={(e) => updateNestedField('clientSignoff', 'signatureDate', e.target.value)}
                     placeholder="DD/MM/YYYY"
-                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 mb-3"
+                    className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 mb-3"
                   />
                   <SignatureCapture 
                     label="Client" 
@@ -1334,7 +1332,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                     value={data.providerSignoff.name}
                     onChange={(e) => updateNestedField('providerSignoff', 'name', e.target.value)}
                     placeholder="e.g. Vikram Patel"
-                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                    className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                   />
                 </div>
                 <div>
@@ -1343,7 +1341,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                     type="text"
                     value={data.providerSignoff.company}
                     onChange={(e) => updateNestedField('providerSignoff', 'company', e.target.value)}
-                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                    className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                   />
                 </div>
                 <div>
@@ -1353,7 +1351,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                     value={data.providerSignoff.signatureDate}
                     onChange={(e) => updateNestedField('providerSignoff', 'signatureDate', e.target.value)}
                     placeholder="DD/MM/YYYY"
-                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 mb-3"
+                    className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 mb-3"
                   />
                   <SignatureCapture 
                     label="Provider" 
@@ -1372,7 +1370,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                   <select
                     value={data.documentApproval.status}
                     onChange={(e) => updateNestedField('documentApproval', 'status', e.target.value)}
-                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 text-black dark:text-white font-bold p-2.5 text-sm outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                    className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg text-black dark:text-white font-bold p-2.5 text-sm outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                   >
                     <option value="Draft">Draft</option>
                     <option value="Under Review">Under Review</option>
@@ -1385,7 +1383,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                     type="text"
                     value={data.documentApproval.projectStartDate}
                     onChange={(e) => updateNestedField('documentApproval', 'projectStartDate', e.target.value)}
-                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                    className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                   />
                 </div>
                 <div>
@@ -1394,7 +1392,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                     type="text"
                     value={data.documentApproval.expectedDeliveryDate}
                     onChange={(e) => updateNestedField('documentApproval', 'expectedDeliveryDate', e.target.value)}
-                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
+                    className="w-full bg-neutral-50 dark:bg-[#121212] border border-neutral-300 dark:border-white/15 focus:border-black dark:focus:border-white rounded-lg p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                   />
                 </div>
               </div>
