@@ -574,7 +574,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
   ];
 
   return (
-    <div id="prd-editor-top" className={`bg-white dark:bg-[#161616] border border-neutral-200 dark:border-white/10 text-neutral-900 dark:text-neutral-100 shadow-md rounded-xl overflow-hidden w-full min-w-0 no-print flex flex-col ${isFocusMode ? "fixed inset-0 z-[200]" : "h-[calc(100vh-240px)] min-h-[500px]"}`}>
+    <div id="prd-editor-top" className={`bg-white dark:bg-[#141414] border border-neutral-200 dark:border-white/[0.07] text-neutral-900 dark:text-neutral-100 shadow-lg rounded-2xl overflow-hidden w-full min-w-0 no-print flex flex-col ${isFocusMode ? "fixed inset-0 z-[200]" : "h-[calc(100vh-240px)] min-h-[500px]"}`}>
       {isFocusMode && (
         <div className="sticky top-0 z-[210] flex justify-between items-center p-4 bg-[#EFECE7]/90 dark:bg-[#1E1E1E]/90 backdrop-blur-sm border-b border-black/10 dark:border-white/10">
           <div className="flex items-center gap-4">
@@ -602,8 +602,8 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
 
         {/* LEFT: Vertical Tab Sidebar (hidden in focus mode) */}
         {!isFocusMode && (
-          <div className="flex flex-col w-[52px] sm:w-44 shrink-0 bg-neutral-50 dark:bg-black/20 border-r border-neutral-200 dark:border-white/10 overflow-y-auto">
-            <div className="flex flex-col gap-0.5 p-1.5 sm:p-2 flex-1">
+          <div className="flex flex-col w-[52px] sm:w-48 shrink-0 bg-neutral-50/80 dark:bg-white/[0.025] border-r border-neutral-200/80 dark:border-white/[0.06] overflow-y-auto">
+            <div className="flex flex-col gap-0.5 p-2 flex-1">
               {tabs.map((tab) => {
                 const Icon = tab.icon;
                 const isActive = activeTab === tab.id;
@@ -611,28 +611,29 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                 const tabCompleted = tabAudits.filter(a => a.isComplete).length;
                 const tabTotal = tabAudits.length;
                 const isTabComplete = tabTotal > 0 && tabCompleted === tabTotal;
+                const hasIncomplete = tabTotal > 0 && !isTabComplete;
 
                 return (
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id as typeof activeTab)}
                     title={tab.label}
-                    className={`group flex items-center gap-2.5 w-full px-2 py-2.5 rounded-lg transition-all text-left ${
+                    className={`group flex items-center gap-2.5 w-full px-2 py-2 rounded-lg transition-all duration-150 text-left ${
                       isActive
-                        ? 'bg-black text-white dark:bg-white dark:text-black shadow-xs'
-                        : 'text-neutral-500 dark:text-neutral-400 hover:bg-neutral-200/60 dark:hover:bg-white/10 hover:text-neutral-900 dark:hover:text-white'
+                        ? 'bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 shadow-sm'
+                        : 'text-neutral-500 dark:text-neutral-400 hover:bg-neutral-200/70 dark:hover:bg-white/[0.07] hover:text-neutral-900 dark:hover:text-white'
                     }`}
                   >
-                    <Icon className="w-4 h-4 shrink-0" />
-                    <span className="hidden sm:block text-[10px] font-bold uppercase tracking-wide leading-tight flex-1">{tab.label}</span>
+                    <Icon className="w-3.5 h-3.5 shrink-0" />
+                    <span className="hidden sm:block text-[10px] font-semibold uppercase tracking-wide leading-tight flex-1 truncate">{tab.label}</span>
                     {tabTotal > 0 && (
-                      <span className={`hidden sm:flex shrink-0 text-[8px] font-mono font-bold items-center justify-center w-5 h-5 rounded-full ${
-                        isTabComplete
-                          ? isActive ? 'bg-white/20 text-white dark:bg-black/20 dark:text-black' : 'bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300'
-                          : isActive ? 'bg-white/20 text-white dark:bg-black/20 dark:text-black' : 'bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300'
-                      }`}>
-                        {isTabComplete ? '✓' : `${tabCompleted}`}
-                      </span>
+                      <span className={`hidden sm:flex shrink-0 w-1.5 h-1.5 rounded-full ${
+                        isActive
+                          ? 'bg-white/40 dark:bg-black/30'
+                          : isTabComplete
+                          ? 'bg-emerald-500'
+                          : 'bg-amber-400'
+                      }`} />
                     )}
                   </button>
                 );
@@ -640,21 +641,21 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
             </div>
 
             {/* Focus Mode Button at bottom */}
-            <div className="p-1.5 sm:p-2 border-t border-neutral-200 dark:border-white/10">
+            <div className="p-2 border-t border-neutral-200/80 dark:border-white/[0.06]">
               <button
                 onClick={() => setIsFocusMode(true)}
-                className="flex items-center gap-2.5 w-full px-2 py-2.5 rounded-lg text-neutral-500 dark:text-neutral-400 hover:bg-neutral-200/60 dark:hover:bg-white/10 hover:text-neutral-900 dark:hover:text-white transition-colors"
+                className="flex items-center gap-2.5 w-full px-2 py-2 rounded-lg text-neutral-500 dark:text-neutral-400 hover:bg-neutral-200/70 dark:hover:bg-white/[0.07] hover:text-neutral-900 dark:hover:text-white transition-colors"
                 title="Enter Focus Mode"
               >
-                <Maximize2 className="w-4 h-4 shrink-0" />
-                <span className="hidden sm:block text-[10px] font-bold uppercase tracking-wide">Focus</span>
+                <Maximize2 className="w-3.5 h-3.5 shrink-0" />
+                <span className="hidden sm:block text-[10px] font-semibold uppercase tracking-wide">Focus</span>
               </button>
             </div>
           </div>
         )}
 
           {/* RIGHT: Tab Content (always renders) */}
-          <div ref={scrollContainerRef} className={`flex-1 min-w-0 overflow-y-auto p-4 sm:p-6 ${isFocusMode ? 'max-w-4xl mx-auto w-full' : ''}`}>
+          <div ref={scrollContainerRef} className={`flex-1 min-w-0 overflow-y-auto p-4 sm:p-5 ${isFocusMode ? 'max-w-4xl mx-auto w-full' : ''}`}>
         
         {/* TAB 0: HEADER & OVERVIEW */}
         {activeTab === 'header' && (
@@ -1607,15 +1608,17 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
             </div>
 
             {/* Progress Bar */}
-            <div className="space-y-1.5">
-              <div className="flex justify-between text-[10px] uppercase font-bold text-black/80 dark:text-white/80 tracking-wider font-mono">
+            <div className="space-y-2">
+              <div className="flex items-center justify-between text-[10px] uppercase font-bold text-neutral-600 dark:text-neutral-400 tracking-wider font-mono">
                 <span>Overall Completeness</span>
-                <span>{completedCount} of {audits.length} Sections Filled ({completionPercentage}%)</span>
+                <span className={`font-mono font-extrabold text-[11px] ${
+                  completionPercentage === 100 ? 'text-emerald-600 dark:text-emerald-400' : completionPercentage >= 80 ? 'text-emerald-600' : 'text-amber-600'
+                }`}>{completedCount}/{audits.length} &middot; {completionPercentage}%</span>
               </div>
-              <div className="w-full h-2.5 bg-black/10 dark:bg-white/10 border border-black dark:border-white/20 rounded-full overflow-hidden">
+              <div className="w-full h-1.5 bg-neutral-200 dark:bg-white/10 rounded-full overflow-hidden">
                 <div
-                  className={`h-full transition-all duration-500 ${
-                    completionPercentage === 100 ? 'bg-black dark:bg-white' : completionPercentage >= 80 ? 'bg-emerald-700' : 'bg-amber-600'
+                  className={`h-full rounded-full transition-all duration-700 ease-in-out ${
+                    completionPercentage === 100 ? 'bg-emerald-500' : completionPercentage >= 80 ? 'bg-emerald-500' : 'bg-amber-500'
                   }`}
                   style={{ width: `${completionPercentage}%` }}
                 />
@@ -1623,41 +1626,41 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
             </div>
 
             {/* Filter Controls & Search */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 pt-2">
-              <div className="flex items-center gap-1.5 overflow-x-auto">
+            <div className="flex flex-wrap items-center justify-between gap-2.5 pt-2 min-w-0">
+              <div className="flex flex-wrap items-center gap-1.5 min-w-0">
                 <button
                   type="button"
                   onClick={() => setSummaryFilter('all')}
-                  className={`px-3 py-1.5 text-xs font-bold uppercase tracking-wider border transition-colors rounded-md ${
+                  className={`px-2.5 py-1 text-xs font-bold uppercase tracking-wider border transition-colors rounded-md ${
                     summaryFilter === 'all'
                       ? 'bg-black dark:bg-white text-white dark:text-[#121212] border-black dark:border-white/30'
                       : 'bg-white dark:bg-white/5 text-black/90 dark:text-white/90 border-black/15 dark:border-white/15 hover:border-black dark:hover:border-white/30'
                   }`}
                 >
-                  All Sections ({audits.length})
+                  All ({audits.length})
                 </button>
                 <button
                   type="button"
                   onClick={() => setSummaryFilter('incomplete')}
-                  className={`px-3 py-1.5 text-xs font-bold uppercase tracking-wider border transition-colors flex items-center space-x-1.5 rounded-md ${
+                  className={`px-2.5 py-1 text-xs font-bold uppercase tracking-wider border transition-colors flex items-center space-x-1 rounded-md ${
                     summaryFilter === 'incomplete'
                       ? 'bg-amber-600 text-white border-amber-700'
                       : 'bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-500/30 hover:border-amber-500/50'
                   }`}
                 >
-                  <AlertTriangle className="w-3.5 h-3.5" />
+                  <AlertTriangle className="w-3 h-3" />
                   <span>Missing ({incompleteCount})</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => setSummaryFilter('complete')}
-                  className={`px-3 py-1.5 text-xs font-bold uppercase tracking-wider border transition-colors flex items-center space-x-1.5 rounded-md ${
+                  className={`px-2.5 py-1 text-xs font-bold uppercase tracking-wider border transition-colors flex items-center space-x-1 rounded-md ${
                     summaryFilter === 'complete'
                       ? 'bg-emerald-600 text-white border-emerald-700'
                       : 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-500/30 hover:border-emerald-500/50'
                   }`}
                 >
-                  <CheckCircle2 className="w-3.5 h-3.5" />
+                  <CheckCircle2 className="w-3 h-3" />
                   <span>Completed ({completedCount})</span>
                 </button>
                 {incompleteCount > 0 && (
@@ -1665,31 +1668,31 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                     type="button"
                     onClick={handleAutoFillAllMissing}
                     disabled={isAutoFilling}
-                    className="px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white rounded-md shadow-xs flex items-center space-x-1.5 disabled:opacity-50 transition-all ml-1 shrink-0"
+                    className="px-2.5 py-1 text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white rounded-md shadow-xs flex items-center space-x-1.5 disabled:opacity-50 transition-all shrink-0"
                   >
                     {isAutoFilling ? (
-                      <><Loader2 className="w-3.5 h-3.5 animate-spin" /> Auto-Filling...</>
+                      <><Loader2 className="w-3 h-3 animate-spin" /> Auto-Filling...</>
                     ) : (
-                      <><Sparkles className="w-3.5 h-3.5 text-amber-300 animate-pulse" /> Auto-Fill Missing with AI</>
+                      <><Sparkles className="w-3 h-3 text-amber-300 animate-pulse" /> Auto-Fill AI</>
                     )}
                   </button>
                 )}
               </div>
 
-              <div className="relative w-full sm:w-64">
+              <div className="relative w-full sm:w-48 md:w-56">
                 <Search className="w-3.5 h-3.5 absolute left-2.5 top-2.5 text-black/40 dark:text-white/40" />
                 <input
                   type="text"
                   placeholder="Filter section title..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/20 focus:border-black dark:border-white/30 pl-8 pr-3 py-1.5 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 font-sans rounded-md"
+                  className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/20 focus:border-black dark:border-white/30 pl-8 pr-3 py-1 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 font-sans rounded-md"
                 />
               </div>
             </div>
 
             {/* Section Cards Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 pt-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-3 pt-1">
               {audits
                 .filter((audit) => {
                   if (summaryFilter === 'incomplete') return !audit.isComplete;
@@ -1707,50 +1710,50 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                 .map((audit) => (
                   <div
                     key={audit.id}
-                    className={`p-3 bg-white dark:bg-white/5 border rounded-lg transition flex flex-col justify-between ${
+                    className={`p-3.5 bg-white dark:bg-[#1A1A1A]/90 border rounded-xl transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md flex flex-col justify-between min-w-0 ${
                       audit.isComplete
-                        ? 'border-neutral-200 dark:border-white/10 hover:border-black dark:hover:border-white/40'
-                        : 'border-amber-400 bg-amber-50/30 dark:bg-amber-950/20 hover:border-amber-600'
+                        ? 'border-neutral-200/80 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 shadow-2xs'
+                        : 'border-amber-400/80 dark:border-amber-500/40 bg-gradient-to-br from-amber-500/5 to-transparent dark:from-amber-950/20 dark:to-transparent hover:border-amber-500 shadow-2xs'
                     }`}
                   >
                     <div>
-                      <div className="flex items-start justify-between gap-2">
-                        <span className="text-xs font-bold text-[#1A1A1A] dark:text-[#F4F1EE] line-clamp-1">
+                      <div className="flex items-start justify-between gap-2 min-w-0">
+                        <span className="text-xs font-extrabold text-neutral-900 dark:text-neutral-100 tracking-tight leading-snug line-clamp-1 flex-1 min-w-0" title={audit.title}>
                           {audit.title}
                         </span>
                         {audit.isComplete ? (
-                          <span className="shrink-0 text-[10px] bg-emerald-100 dark:bg-emerald-900/40 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700 font-bold px-1.5 py-0.5 uppercase tracking-wider flex items-center space-x-1 font-mono rounded-xs">
+                          <span className="shrink-0 text-[10px] bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 font-bold px-2 py-0.5 uppercase tracking-wider flex items-center space-x-1 font-mono rounded-full shadow-2xs">
                             <Check className="w-3 h-3 inline" />
                             <span>Filled</span>
                           </span>
                         ) : (
-                          <span className="shrink-0 text-[10px] bg-amber-100 dark:bg-amber-900/40 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-700 font-bold px-1.5 py-0.5 uppercase tracking-wider flex items-center space-x-1 font-mono rounded-xs">
-                            <AlertTriangle className="w-3.5 h-3.5 inline" />
+                          <span className="shrink-0 text-[10px] bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30 font-bold px-2 py-0.5 uppercase tracking-wider flex items-center space-x-1 font-mono rounded-full shadow-2xs animate-pulse">
+                            <AlertTriangle className="w-3 h-3 inline text-amber-500" />
                             <span>Empty</span>
                           </span>
                         )}
                       </div>
 
-                      <p className="text-[11px] text-black/80 dark:text-white/80 mt-1.5 min-h-[32px] line-clamp-2">
+                      <p className="text-[11px] text-neutral-600 dark:text-neutral-400 mt-2 leading-relaxed min-h-[34px] line-clamp-2">
                         {audit.isComplete
                           ? 'Section requirement satisfied and validated.'
                           : audit.missingDetail || 'Missing required details.'}
                       </p>
                     </div>
 
-                    <div className="mt-3 pt-2 border-t border-black/10 dark:border-white/10 flex items-center justify-between gap-2 min-w-0">
-                      <span className="text-[9px] font-mono text-black/40 dark:text-white/40 uppercase tracking-wider truncate">
-                        Tab: {tabs.find((t) => t.id === audit.tab)?.label.split('.')[0] || audit.tab}
+                    <div className="mt-3 pt-2.5 border-t border-neutral-200/80 dark:border-white/10 flex items-center justify-between gap-2 min-w-0">
+                      <span className="text-[10px] font-mono font-medium text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-white/5 border border-neutral-200/60 dark:border-white/10 px-2 py-0.5 rounded-md uppercase tracking-wider truncate max-w-[110px]">
+                        {tabs.find((t) => t.id === audit.tab)?.label.split('.')[0] || audit.tab}
                       </span>
                       <button
                         type="button"
                         onClick={() => {
                           setActiveTab(audit.tab);
                         }}
-                        className={`text-[10px] shrink-0 font-bold uppercase tracking-wider px-2.5 py-1 rounded-md flex items-center space-x-1 transition-colors ${
+                        className={`text-[10px] shrink-0 font-bold uppercase tracking-wider px-2.5 py-1 rounded-md flex items-center space-x-1.5 transition-all shadow-2xs ${
                           audit.isComplete
-                            ? 'text-black/80 dark:text-white/80 hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-[#121212] border border-neutral-300 dark:border-white/20'
-                            : 'bg-black dark:bg-white text-white dark:text-[#121212] hover:bg-neutral-800 dark:hover:bg-white/80'
+                            ? 'text-neutral-800 dark:text-neutral-200 bg-neutral-100 dark:bg-white/10 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black border border-neutral-300/80 dark:border-white/20'
+                            : 'bg-black dark:bg-white text-white dark:text-black hover:opacity-90'
                         }`}
                       >
                         <span>{audit.isComplete ? 'Edit Section' : 'Fix Field'}</span>
