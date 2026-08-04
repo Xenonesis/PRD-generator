@@ -1322,7 +1322,7 @@ export const DocumentView: React.FC<DocumentViewProps> = ({
             AUTOMATIC HIGH-END COVER PAGE LAYOUT
            ======================================================== */}
         <div 
-          className="pdf-page-break-after p-4 sm:p-12 md:p-16 min-h-0 sm:min-h-[920px] print:min-h-0 flex flex-col justify-between text-center relative bg-[#FAF9F6] dark:bg-[#121212] mb-8 sm:mb-12 print:mb-0 shadow-sm print:h-[250mm]"
+          className="pdf-page-break-after p-4 sm:p-12 md:p-16 print:p-8 min-h-0 sm:min-h-[920px] print:min-h-[240mm] print:h-[240mm] flex flex-col justify-between text-center relative bg-[#FAF9F6] dark:bg-[#121212] mb-8 sm:mb-12 print:mb-0 shadow-sm"
           style={{
             border: d.brandingHeaderStyle === 'minimal'
               ? `1px solid ${d.brandingPrimaryColor || '#000000'}40`
@@ -1338,12 +1338,12 @@ export const DocumentView: React.FC<DocumentViewProps> = ({
           />
 
           {d.brandingLogoUrl && (
-            <div className="absolute top-12 left-0 right-0 flex justify-center pointer-events-none">
-              <img src={d.brandingLogoUrl} alt="Logo" className="max-h-24 object-contain" />
+            <div className="absolute top-12 print:top-8 left-0 right-0 flex justify-center pointer-events-none">
+              <img src={d.brandingLogoUrl} alt="Logo" className="max-h-24 print:max-h-16 object-contain" />
             </div>
           )}
           {/* Top Classification Banner */}
-          <div className="space-y-2 pt-4 relative z-10">
+          <div className="space-y-2 pt-4 print:pt-0 relative z-10">
             <div className="inline-block bg-black dark:bg-white text-white dark:text-[#121212] px-3 py-1 text-[10px] font-mono uppercase tracking-[0.25em] font-bold">
               {d.coverBadge || "Confidential & Proprietary"}
             </div>
@@ -1353,31 +1353,31 @@ export const DocumentView: React.FC<DocumentViewProps> = ({
           </div>
 
           {/* Centerpiece Typographic Display */}
-          <div className="my-auto py-10 space-y-6 relative z-10 px-4">
+          <div className="my-auto py-10 print:py-4 space-y-6 print:space-y-4 relative z-10 px-4">
             <div className="text-[11px] uppercase font-mono tracking-[0.3em] text-black/70 dark:text-white/70 font-bold">
               {d.coverSubtitle || "— Official Project Specification —"}
             </div>
 
-            <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl font-black text-[#1A1A1A] dark:text-[#F4F1EE] uppercase tracking-tight leading-tight max-w-3xl mx-auto break-words">
+            <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl print:text-4xl font-black text-[#1A1A1A] dark:text-[#F4F1EE] uppercase tracking-tight leading-tight max-w-3xl mx-auto break-words">
               {d.projectName || "UNTITLED PROJECT"}
             </h1>
 
             <div 
-              className="w-24 h-1 mx-auto my-4" 
+              className="w-24 h-1 mx-auto my-4 print:my-2" 
               style={{ background: d.brandingPrimaryColor || '#000000' }}
             />
 
-            <p className="font-serif italic text-base sm:text-xl text-black/80 dark:text-white/80 max-w-xl mx-auto leading-relaxed">
+            <p className="font-serif italic text-base sm:text-xl print:text-base text-black/80 dark:text-white/80 max-w-xl mx-auto leading-relaxed">
               {d.coverDescription || "Comprehensive Technical Architecture, Functional Requirements & Commercial Scope Agreement"}
             </p>
 
             {/* Centered Metadata Card */}
-            <div className="max-w-lg mx-auto bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/20 p-4 sm:p-6 shadow-sm my-6 sm:my-8 text-left grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+            <div className="max-w-lg mx-auto bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/20 p-4 sm:p-6 print:p-4 shadow-sm my-6 sm:my-8 print:my-4 text-left grid grid-cols-1 sm:grid-cols-2 gap-4 print:gap-3 text-xs">
               <div>
                 <span className="font-mono text-[9px] uppercase tracking-widest text-black/60 dark:text-white/60 block font-bold">
                   Client / Company
                 </span>
-                <span className="font-bold text-[#1A1A1A] dark:text-[#F4F1EE] text-sm block mt-0.5">
+                <span className="font-bold text-[#1A1A1A] dark:text-[#F4F1EE] text-sm print:text-xs block mt-0.5">
                   {d.clientName || "[Client Name]"}
                 </span>
               </div>
@@ -1385,7 +1385,7 @@ export const DocumentView: React.FC<DocumentViewProps> = ({
                 <span className="font-mono text-[9px] uppercase tracking-widest text-black/60 dark:text-white/60 block font-bold">
                   Service Provider
                 </span>
-                <span className="font-bold text-[#1A1A1A] dark:text-[#F4F1EE] text-sm block mt-0.5">
+                <span className="font-bold text-[#1A1A1A] dark:text-[#F4F1EE] text-sm print:text-xs block mt-0.5">
                   {d.serviceProvider || "[Provider Name]"}
                 </span>
               </div>
@@ -1393,7 +1393,7 @@ export const DocumentView: React.FC<DocumentViewProps> = ({
                 <span className="font-mono text-[9px] uppercase tracking-widest text-black/60 dark:text-white/60 block font-bold">
                   Document Version
                 </span>
-                <span className="font-bold font-mono text-[#1A1A1A] dark:text-[#F4F1EE] text-xs block mt-0.5">
+                <span className="font-bold font-mono text-[#1A1A1A] dark:text-[#F4F1EE] text-xs print:text-[10px] block mt-0.5">
                   v{d.docVersion || "1.0"}
                 </span>
               </div>
@@ -1401,7 +1401,7 @@ export const DocumentView: React.FC<DocumentViewProps> = ({
                 <span className="font-mono text-[9px] uppercase tracking-widest text-black/60 dark:text-white/60 block font-bold">
                   Effective Date
                 </span>
-                <span className="font-bold font-mono text-[#1A1A1A] dark:text-[#F4F1EE] text-xs block mt-0.5">
+                <span className="font-bold font-mono text-[#1A1A1A] dark:text-[#F4F1EE] text-xs print:text-[10px] block mt-0.5">
                   {d.date || "[DD/MM/YYYY]"}
                 </span>
               </div>
@@ -1410,7 +1410,7 @@ export const DocumentView: React.FC<DocumentViewProps> = ({
                   <span className="font-mono text-[9px] uppercase tracking-widest text-black/60 dark:text-white/60 block font-bold">
                     Agreed Valuation
                   </span>
-                  <span className="font-bold text-black dark:text-white text-xs block mt-0.5">
+                  <span className="font-bold text-black dark:text-white text-xs print:text-[10px] block mt-0.5">
                     {d.currencySymbol}
                     {d.projectCost}
                   </span>
@@ -1421,7 +1421,7 @@ export const DocumentView: React.FC<DocumentViewProps> = ({
                   <span className="font-mono text-[9px] uppercase tracking-widest text-black/60 dark:text-white/60 block font-bold">
                     Delivery Timeline
                   </span>
-                  <span className="font-bold text-black dark:text-white text-xs block mt-0.5">
+                  <span className="font-bold text-black dark:text-white text-xs print:text-[10px] block mt-0.5">
                     {d.estimatedTimeline}
                   </span>
                 </div>
@@ -1430,7 +1430,7 @@ export const DocumentView: React.FC<DocumentViewProps> = ({
           </div>
 
           {/* Bottom Seal & Handover Footer */}
-          <div className="relative z-10 pb-4 border-t border-black dark:border-white/20 pt-4 flex flex-col sm:flex-row items-center justify-between text-[10px] font-mono text-black/70 dark:text-white/70 uppercase tracking-widest">
+          <div className="relative z-10 pb-4 print:pb-0 border-t border-black dark:border-white/20 pt-4 print:pt-2 flex flex-col sm:flex-row items-center justify-between text-[10px] print:text-[9px] font-mono text-black/70 dark:text-white/70 uppercase tracking-widest">
             <span>
               Ref: PRD-{d.docVersion || "1.0"} • {d.projectName || "Document"}
             </span>
