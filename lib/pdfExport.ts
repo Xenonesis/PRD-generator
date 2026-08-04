@@ -114,7 +114,6 @@ export async function exportToHighFidelityPDF(
         tocContainer.style.cssText = `
           padding: 40px;
           font-family: inherit;
-          min-height: 297mm; /* Ensure it takes at least a page roughly */
           box-sizing: border-box;
         `;
         
@@ -165,7 +164,12 @@ export async function exportToHighFidelityPDF(
         });
         
         tocContainer.appendChild(tocList);
-        element.insertBefore(tocContainer, element.firstChild);
+        // Insert TOC after the Cover Page (which is element.children[0])
+        if (element.children.length > 0) {
+          element.insertBefore(tocContainer, element.children[1]);
+        } else {
+          element.insertBefore(tocContainer, element.firstChild);
+        }
       }
     }
 
