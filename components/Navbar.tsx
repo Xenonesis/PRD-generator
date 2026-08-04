@@ -178,7 +178,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* Right Actions */}
-          <div className="flex items-center space-x-1 sm:space-x-2 shrink-0">
+          <div className="flex items-center space-x-1 sm:space-x-2 overflow-x-auto no-scrollbar py-1">
             {/* Translate Button */}
             <button
               onClick={onOpenTranslate}

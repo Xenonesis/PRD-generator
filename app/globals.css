@@ -103,3 +103,13 @@ body {
 .pdf-compact-density .space-y-4 > * + * {
   margin-top: 0.5rem !important;
 }
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
