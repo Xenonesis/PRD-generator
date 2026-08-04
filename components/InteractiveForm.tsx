@@ -475,7 +475,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
   ];
 
   return (
-    <div id="prd-editor-top" className={`bg-[#EFECE7] dark:bg-[#1E1E1E] border border-black dark:border-white/10 text-[#1A1A1A] dark:text-[#F4F1EE] shadow-sm overflow-hidden w-full min-w-0 no-print ${isFocusMode ? "fixed inset-0 z-[200] overflow-y-auto" : ""}`}>
+    <div id="prd-editor-top" className={`bg-white dark:bg-[#1A1A1A] border border-black dark:border-white/10 text-[#1A1A1A] dark:text-[#F4F1EE] shadow-sm overflow-hidden w-full min-w-0 no-print ${isFocusMode ? "fixed inset-0 z-[200] overflow-y-auto" : ""}`}>
       {isFocusMode && (
         <div className="sticky top-0 z-[210] flex justify-between items-center p-4 bg-[#EFECE7]/90 dark:bg-[#1E1E1E]/90 backdrop-blur-sm border-b border-black/10 dark:border-white/10">
           <div className="flex items-center gap-4">
@@ -483,7 +483,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
             <select
               value={activeTab}
               onChange={(e) => setActiveTab(e.target.value as any)}
-              className="bg-white dark:bg-[#2A2A2A] border border-black/20 dark:border-white/20 text-xs font-bold text-black/80 dark:text-white/80 p-1.5 outline-none"
+              className="bg-white dark:bg-white/5 border border-black/20 dark:border-white/20 text-xs font-bold text-black/80 dark:text-white/80 p-1.5 outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
             >
               {tabs.map((tab) => (
                 <option key={tab.id} value={tab.id}>
@@ -492,7 +492,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
               ))}
             </select>
           </div>
-          <button onClick={() => setIsFocusMode(false)} className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white transition-colors bg-white dark:bg-[#2A2A2A] px-3 py-1.5 border border-black/20 dark:border-white/20">
+          <button onClick={() => setIsFocusMode(false)} className="flex items-center gap-2.5 text-sm font-bold uppercase tracking-wider text-black/80 dark:text-white/80 hover:text-black dark:hover:text-white transition-colors bg-white dark:bg-white/5 px-3 py-1.5 border border-black/20 dark:border-white/20">
             <Minimize2 className="w-4 h-4" /> Exit
           </button>
         </div>
@@ -500,7 +500,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
       
       {/* Category Tabs Header */}
       {!isFocusMode && (
-        <div className="bg-[#F4F1EE] dark:bg-[#121212] border-b border-black dark:border-white/10 p-2 flex relative w-full pr-12">
+        <div className="bg-neutral-50 dark:bg-white/5 border-b border-black dark:border-white/10 p-2 flex relative w-full pr-12">
           <div className="flex overflow-x-auto gap-1 no-scrollbar flex-grow">
             {tabs.map((tab) => {
               const Icon = tab.icon;
@@ -516,7 +516,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                   }`}
                 >
                   <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
-                  <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-center line-clamp-1">{tab.label}</span>
+                  <span className="text-[9px] sm:text-xs font-bold uppercase tracking-wider text-center line-clamp-1">{tab.label}</span>
                 </button>
               );
             })}
@@ -524,11 +524,11 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
           <div className="absolute right-0 top-0 h-full flex items-center justify-center bg-gradient-to-l from-[#F4F1EE] dark:from-[#121212] to-transparent pl-4 pr-2">
             <button 
               onClick={() => setIsFocusMode(true)} 
-              className="flex flex-col items-center justify-center p-2 space-y-1 text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors" 
+              className="flex flex-col items-center justify-center p-2 space-y-1 text-black/80 dark:text-white/80 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors" 
               title="Enter Focus Mode"
             >
               <Maximize2 className="w-4 h-4 sm:w-5 sm:h-5" />
-              <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-center">Focus</span>
+              <span className="text-[9px] sm:text-xs font-bold uppercase tracking-wider text-center">Focus</span>
             </button>
           </div>
         </div>
@@ -542,77 +542,77 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
             {/* Meta */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-black/60 dark:text-white/60 mb-1">Project Name</label>
+                <label className="block text-xs font-bold uppercase tracking-wider text-black/80 dark:text-white/80 mb-1">Project Name</label>
                 <input
                   type="text"
                   value={data.projectName}
                   onChange={(e) => updateField('projectName', e.target.value)}
-                  className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 p-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none"
+                  className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                 />
               </div>
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-black/60 dark:text-white/60 mb-1">Client / Company Name</label>
+                <label className="block text-xs font-bold uppercase tracking-wider text-black/80 dark:text-white/80 mb-1">Client / Company Name</label>
                 <input
                   type="text"
                   value={data.clientName}
                   onChange={(e) => updateField('clientName', e.target.value)}
-                  className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 p-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none"
+                  className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                 />
               </div>
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-black/60 dark:text-white/60 mb-1">Service Provider</label>
+                <label className="block text-xs font-bold uppercase tracking-wider text-black/80 dark:text-white/80 mb-1">Service Provider</label>
                 <input
                   type="text"
                   value={data.serviceProvider}
                   onChange={(e) => updateField('serviceProvider', e.target.value)}
-                  className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 p-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none"
+                  className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                 />
               </div>
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-black/60 dark:text-white/60 mb-1">Document Version</label>
+                <label className="block text-xs font-bold uppercase tracking-wider text-black/80 dark:text-white/80 mb-1">Document Version</label>
                 <input
                   type="text"
                   value={data.docVersion}
                   onChange={(e) => updateField('docVersion', e.target.value)}
-                  className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 p-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none"
+                  className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                 />
               </div>
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-black/60 dark:text-white/60 mb-1">Date (DD/MM/YYYY)</label>
+                <label className="block text-xs font-bold uppercase tracking-wider text-black/80 dark:text-white/80 mb-1">Date (DD/MM/YYYY)</label>
                 <input
                   type="text"
                   value={data.date}
                   onChange={(e) => updateField('date', e.target.value)}
-                  className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 p-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none"
+                  className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                 />
               </div>
               <div className="flex space-x-2">
                 <div className="w-1/3">
-                  <label className="block text-[10px] font-bold uppercase tracking-wider text-black/60 dark:text-white/60 mb-1">Currency</label>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-black/80 dark:text-white/80 mb-1">Currency</label>
                   <input
                     type="text"
                     value={data.currencySymbol}
                     onChange={(e) => updateField('currencySymbol', e.target.value)}
-                    className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 p-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none text-center"
+                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 text-center"
                   />
                 </div>
                 <div className="w-2/3">
-                  <label className="block text-[10px] font-bold uppercase tracking-wider text-black/60 dark:text-white/60 mb-1">Total Project Cost</label>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-black/80 dark:text-white/80 mb-1">Total Project Cost</label>
                   <input
                     type="text"
                     value={data.projectCost}
                     onChange={(e) => updateField('projectCost', e.target.value)}
-                    className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 p-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none"
+                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                   />
                 </div>
               </div>
               <div className="md:col-span-3">
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-black/60 dark:text-white/60 mb-1">Estimated Timeline Summary</label>
+                <label className="block text-xs font-bold uppercase tracking-wider text-black/80 dark:text-white/80 mb-1">Estimated Timeline Summary</label>
                 <input
                   type="text"
                   value={data.estimatedTimeline}
                   onChange={(e) => updateField('estimatedTimeline', e.target.value)}
-                  className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 p-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none"
+                  className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                 />
               </div>
             </div>
@@ -626,7 +626,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
             <div>
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-2">
-                  <h3 className="text-[10px] font-bold uppercase tracking-wider text-black/70 dark:text-white/70">1.1 Project Description</h3>
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-black/90 dark:text-white/90">1.1 Project Description</h3>
                   <AIQuickFill field="projectDescription" schemaDescription="string" data={data} onUpdate={(val) => updateField('projectDescription', val)} title="Project Description" />
                 </div>
               </div>
@@ -634,7 +634,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                 value={data.projectDescription}
                 onChange={(e) => updateField('projectDescription', e.target.value)}
                 rows={4}
-                className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 focus:border-black dark:border-white/30 p-3 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none"
+                className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 focus:border-black dark:border-white/30 p-3 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
               />
             </div>
 
@@ -642,7 +642,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
             <div>
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center space-x-3">
-                  <label className="text-[10px] font-bold uppercase tracking-wider text-black/70 dark:text-white/70">1.2 Project Objectives</label>
+                  <label className="text-xs font-bold uppercase tracking-wider text-black/90 dark:text-white/90">1.2 Project Objectives</label>
 <AIQuickFill field="projectObjectives" schemaDescription="Array of strings" data={data} onUpdate={(val) => updateField('projectObjectives', val)} title="Project Objectives" />
                 </div>
                 <button
@@ -662,7 +662,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                       type="text"
                       value={obj}
                       onChange={(e) => handleListChange('projectObjectives', idx, e.target.value)}
-                      className="flex-1 bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 focus:border-black dark:border-white/30 p-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none"
+                      className="flex-1 bg-white dark:bg-white/5 border border-black dark:border-white/10 focus:border-black dark:border-white/30 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                     />
                     <button
                       type="button"
@@ -678,33 +678,33 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
 
             {/* 1.3 Target Users */}
             <div className="border-t border-black dark:border-white/10 pt-4">
-              <div className="flex items-center gap-2"><label className="text-[10px] font-bold uppercase tracking-wider text-black/70 dark:text-white/70 block mb-2">1.3 Target Users</label><AIQuickFill field="targetUsers" schemaDescription="Object with keys: primary, secondary, admin (all strings)" data={data} onUpdate={(val) => updateField('targetUsers', val)} title="Target Users" /></div>
+              <div className="flex items-center gap-2"><label className="text-xs font-bold uppercase tracking-wider text-black/90 dark:text-white/90 block mb-2">1.3 Target Users</label><AIQuickFill field="targetUsers" schemaDescription="Object with keys: primary, secondary, admin (all strings)" data={data} onUpdate={(val) => updateField('targetUsers', val)} title="Target Users" /></div>
               <div className="grid grid-cols-1 gap-3">
                 <div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-black/50 dark:text-white/50 block mb-1">Primary Users</span>
+                  <span className="text-xs font-bold uppercase tracking-wider text-black/70 dark:text-white/70 block mb-1">Primary Users</span>
                   <input
                     type="text"
                     value={data.targetUsers.primary}
                     onChange={(e) => updateNestedField('targetUsers', 'primary', e.target.value)}
-                    className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 focus:border-black dark:border-white/30 p-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none"
+                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 focus:border-black dark:border-white/30 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                   />
                 </div>
                 <div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-black/50 dark:text-white/50 block mb-1">Secondary Users</span>
+                  <span className="text-xs font-bold uppercase tracking-wider text-black/70 dark:text-white/70 block mb-1">Secondary Users</span>
                   <input
                     type="text"
                     value={data.targetUsers.secondary}
                     onChange={(e) => updateNestedField('targetUsers', 'secondary', e.target.value)}
-                    className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 focus:border-black dark:border-white/30 p-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none"
+                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 focus:border-black dark:border-white/30 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                   />
                 </div>
                 <div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-black/50 dark:text-white/50 block mb-1">Admin Users</span>
+                  <span className="text-xs font-bold uppercase tracking-wider text-black/70 dark:text-white/70 block mb-1">Admin Users</span>
                   <input
                     type="text"
                     value={data.targetUsers.admin}
                     onChange={(e) => updateNestedField('targetUsers', 'admin', e.target.value)}
-                    className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 focus:border-black dark:border-white/30 p-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none"
+                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 focus:border-black dark:border-white/30 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                   />
                 </div>
               </div>
@@ -712,8 +712,8 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
 
             {/* 2. PROJECT SCOPE - Platforms */}
             <div className="border-t border-black dark:border-white/10 pt-4">
-              <label className="text-[10px] font-bold uppercase tracking-wider text-black/70 dark:text-white/70 block mb-2">2. Included Platforms (Checkboxes)</label>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 bg-white dark:bg-[#2A2A2A] p-3 border border-black dark:border-white/10">
+              <label className="text-xs font-bold uppercase tracking-wider text-black/90 dark:text-white/90 block mb-2">2. Included Platforms (Checkboxes)</label>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 bg-white dark:bg-white/5 p-3 border border-black dark:border-white/10">
                 {[
                   { key: 'website', label: 'Website' },
                   { key: 'webApp', label: 'Web Application' },
@@ -734,13 +734,13 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                 ))}
               </div>
               <div className="mt-2">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-black/50 dark:text-white/50 block mb-1">Other Platform (Optional)</span>
+                <span className="text-xs font-bold uppercase tracking-wider text-black/70 dark:text-white/70 block mb-1">Other Platform (Optional)</span>
                 <input
                   type="text"
                   value={data.includedPlatforms.other}
                   onChange={(e) => updateNestedField('includedPlatforms', 'other', e.target.value)}
                   placeholder="e.g. Chrome Browser Extension"
-                  className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 focus:border-black dark:border-white/30 p-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none"
+                  className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 focus:border-black dark:border-white/30 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                 />
               </div>
             </div>
@@ -754,8 +754,8 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
             <div>
               <div className="flex items-center justify-between mb-3">
                 <div>
-                  <div className="flex items-center gap-2"><h3 className="text-[10px] font-bold uppercase tracking-wider text-black/70 dark:text-white/70">3. Features &amp; Functional Requirements</h3><AIQuickFill field="features" schemaDescription="Array of objects {id: string, feature: string, description: string, priority: 'High'|'Medium'|'Low'}" data={data} onUpdate={(val) => updateField('features', val)} title="Features" /></div>
-                  <p className="text-[11px] text-black/50 dark:text-white/50">Add, edit, or prioritize key system features</p>
+                  <div className="flex items-center gap-2"><h3 className="text-xs font-bold uppercase tracking-wider text-black/90 dark:text-white/90">3. Features &amp; Functional Requirements</h3><AIQuickFill field="features" schemaDescription="Array of objects {id: string, feature: string, description: string, priority: 'High'|'Medium'|'Low'}" data={data} onUpdate={(val) => updateField('features', val)} title="Features" /></div>
+                  <p className="text-[11px] text-black/70 dark:text-white/70">Add, edit, or prioritize key system features</p>
                 </div>
                 <button
                   type="button"
@@ -769,25 +769,25 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
 
               <div className="space-y-3">
                 {data.features.map((f, idx) => (
-                  <div key={idx} className="bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 p-3 text-xs space-y-2">
+                  <div key={idx} className="bg-white dark:bg-white/5 border border-black dark:border-white/10 p-3 text-sm space-y-2">
                     <div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-2">
                       <input
                         type="text"
                         value={f.id}
                         onChange={(e) => updateFeature(idx, 'id', e.target.value)}
-                        className="w-16 bg-[#F4F1EE] dark:bg-[#121212] border border-black dark:border-white/10 font-mono text-black dark:text-white font-bold px-2 py-1 outline-none text-xs"
+                        className="w-16 bg-neutral-50 dark:bg-white/5 border border-black dark:border-white/10 font-mono text-black dark:text-white font-bold px-2 py-1 outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 text-xs"
                       />
                       <input
                         type="text"
                         value={f.feature}
                         onChange={(e) => updateFeature(idx, 'feature', e.target.value)}
                         placeholder="Feature Name"
-                        className="flex-1 bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 px-2 py-1 font-semibold text-[#1A1A1A] dark:text-[#F4F1EE] outline-none text-xs"
+                        className="flex-1 bg-white dark:bg-white/5 border border-black dark:border-white/10 px-2 py-1 font-semibold text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 text-xs"
                       />
                       <select
                         value={f.priority}
                         onChange={(e) => updateFeature(idx, 'priority', e.target.value as 'High' | 'Medium' | 'Low')}
-                        className="bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 text-[#1A1A1A] dark:text-[#F4F1EE] px-2 py-1 font-semibold text-xs outline-none"
+                        className="bg-white dark:bg-white/5 border border-black dark:border-white/10 text-[#1A1A1A] dark:text-[#F4F1EE] px-2 py-1 font-semibold text-xs outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                       >
                         <option value="High">High</option>
                         <option value="Medium">Medium</option>
@@ -806,7 +806,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                       onChange={(e) => updateFeature(idx, 'description', e.target.value)}
                       placeholder="Feature functional behavior & details..."
                       rows={2}
-                      className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 p-2 text-[#1A1A1A] dark:text-[#F4F1EE] text-xs outline-none"
+                      className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-[#1A1A1A] dark:text-[#F4F1EE] text-xs outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                     />
                   </div>
                 ))}
@@ -816,7 +816,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
             {/* 4. Pages / Screens */}
             <div className="border-t border-black dark:border-white/10 pt-5">
               <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center gap-2"><h3 className="text-[10px] font-bold uppercase tracking-wider text-black/70 dark:text-white/70">4. Pages / Screens List</h3><AIQuickFill field="pages" schemaDescription="Array of strings representing page names" data={data} onUpdate={(val) => updateField('pages', val)} title="Pages" /></div>
+                <div className="flex items-center gap-2"><h3 className="text-xs font-bold uppercase tracking-wider text-black/90 dark:text-white/90">4. Pages / Screens List</h3><AIQuickFill field="pages" schemaDescription="Array of strings representing page names" data={data} onUpdate={(val) => updateField('pages', val)} title="Pages" /></div>
                 <button
                   type="button"
                   onClick={() => addListItem('pages', 'New Screen')}
@@ -829,13 +829,13 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {data.pages.map((p, idx) => (
-                  <div key={idx} className="flex items-center space-x-2 bg-white dark:bg-[#2A2A2A] p-2 border border-black dark:border-white/10">
+                  <div key={idx} className="flex items-center space-x-2 bg-white dark:bg-white/5 p-2 border border-black dark:border-white/10">
                     <span className="text-black/40 dark:text-white/40 text-xs font-mono w-5">{idx + 1}.</span>
                     <input
                       type="text"
                       value={p}
                       onChange={(e) => handleListChange('pages', idx, e.target.value)}
-                      className="flex-1 bg-transparent text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none"
+                      className="flex-1 bg-transparent text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                     />
                     <button
                       type="button"
@@ -854,7 +854,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
         {/* TAB 5 & 6: ROLES & FLOWS */}
         {activeTab === 'roles' && (
           <div className="space-y-5 animate-fade-in">
-            <div className="flex items-center gap-2"><h3 className="text-[10px] font-bold uppercase tracking-wider text-black/70 dark:text-white/70">5. User Roles &amp; Permissions</h3><AIQuickFill field="userRoles" schemaDescription="Object with keys: guest, registeredUser, admin, superAdmin (all strings)" data={data} onUpdate={(val) => updateField('userRoles', val)} title="User Roles & Permissions" /></div>
+            <div className="flex items-center gap-2"><h3 className="text-xs font-bold uppercase tracking-wider text-black/90 dark:text-white/90">5. User Roles &amp; Permissions</h3><AIQuickFill field="userRoles" schemaDescription="Object with keys: guest, registeredUser, admin, superAdmin (all strings)" data={data} onUpdate={(val) => updateField('userRoles', val)} title="User Roles & Permissions" /></div>
             <div className="space-y-3">
               {[
                 { key: 'guest', label: 'Guest Role Permissions' },
@@ -863,45 +863,45 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                 { key: 'superAdmin', label: 'Super Admin Role Permissions' }
               ].map((role) => (
                 <div key={role.key}>
-                  <label className="block text-[10px] font-bold uppercase tracking-wider text-black/50 dark:text-white/50 mb-1">{role.label}</label>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-black/70 dark:text-white/70 mb-1">{role.label}</label>
                   <textarea
                     value={data.userRoles[role.key as keyof typeof data.userRoles]}
                     onChange={(e) => updateNestedField('userRoles', role.key, e.target.value)}
                     rows={2}
-                    className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 p-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none"
+                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                   />
                 </div>
               ))}
             </div>
 
             <div className="border-t border-black dark:border-white/10 pt-4">
-              <div className="flex items-center gap-2 mb-3"><h3 className="text-[10px] font-bold uppercase tracking-wider text-black/70 dark:text-white/70">6. User Workflows</h3><AIQuickFill field="userFlows" schemaDescription="Object with keys: registration, primaryProductFlow, adminFlow (all strings)" data={data} onUpdate={(val) => updateField('userFlows', val)} title="User Workflows" /></div>
+              <div className="flex items-center gap-2 mb-3"><h3 className="text-xs font-bold uppercase tracking-wider text-black/90 dark:text-white/90">6. User Workflows</h3><AIQuickFill field="userFlows" schemaDescription="Object with keys: registration, primaryProductFlow, adminFlow (all strings)" data={data} onUpdate={(val) => updateField('userFlows', val)} title="User Workflows" /></div>
               <div className="space-y-3">
                 <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-wider text-black/50 dark:text-white/50 mb-1">Registration Flow</label>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-black/70 dark:text-white/70 mb-1">Registration Flow</label>
                   <input
                     type="text"
                     value={data.userFlows.registration}
                     onChange={(e) => updateNestedField('userFlows', 'registration', e.target.value)}
-                    className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 font-mono text-xs text-[#1A1A1A] dark:text-[#F4F1EE] p-2.5 outline-none"
+                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 font-mono text-xs text-[#1A1A1A] dark:text-[#F4F1EE] p-2.5 outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-wider text-black/50 dark:text-white/50 mb-1">Primary Product Flow</label>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-black/70 dark:text-white/70 mb-1">Primary Product Flow</label>
                   <input
                     type="text"
                     value={data.userFlows.primaryProductFlow}
                     onChange={(e) => updateNestedField('userFlows', 'primaryProductFlow', e.target.value)}
-                    className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 font-mono text-xs text-[#1A1A1A] dark:text-[#F4F1EE] p-2.5 outline-none"
+                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 font-mono text-xs text-[#1A1A1A] dark:text-[#F4F1EE] p-2.5 outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] font-bold uppercase tracking-wider text-black/50 dark:text-white/50 mb-1">Admin Flow</label>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-black/70 dark:text-white/70 mb-1">Admin Flow</label>
                   <input
                     type="text"
                     value={data.userFlows.adminFlow}
                     onChange={(e) => updateNestedField('userFlows', 'adminFlow', e.target.value)}
-                    className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 font-mono text-xs text-[#1A1A1A] dark:text-[#F4F1EE] p-2.5 outline-none"
+                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 font-mono text-xs text-[#1A1A1A] dark:text-[#F4F1EE] p-2.5 outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                   />
                 </div>
               </div>
@@ -912,51 +912,51 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
         {/* TAB 7 & 8: DESIGN & TECH STACK */}
         {activeTab === 'design' && (
           <div className="space-y-5 animate-fade-in">
-            <div className="flex items-center gap-2"><h3 className="text-[10px] font-bold uppercase tracking-wider text-black/70 dark:text-white/70">7. UI/UX &amp; Design Requirements</h3><AIQuickFill field="design" schemaDescription="Object with keys: style, primaryColor, secondaryColor, typography, referenceWebsites (all strings)" data={data} onUpdate={(val) => updateField('design', val)} title="UI/UX & Design" /></div>
+            <div className="flex items-center gap-2"><h3 className="text-xs font-bold uppercase tracking-wider text-black/90 dark:text-white/90">7. UI/UX &amp; Design Requirements</h3><AIQuickFill field="design" schemaDescription="Object with keys: style, primaryColor, secondaryColor, typography, referenceWebsites (all strings)" data={data} onUpdate={(val) => updateField('design', val)} title="UI/UX & Design" /></div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-black/50 dark:text-white/50 mb-1">Visual Style</label>
+                <label className="block text-xs font-bold uppercase tracking-wider text-black/70 dark:text-white/70 mb-1">Visual Style</label>
                 <input
                   type="text"
                   value={data.design.style}
                   onChange={(e) => updateNestedField('design', 'style', e.target.value)}
-                  className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 p-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none"
+                  className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                 />
               </div>
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-black/50 dark:text-white/50 mb-1">Primary Color</label>
+                <label className="block text-xs font-bold uppercase tracking-wider text-black/70 dark:text-white/70 mb-1">Primary Color</label>
                 <input
                   type="text"
                   value={data.design.primaryColor}
                   onChange={(e) => updateNestedField('design', 'primaryColor', e.target.value)}
-                  className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 p-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none"
+                  className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                 />
               </div>
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-black/50 dark:text-white/50 mb-1">Secondary Color</label>
+                <label className="block text-xs font-bold uppercase tracking-wider text-black/70 dark:text-white/70 mb-1">Secondary Color</label>
                 <input
                   type="text"
                   value={data.design.secondaryColor}
                   onChange={(e) => updateNestedField('design', 'secondaryColor', e.target.value)}
-                  className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 p-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none"
+                  className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                 />
               </div>
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-black/50 dark:text-white/50 mb-1">Typography Font</label>
+                <label className="block text-xs font-bold uppercase tracking-wider text-black/70 dark:text-white/70 mb-1">Typography Font</label>
                 <input
                   type="text"
                   value={data.design.typography}
                   onChange={(e) => updateNestedField('design', 'typography', e.target.value)}
-                  className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 p-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none"
+                  className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                 />
               </div>
               <div className="sm:col-span-2">
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-black/50 dark:text-white/50 mb-1">Reference Websites / Apps</label>
+                <label className="block text-xs font-bold uppercase tracking-wider text-black/70 dark:text-white/70 mb-1">Reference Websites / Apps</label>
                 <input
                   type="text"
                   value={data.design.referenceWebsites}
                   onChange={(e) => updateNestedField('design', 'referenceWebsites', e.target.value)}
-                  className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 p-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none"
+                  className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                 />
               </div>
             </div>
@@ -964,7 +964,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
             <div className="border-t border-black dark:border-white/10 pt-4">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center space-x-3">
-                  <div className="flex items-center gap-2"><h3 className="text-[10px] font-bold uppercase tracking-wider text-black/70 dark:text-white/70">8. Technical Architecture Stack</h3><AIQuickFill field="techStack" schemaDescription="Object with keys: frontend, backend, database, authentication, storage, hosting, analytics (all strings)" data={data} onUpdate={(val) => updateField('techStack', val)} title="Tech Stack" /></div>
+                  <div className="flex items-center gap-2"><h3 className="text-xs font-bold uppercase tracking-wider text-black/90 dark:text-white/90">8. Technical Architecture Stack</h3><AIQuickFill field="techStack" schemaDescription="Object with keys: frontend, backend, database, authentication, storage, hosting, analytics (all strings)" data={data} onUpdate={(val) => updateField('techStack', val)} title="Tech Stack" /></div>
 
                 </div>
               </div>
@@ -979,12 +979,12 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                   { key: 'analytics', label: 'Analytics' }
                 ].map((item) => (
                   <div key={item.key}>
-                    <label className="block text-[10px] font-bold uppercase tracking-wider text-black/50 dark:text-white/50 mb-1">{item.label}</label>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-black/70 dark:text-white/70 mb-1">{item.label}</label>
                     <input
                       type="text"
                       value={data.techStack[item.key as keyof typeof data.techStack]}
                       onChange={(e) => updateNestedField('techStack', item.key, e.target.value)}
-                      className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 p-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none"
+                      className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                     />
                   </div>
                 ))}
@@ -998,7 +998,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
           <div className="space-y-6 animate-fade-in">
             <div>
               <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-2"><h3 className="text-[10px] font-bold uppercase tracking-wider text-black/70 dark:text-white/70">14. Timeline Phase Breakdown</h3><AIQuickFill field="timelinePhases" schemaDescription="Array of objects {phase: string, duration: string}" data={data} onUpdate={(val) => updateField('timelinePhases', val)} title="Timeline Phase Breakdown" /></div>
+                <div className="flex items-center gap-2"><h3 className="text-xs font-bold uppercase tracking-wider text-black/90 dark:text-white/90">14. Timeline Phase Breakdown</h3><AIQuickFill field="timelinePhases" schemaDescription="Array of objects {phase: string, duration: string}" data={data} onUpdate={(val) => updateField('timelinePhases', val)} title="Timeline Phase Breakdown" /></div>
                 <button
                   type="button"
                   onClick={addTimelinePhase}
@@ -1011,7 +1011,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
 
               <div className="space-y-2">
                 {data.timelinePhases.map((t, idx) => (
-                  <div key={idx} className="flex flex-wrap sm:flex-nowrap items-center gap-2 bg-white dark:bg-[#2A2A2A] p-2 border border-black dark:border-white/10">
+                  <div key={idx} className="flex flex-wrap sm:flex-nowrap items-center gap-2 bg-white dark:bg-white/5 p-2 border border-black dark:border-white/10">
                     <input
                       type="text"
                       value={t.phase}
@@ -1021,7 +1021,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                         updateField('timelinePhases', updated);
                       }}
                       placeholder="Phase Name"
-                      className="flex-1 min-w-[120px] bg-transparent text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none font-medium"
+                      className="flex-1 min-w-[120px] bg-transparent text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 font-medium"
                     />
                     <input
                       type="text"
@@ -1032,7 +1032,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                         updateField('timelinePhases', updated);
                       }}
                       placeholder="e.g. 5 Days"
-                      className="w-24 bg-[#F4F1EE] dark:bg-[#121212] border border-black dark:border-white/10 text-black dark:text-white text-right px-2 py-1 font-mono text-xs outline-none"
+                      className="w-24 bg-neutral-50 dark:bg-white/5 border border-black dark:border-white/10 text-black dark:text-white text-right px-2 py-1 font-mono text-xs outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                     />
                     <button
                       type="button"
@@ -1048,7 +1048,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
 
             <div className="border-t border-black dark:border-white/10 pt-4">
               <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-2"><h3 className="text-[10px] font-bold uppercase tracking-wider text-black/70 dark:text-white/70">15. Payment Milestones</h3><AIQuickFill field="paymentStructure" schemaDescription="Array of objects {percentage: string, milestone: string, description: string}" data={data} onUpdate={(val) => updateField('paymentStructure', val)} title="Payment Milestones" /></div>
+                <div className="flex items-center gap-2"><h3 className="text-xs font-bold uppercase tracking-wider text-black/90 dark:text-white/90">15. Payment Milestones</h3><AIQuickFill field="paymentStructure" schemaDescription="Array of objects {percentage: string, milestone: string, description: string}" data={data} onUpdate={(val) => updateField('paymentStructure', val)} title="Payment Milestones" /></div>
                 <button
                   type="button"
                   onClick={addPaymentMilestone}
@@ -1061,7 +1061,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
 
               <div className="space-y-3">
                 {data.paymentStructure.map((p, idx) => (
-                  <div key={idx} className="bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 p-3 space-y-2">
+                  <div key={idx} className="bg-white dark:bg-white/5 border border-black dark:border-white/10 p-3 space-y-2">
                     <div className="flex flex-wrap sm:flex-nowrap items-center gap-2">
                       <input
                         type="text"
@@ -1071,7 +1071,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                           updated[idx].percentage = e.target.value;
                           updateField('paymentStructure', updated);
                         }}
-                        className="w-16 shrink-0 bg-[#F4F1EE] dark:bg-[#121212] border border-black dark:border-white/10 font-bold text-black dark:text-white px-2 py-1 text-center text-xs outline-none"
+                        className="w-16 shrink-0 bg-neutral-50 dark:bg-white/5 border border-black dark:border-white/10 font-bold text-black dark:text-white px-2 py-1 text-center text-xs outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                       />
                       <input
                         type="text"
@@ -1081,7 +1081,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                           updated[idx].milestone = e.target.value;
                           updateField('paymentStructure', updated);
                         }}
-                        className="flex-1 min-w-[120px] bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 text-[#1A1A1A] dark:text-[#F4F1EE] font-semibold px-2 py-1 text-xs outline-none"
+                        className="flex-1 min-w-[120px] bg-white dark:bg-white/5 border border-black dark:border-white/10 text-[#1A1A1A] dark:text-[#F4F1EE] font-semibold px-2 py-1 text-xs outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                       />
                       <button
                         type="button"
@@ -1099,7 +1099,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                         updated[idx].description = e.target.value;
                         updateField('paymentStructure', updated);
                       }}
-                      className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 p-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none"
+                      className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                     />
                   </div>
                 ))}
@@ -1116,7 +1116,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
             <div className="mb-6 pb-6 border-b border-black/10 dark:border-white/10">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-2">
-                  <h3 className="text-[10px] font-bold uppercase tracking-wider text-black/70 dark:text-white/70">10. Security Practices &amp; Policy</h3>
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-black/90 dark:text-white/90">10. Security Practices &amp; Policy</h3>
                   <AIQuickFill 
                     field="securityPractices" 
                     schemaDescription="Array of strings" 
@@ -1142,7 +1142,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                       type="text"
                       value={item}
                       onChange={(e) => handleListChange('securityPractices', idx, e.target.value)}
-                      className="flex-1 bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 p-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none"
+                      className="flex-1 bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                     />
                     <button
                       type="button"
@@ -1156,43 +1156,43 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
               </div>
             </div>
 
-            <h3 className="text-[10px] font-bold uppercase tracking-wider text-black/70 dark:text-white/70">Policies, Warranty &amp; Exclusions</h3>
+            <h3 className="text-xs font-bold uppercase tracking-wider text-black/90 dark:text-white/90">Policies, Warranty &amp; Exclusions</h3>
 
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-black/50 dark:text-white/50 mb-1">Design Revision Rounds</label>
+                <label className="block text-xs font-bold uppercase tracking-wider text-black/70 dark:text-white/70 mb-1">Design Revision Rounds</label>
                 <input
                   type="text"
                   value={data.designRevisions}
                   onChange={(e) => updateField('designRevisions', e.target.value)}
-                  className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 p-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none"
+                  className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                 />
               </div>
               <div>
-                <label className="block text-[10px] font-bold uppercase tracking-wider text-black/50 dark:text-white/50 mb-1">Development Revision Rounds</label>
+                <label className="block text-xs font-bold uppercase tracking-wider text-black/70 dark:text-white/70 mb-1">Development Revision Rounds</label>
                 <input
                   type="text"
                   value={data.devRevisions}
                   onChange={(e) => updateField('devRevisions', e.target.value)}
-                  className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 p-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none"
+                  className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-[10px] font-bold uppercase tracking-wider text-black/50 dark:text-white/50 mb-1">Post-Launch Support Period</label>
+              <label className="block text-xs font-bold uppercase tracking-wider text-black/70 dark:text-white/70 mb-1">Post-Launch Support Period</label>
               <input
                 type="text"
                 value={data.supportPeriod}
                 onChange={(e) => updateField('supportPeriod', e.target.value)}
-                className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 p-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] font-semibold outline-none"
+                className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] font-semibold outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                 placeholder="30 Days"
               />
             </div>
 
             <div>
               <div className="flex items-center justify-between mb-2">
-                <label className="text-[10px] font-bold uppercase tracking-wider text-black/70 dark:text-white/70">31. Out-Of-Scope Exclusions</label>
+                <label className="text-xs font-bold uppercase tracking-wider text-black/90 dark:text-white/90">31. Out-Of-Scope Exclusions</label>
                 <button
                   type="button"
                   onClick={() => addListItem('outOfScope', 'New exclusion')}
@@ -1209,7 +1209,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                       type="text"
                       value={o}
                       onChange={(e) => handleListChange('outOfScope', idx, e.target.value)}
-                      className="flex-1 bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 p-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none"
+                      className="flex-1 bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                     />
                     <button
                       type="button"
@@ -1225,7 +1225,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
 
             {/* Optional Legal Clauses Toggle */}
             <div className="pt-4 border-t border-black dark:border-white/10">
-              <div className="flex items-center gap-2"><h3 className="text-[10px] font-bold uppercase tracking-wider text-black/70 dark:text-white/70 mb-3">Additional Legal Clauses (Optional)</h3><AIQuickFill field="additionalLegalClauses" schemaDescription="Object with keys: nda, ipAssignment, nonCompete, termination (all booleans)" data={data} onUpdate={(val) => updateField('additionalLegalClauses', val)} title="Additional Legal Clauses" /></div>
+              <div className="flex items-center gap-2"><h3 className="text-xs font-bold uppercase tracking-wider text-black/90 dark:text-white/90 mb-3">Additional Legal Clauses (Optional)</h3><AIQuickFill field="additionalLegalClauses" schemaDescription="Object with keys: nda, ipAssignment, nonCompete, termination (all booleans)" data={data} onUpdate={(val) => updateField('additionalLegalClauses', val)} title="Additional Legal Clauses" /></div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <label className="flex items-start space-x-2 cursor-pointer">
                   <input
@@ -1236,7 +1236,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                   />
                   <div>
                     <span className="block text-xs font-bold text-[#1A1A1A] dark:text-[#F4F1EE]">Non-Disclosure Agreement (NDA)</span>
-                    <span className="block text-[10px] text-black/50 dark:text-white/50">Confidentiality clause for sensitive information.</span>
+                    <span className="block text-[10px] text-black/70 dark:text-white/70">Confidentiality clause for sensitive information.</span>
                   </div>
                 </label>
                 <label className="flex items-start space-x-2 cursor-pointer">
@@ -1248,7 +1248,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                   />
                   <div>
                     <span className="block text-xs font-bold text-[#1A1A1A] dark:text-[#F4F1EE]">IP Assignment</span>
-                    <span className="block text-[10px] text-black/50 dark:text-white/50">Transfers IP ownership to client upon final payment.</span>
+                    <span className="block text-[10px] text-black/70 dark:text-white/70">Transfers IP ownership to client upon final payment.</span>
                   </div>
                 </label>
                 <label className="flex items-start space-x-2 cursor-pointer">
@@ -1260,7 +1260,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                   />
                   <div>
                     <span className="block text-xs font-bold text-[#1A1A1A] dark:text-[#F4F1EE]">Non-Compete</span>
-                    <span className="block text-[10px] text-black/50 dark:text-white/50">Restricts building an exact replica for competitors.</span>
+                    <span className="block text-[10px] text-black/70 dark:text-white/70">Restricts building an exact replica for competitors.</span>
                   </div>
                 </label>
                 <label className="flex items-start space-x-2 cursor-pointer">
@@ -1272,7 +1272,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                   />
                   <div>
                     <span className="block text-xs font-bold text-[#1A1A1A] dark:text-[#F4F1EE]">Termination Terms</span>
-                    <span className="block text-[10px] text-black/50 dark:text-white/50">14-day notice and prorated payment agreement.</span>
+                    <span className="block text-[10px] text-black/70 dark:text-white/70">14-day notice and prorated payment agreement.</span>
                   </div>
                 </label>
               </div>
@@ -1284,38 +1284,38 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
         {/* TAB 33: SIGNATURES & APPROVAL */}
         {activeTab === 'signoff' && (
           <div className="space-y-5 animate-fade-in">
-            <h3 className="text-[10px] font-bold uppercase tracking-wider text-black/70 dark:text-white/70">33. Final Sign-Off &amp; Document Approval</h3>
+            <h3 className="text-xs font-bold uppercase tracking-wider text-black/90 dark:text-white/90">33. Final Sign-Off &amp; Document Approval</h3>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="bg-white dark:bg-[#2A2A2A] p-4 border border-black dark:border-white/10 space-y-3">
-                <h4 className="text-[10px] font-bold text-black dark:text-white uppercase tracking-wider">Client Signatory</h4>
+              <div className="bg-white dark:bg-white/5 p-4 border border-black dark:border-white/10 space-y-3">
+                <h4 className="text-xs font-bold text-black dark:text-white uppercase tracking-wider">Client Signatory</h4>
                 <div>
-                  <label className="block text-[10px] text-black/50 dark:text-white/50 mb-1">Client Name</label>
+                  <label className="block text-[10px] text-black/70 dark:text-white/70 mb-1">Client Name</label>
                   <input
                     type="text"
                     value={data.clientSignoff.name}
                     onChange={(e) => updateNestedField('clientSignoff', 'name', e.target.value)}
                     placeholder="e.g. Rahul Sharma"
-                    className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 p-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none"
+                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] text-black/50 dark:text-white/50 mb-1">Company</label>
+                  <label className="block text-[10px] text-black/70 dark:text-white/70 mb-1">Company</label>
                   <input
                     type="text"
                     value={data.clientSignoff.company}
                     onChange={(e) => updateNestedField('clientSignoff', 'company', e.target.value)}
-                    className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 p-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none"
+                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] text-black/50 dark:text-white/50 mb-1">Signature Date</label>
+                  <label className="block text-[10px] text-black/70 dark:text-white/70 mb-1">Signature Date</label>
                   <input
                     type="text"
                     value={data.clientSignoff.signatureDate}
                     onChange={(e) => updateNestedField('clientSignoff', 'signatureDate', e.target.value)}
                     placeholder="DD/MM/YYYY"
-                    className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 p-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none mb-3"
+                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 mb-3"
                   />
                   <SignatureCapture 
                     label="Client" 
@@ -1325,35 +1325,35 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                 </div>
               </div>
 
-              <div className="bg-white dark:bg-[#2A2A2A] p-4 border border-black dark:border-white/10 space-y-3">
-                <h4 className="text-[10px] font-bold text-black dark:text-white uppercase tracking-wider">Service Provider Signatory</h4>
+              <div className="bg-white dark:bg-white/5 p-4 border border-black dark:border-white/10 space-y-3">
+                <h4 className="text-xs font-bold text-black dark:text-white uppercase tracking-wider">Service Provider Signatory</h4>
                 <div>
-                  <label className="block text-[10px] text-black/50 dark:text-white/50 mb-1">Provider Name</label>
+                  <label className="block text-[10px] text-black/70 dark:text-white/70 mb-1">Provider Name</label>
                   <input
                     type="text"
                     value={data.providerSignoff.name}
                     onChange={(e) => updateNestedField('providerSignoff', 'name', e.target.value)}
                     placeholder="e.g. Vikram Patel"
-                    className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 p-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none"
+                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] text-black/50 dark:text-white/50 mb-1">Company</label>
+                  <label className="block text-[10px] text-black/70 dark:text-white/70 mb-1">Company</label>
                   <input
                     type="text"
                     value={data.providerSignoff.company}
                     onChange={(e) => updateNestedField('providerSignoff', 'company', e.target.value)}
-                    className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 p-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none"
+                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] text-black/50 dark:text-white/50 mb-1">Signature Date</label>
+                  <label className="block text-[10px] text-black/70 dark:text-white/70 mb-1">Signature Date</label>
                   <input
                     type="text"
                     value={data.providerSignoff.signatureDate}
                     onChange={(e) => updateNestedField('providerSignoff', 'signatureDate', e.target.value)}
                     placeholder="DD/MM/YYYY"
-                    className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 p-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none mb-3"
+                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 mb-3"
                   />
                   <SignatureCapture 
                     label="Provider" 
@@ -1364,15 +1364,15 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
               </div>
             </div>
 
-            <div className="bg-white dark:bg-[#2A2A2A] p-4 border border-black dark:border-white/10 space-y-3">
-              <h4 className="text-[10px] font-bold text-black dark:text-white uppercase tracking-wider">Document Status &amp; Approval Dates</h4>
+            <div className="bg-white dark:bg-white/5 p-4 border border-black dark:border-white/10 space-y-3">
+              <h4 className="text-xs font-bold text-black dark:text-white uppercase tracking-wider">Document Status &amp; Approval Dates</h4>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div>
-                  <label className="block text-[10px] text-black/50 dark:text-white/50 mb-1">Approval Status</label>
+                  <label className="block text-[10px] text-black/70 dark:text-white/70 mb-1">Approval Status</label>
                   <select
                     value={data.documentApproval.status}
                     onChange={(e) => updateNestedField('documentApproval', 'status', e.target.value)}
-                    className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 text-black dark:text-white font-bold p-2 text-xs outline-none"
+                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 text-black dark:text-white font-bold p-2.5 text-sm outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                   >
                     <option value="Draft">Draft</option>
                     <option value="Under Review">Under Review</option>
@@ -1380,21 +1380,21 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                   </select>
                 </div>
                 <div>
-                  <label className="block text-[10px] text-black/50 dark:text-white/50 mb-1">Project Start Date</label>
+                  <label className="block text-[10px] text-black/70 dark:text-white/70 mb-1">Project Start Date</label>
                   <input
                     type="text"
                     value={data.documentApproval.projectStartDate}
                     onChange={(e) => updateNestedField('documentApproval', 'projectStartDate', e.target.value)}
-                    className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 p-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none"
+                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] text-black/50 dark:text-white/50 mb-1">Expected Delivery Date</label>
+                  <label className="block text-[10px] text-black/70 dark:text-white/70 mb-1">Expected Delivery Date</label>
                   <input
                     type="text"
                     value={data.documentApproval.expectedDeliveryDate}
                     onChange={(e) => updateNestedField('documentApproval', 'expectedDeliveryDate', e.target.value)}
-                    className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/10 p-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none"
+                    className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/10 p-2.5 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20"
                   />
                 </div>
               </div>
@@ -1407,7 +1407,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
       {/* =========================================
           PRD SECTION COMPLETION AUDIT & SUMMARY
          ========================================= */}
-      <div id="prd-audit-summary" className="bg-[#F4F1EE] dark:bg-[#121212] border-t-2 border-black dark:border-white/20 p-4 sm:p-6 space-y-5">
+      <div id="prd-audit-summary" className="bg-neutral-50 dark:bg-white/5 border-t-2 border-black dark:border-white/20 p-4 sm:p-6 space-y-5">
         
         {/* Header & Overall Metric */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-black dark:border-white/10 pb-4">
@@ -1420,17 +1420,17 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                 PRD Section Completion Summary
               </h3>
             </div>
-            <p className="text-xs text-black/60 dark:text-white/60 mt-1">
+            <p className="text-xs text-black/80 dark:text-white/80 mt-1">
               Real-time completeness verification across all 33 required PRD document sections.
             </p>
           </div>
 
-          <div className="flex items-center space-x-3 bg-white dark:bg-[#2A2A2A] border border-black/15 dark:border-white/15 px-4 py-2.5 shadow-2xs shrink-0">
+          <div className="flex items-center space-x-3 bg-white dark:bg-white/5 border border-black/15 dark:border-white/15 px-4 py-2.5 shadow-2xs shrink-0">
             <div className="text-right">
               <div className="text-xs font-mono font-bold text-[#1A1A1A] dark:text-[#F4F1EE]">
                 {completedCount} / {audits.length} Sections
               </div>
-              <div className="text-[10px] text-black/50 dark:text-white/50 uppercase tracking-wider font-medium">
+              <div className="text-[10px] text-black/70 dark:text-white/70 uppercase tracking-wider font-medium">
                 {completionPercentage === 100
                   ? '100% Complete'
                   : `${incompleteCount} Missing Section${incompleteCount > 1 ? 's' : ''}`}
@@ -1450,7 +1450,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
 
         {/* Progress Bar */}
         <div className="space-y-1.5">
-          <div className="flex justify-between text-[10px] uppercase font-bold text-black/60 dark:text-white/60 tracking-wider font-mono">
+          <div className="flex justify-between text-[10px] uppercase font-bold text-black/80 dark:text-white/80 tracking-wider font-mono">
             <span>Overall Completeness</span>
             <span>{completedCount} of {audits.length} Sections Filled ({completionPercentage}%)</span>
           </div>
@@ -1473,7 +1473,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
               className={`px-3 py-1.5 text-xs font-bold uppercase tracking-wider border transition-colors ${
                 summaryFilter === 'all'
                   ? 'bg-black dark:bg-white text-white dark:text-[#121212] border-black dark:border-white/30'
-                  : 'bg-white dark:bg-[#2A2A2A] text-black/70 dark:text-white/70 border-black/15 dark:border-white/15 hover:border-black dark:hover:border-white/30'
+                  : 'bg-white dark:bg-white/5 text-black/90 dark:text-white/90 border-black/15 dark:border-white/15 hover:border-black dark:hover:border-white/30'
               }`}
             >
               All Sections ({audits.length})
@@ -1484,7 +1484,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
               className={`px-3 py-1.5 text-xs font-bold uppercase tracking-wider border transition-colors flex items-center space-x-1.5 ${
                 summaryFilter === 'incomplete'
                   ? 'bg-amber-800 text-white dark:text-[#121212] border-amber-900'
-                  : 'bg-white dark:bg-[#2A2A2A] text-amber-900 border-amber-600/30 hover:border-amber-700'
+                  : 'bg-white dark:bg-white/5 text-amber-900 border-amber-600/30 hover:border-amber-700'
               }`}
             >
               <AlertTriangle className="w-3.5 h-3.5" />
@@ -1496,7 +1496,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
               className={`px-3 py-1.5 text-xs font-bold uppercase tracking-wider border transition-colors flex items-center space-x-1.5 ${
                 summaryFilter === 'complete'
                   ? 'bg-emerald-800 text-white dark:text-[#121212] border-emerald-900'
-                  : 'bg-white dark:bg-[#2A2A2A] text-emerald-800 border-emerald-600/30 hover:border-emerald-700'
+                  : 'bg-white dark:bg-white/5 text-emerald-800 border-emerald-600/30 hover:border-emerald-700'
               }`}
             >
               <CheckCircle2 className="w-3.5 h-3.5" />
@@ -1511,7 +1511,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
               placeholder="Filter section title..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/20 focus:border-black dark:border-white/30 pl-8 pr-3 py-1.5 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none font-sans"
+              className="w-full bg-white dark:bg-white/5 border border-black dark:border-white/20 focus:border-black dark:border-white/30 pl-8 pr-3 py-1.5 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] outline-none focus:ring-1 focus:ring-black/20 dark:focus:ring-white/20 font-sans"
             />
           </div>
         </div>
@@ -1535,7 +1535,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
             .map((audit) => (
               <div
                 key={audit.id}
-                className={`p-3 bg-white dark:bg-[#2A2A2A] border transition flex flex-col justify-between ${
+                className={`p-3 bg-white dark:bg-white/5 border transition flex flex-col justify-between ${
                   audit.isComplete
                     ? 'border-black dark:border-white/10 hover:border-black dark:border-white/40'
                     : 'border-amber-400 bg-amber-50/30 hover:border-amber-600'
@@ -1559,7 +1559,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                     )}
                   </div>
 
-                  <p className="text-[11px] text-black/60 dark:text-white/60 mt-1.5 min-h-[32px] line-clamp-2">
+                  <p className="text-[11px] text-black/80 dark:text-white/80 mt-1.5 min-h-[32px] line-clamp-2">
                     {audit.isComplete
                       ? 'Section requirement satisfied and validated.'
                       : audit.missingDetail || 'Missing required details.'}
@@ -1598,16 +1598,16 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
       </div>
 
       {/* Editor Word Count Footer */}
-      <div className="bg-white dark:bg-[#2A2A2A] border-t border-black dark:border-white/10 px-4 py-3 flex flex-wrap items-center justify-between no-print sticky bottom-0 z-20 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] pb-safe">
+      <div className="bg-white dark:bg-white/5 border-t border-black dark:border-white/10 px-4 py-3 flex flex-wrap items-center justify-between no-print sticky bottom-0 z-20 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] pb-safe">
         <div className="flex items-center space-x-2">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span className="text-[10px] uppercase tracking-widest font-bold text-black/60 dark:text-white/60">Live Word Count Tracker</span>
+          <span className="text-[10px] uppercase tracking-widest font-bold text-black/80 dark:text-white/80">Live Word Count Tracker</span>
         </div>
         <div className="flex items-center space-x-3 mt-2 sm:mt-0">
-          <div className="text-[10px] text-black/50 dark:text-white/50 font-medium hidden sm:block">
+          <div className="text-[10px] text-black/70 dark:text-white/70 font-medium hidden sm:block">
             Monitors PRD & Legal Agreement Length
           </div>
-          <span className="bg-[#EFECE7] dark:bg-[#1E1E1E] text-[#1A1A1A] dark:text-[#F4F1EE] border border-black dark:border-white/10 px-3 py-1 text-xs font-mono font-bold tracking-wider">
+          <span className="bg-white dark:bg-[#1A1A1A] text-[#1A1A1A] dark:text-[#F4F1EE] border border-black dark:border-white/10 px-3 py-1 text-xs font-mono font-bold tracking-wider">
             {wordCount.toLocaleString()} WORDS
           </span>
         </div>

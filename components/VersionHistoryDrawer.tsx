@@ -23,7 +23,7 @@ export const VersionHistoryDrawer: React.FC<VersionHistoryDrawerProps> = ({
         className="fixed inset-0 z-40 bg-black/20 dark:bg-black/50 backdrop-blur-sm transition-opacity" 
         onClick={onClose}
       />
-      <div className="fixed inset-y-0 right-0 z-50 w-full sm:w-80 max-w-sm bg-white dark:bg-[#1A1A1A] border-l border-black/10 dark:border-white/10 shadow-2xl flex flex-col transform transition-transform animate-fade-in text-[#1A1A1A] dark:text-[#F4F1EE]" style="overscroll-behavior: contain">
+      <div className="fixed inset-y-0 right-0 z-50 w-full sm:w-80 max-w-sm bg-white dark:bg-[#1A1A1A] border-l border-black/10 dark:border-white/10 shadow-2xl flex flex-col transform transition-transform animate-fade-in text-[#1A1A1A] dark:text-[#F4F1EE]" style={{ overscrollBehavior: 'contain' }}>
         <div className="p-4 border-b border-black/10 dark:border-white/10 flex items-center justify-between bg-[#F4F1EE] dark:bg-[#121212]">
           <h2 className="font-serif font-bold flex items-center gap-2">
             <Clock className="w-4 h-4" />

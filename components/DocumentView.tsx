@@ -26,14 +26,14 @@ const SectionControls = ({ index, total, moveUp, moveDown }: { index: number, to
   };
   return (
     <div className="section-controls no-print absolute top-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/20 rounded z-10 flex flex-row items-center p-1 gap-1">
-      <button onClick={() => moveUp(index)} className="p-1 hover:text-black dark:hover:text-white text-black/60 dark:text-white/60 hover:bg-black/10 dark:hover:bg-white/10 rounded" title="Move Up">
+      <button onClick={() => moveUp(index)} className="p-1 hover:text-black dark:hover:text-white text-black/80 dark:text-white/80 hover:bg-black/10 dark:hover:bg-white/10 rounded" title="Move Up">
         <ArrowUp className="w-3.5 h-3.5" />
       </button>
-      <button onClick={() => moveDown(index)} className="p-1 hover:text-black dark:hover:text-white text-black/60 dark:text-white/60 hover:bg-black/10 dark:hover:bg-white/10 rounded" title="Move Down">
+      <button onClick={() => moveDown(index)} className="p-1 hover:text-black dark:hover:text-white text-black/80 dark:text-white/80 hover:bg-black/10 dark:hover:bg-white/10 rounded" title="Move Down">
         <ArrowDown className="w-3.5 h-3.5" />
       </button>
       <div className="w-px h-3 bg-black/20 dark:bg-white/20 mx-0.5" />
-      <button onClick={handleCopy} className="p-1 hover:text-black dark:hover:text-white text-black/60 dark:text-white/60 hover:bg-black/10 dark:hover:bg-white/10 rounded" title="Copy Section">
+      <button onClick={handleCopy} className="p-1 hover:text-black dark:hover:text-white text-black/80 dark:text-white/80 hover:bg-black/10 dark:hover:bg-white/10 rounded" title="Copy Section">
         {copied ? (
           <Check className="w-3.5 h-3.5 text-green-600 dark:text-green-400" />
         ) : (
@@ -52,7 +52,7 @@ const getPriorityBadge = (p: string) => {
       case "low":
         return "bg-[#EFECE7] dark:bg-[#1E1E1E] text-[#1A1A1A] dark:text-[#F4F1EE] border-black dark:border-white/20 font-medium";
       default:
-        return "bg-[#F4F1EE] dark:bg-[#121212] text-black/70 dark:text-white/70 border-black dark:border-white/10";
+        return "bg-neutral-50 dark:bg-white/5 text-black/90 dark:text-white/90 border-black dark:border-white/10";
     }
   };
 
@@ -65,26 +65,26 @@ const sectionBlocks = [
           <SectionControls index={index} total={31} moveUp={moveUp} moveDown={moveDown} />
           <h2 className="font-serif italic text-xl font-bold text-[#1A1A1A] dark:text-[#F4F1EE] border-b border-black dark:border-white/20 pb-1 mb-4 flex items-center justify-between">
             <span>1. PROJECT OVERVIEW</span>
-            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/40 dark:text-white/40 font-bold">
+            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/60 dark:text-white/60 font-bold">
               SEC 01
             </span>
           </h2>
 
           <div className="mb-4">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-black/70 dark:text-white/70 mb-1.5">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-black/90 dark:text-white/90 mb-1.5">
               1.1 Project Description
             </h3>
-            <p className="text-sm text-[#1A1A1A] dark:text-[#F4F1EE] leading-relaxed whitespace-pre-line bg-[#F4F1EE] dark:bg-[#121212] p-4 border border-black dark:border-white/10">
+            <p className="text-sm text-[#1A1A1A] dark:text-[#F4F1EE] leading-relaxed whitespace-pre-line bg-neutral-50 dark:bg-white/5 p-4 border border-black dark:border-white/10">
               {d.projectDescription ||
                 "[Briefly describe what will be designed/developed, the business problem it solves, and its primary purpose.]"}
             </p>
           </div>
 
           <div className="mb-4">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-black/70 dark:text-white/70 mb-1.5">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-black/90 dark:text-white/90 mb-1.5">
               1.2 Project Objectives
             </h3>
-            <p className="text-xs text-black/60 dark:text-white/60 mb-2">
+            <p className="text-xs text-black/80 dark:text-white/80 mb-2">
               The primary objectives of this project are:
             </p>
             <ul className="list-disc list-inside space-y-1 text-sm text-[#1A1A1A] dark:text-[#F4F1EE] pl-2">
@@ -97,24 +97,24 @@ const sectionBlocks = [
           </div>
 
           <div>
-            <h3 className="text-xs font-bold uppercase tracking-wider text-black/70 dark:text-white/70 mb-2">
+            <h3 className="text-xs font-bold uppercase tracking-wider text-black/90 dark:text-white/90 mb-2">
               1.3 Target Users
             </h3>
             <div className="space-y-1.5 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] pl-2 border-l-2 border-black dark:border-white/20">
               <p>
-                <span className="font-bold text-black/70 dark:text-white/70 uppercase text-[10px] tracking-wider">
+                <span className="font-bold text-black/90 dark:text-white/90 uppercase text-[10px] tracking-wider">
                   Primary Users:
                 </span>{" "}
                 {d.targetUsers.primary || "[User Type]"}
               </p>
               <p>
-                <span className="font-bold text-black/70 dark:text-white/70 uppercase text-[10px] tracking-wider">
+                <span className="font-bold text-black/90 dark:text-white/90 uppercase text-[10px] tracking-wider">
                   Secondary Users:
                 </span>{" "}
                 {d.targetUsers.secondary || "[User Type]"}
               </p>
               <p>
-                <span className="font-bold text-black/70 dark:text-white/70 uppercase text-[10px] tracking-wider">
+                <span className="font-bold text-black/90 dark:text-white/90 uppercase text-[10px] tracking-wider">
                   Admin Users:
                 </span>{" "}
                 {d.targetUsers.admin || "[Admin / Staff / Management]"}
@@ -132,19 +132,19 @@ const sectionBlocks = [
           <SectionControls index={index} total={31} moveUp={moveUp} moveDown={moveDown} />
           <h2 className="font-serif italic text-xl font-bold text-[#1A1A1A] dark:text-[#F4F1EE] border-b border-black dark:border-white/20 pb-1 mb-4 flex items-center justify-between">
             <span>2. PROJECT SCOPE</span>
-            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/40 dark:text-white/40 font-bold">
+            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/60 dark:text-white/60 font-bold">
               SEC 02
             </span>
           </h2>
-          <p className="text-xs text-black/70 dark:text-white/70 mb-3 leading-relaxed">
+          <p className="text-xs text-black/90 dark:text-white/90 mb-3 leading-relaxed">
             The project includes the design, development, testing, and
             deployment of the features specifically mentioned in this document.
           </p>
 
-          <h3 className="text-xs font-bold uppercase tracking-wider text-black/70 dark:text-white/70 mb-2">
+          <h3 className="text-xs font-bold uppercase tracking-wider text-black/90 dark:text-white/90 mb-2">
             Included Platforms
           </h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] bg-[#F4F1EE] dark:bg-[#121212] p-4 border border-black dark:border-white/10 mb-2">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] bg-neutral-50 dark:bg-white/5 p-4 border border-black dark:border-white/10 mb-2">
             <label className="flex items-center space-x-2">
               <input
                 type="checkbox"
@@ -213,7 +213,7 @@ const sectionBlocks = [
               </label>
             )}
           </div>
-          <p className="text-[11px] text-black/50 dark:text-white/50 italic">
+          <p className="text-[11px] text-black/70 dark:text-white/70 italic">
             Only checked and explicitly documented platforms are included.
           </p>
         </section>
@@ -229,7 +229,7 @@ const sectionBlocks = [
           <SectionControls index={index} total={31} moveUp={moveUp} moveDown={moveDown} />
           <h2 className="font-serif italic text-xl font-bold text-[#1A1A1A] dark:text-[#F4F1EE] border-b border-black dark:border-white/20 pb-1 mb-4 flex items-center justify-between">
             <span>3. FEATURES &amp; FUNCTIONAL REQUIREMENTS</span>
-            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/40 dark:text-white/40 font-bold">
+            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/60 dark:text-white/60 font-bold">
               SEC 03
             </span>
           </h2>
@@ -259,7 +259,7 @@ const sectionBlocks = [
                     className={
                       idx % 2 === 0
                         ? "bg-white dark:bg-[#2A2A2A] border-b border-black dark:border-white/10"
-                        : "bg-[#F4F1EE] dark:bg-[#121212] border-b border-black dark:border-white/10"
+                        : "bg-neutral-50 dark:bg-white/5 border-b border-black dark:border-white/10"
                     }
                   >
                     <td className="p-2.5 font-mono font-bold text-black dark:text-white min-w-0">
@@ -284,7 +284,7 @@ const sectionBlocks = [
             </table>
           </div>
 
-          <p className="text-[11px] text-black/60 dark:text-white/60 space-y-1 italic">
+          <p className="text-[11px] text-black/80 dark:text-white/80 space-y-1 italic">
             <span>
               Each feature will be implemented according to the behavior
               described and approved in this document.
@@ -303,15 +303,15 @@ const sectionBlocks = [
           <SectionControls index={index} total={31} moveUp={moveUp} moveDown={moveDown} />
           <h2 className="font-serif italic text-xl font-bold text-[#1A1A1A] dark:text-[#F4F1EE] border-b border-black dark:border-white/20 pb-1 mb-4 flex items-center justify-between">
             <span>4. PAGES / SCREENS</span>
-            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/40 dark:text-white/40 font-bold">
+            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/60 dark:text-white/60 font-bold">
               SEC 04
             </span>
           </h2>
-          <p className="text-xs text-black/70 dark:text-white/70 mb-2">
+          <p className="text-xs text-black/90 dark:text-white/90 mb-2">
             The project will contain the following agreed pages/screens:
           </p>
 
-          <ol className="list-decimal list-inside grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] bg-[#F4F1EE] dark:bg-[#121212] p-4 border border-black dark:border-white/10 mb-2">
+          <ol className="list-decimal list-inside grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] bg-neutral-50 dark:bg-white/5 p-4 border border-black dark:border-white/10 mb-2">
             {d.pages.map((p, idx) => (
               <li
                 key={idx}
@@ -322,7 +322,7 @@ const sectionBlocks = [
             ))}
           </ol>
 
-          <p className="text-[11px] text-black/50 dark:text-white/50 italic">
+          <p className="text-[11px] text-black/70 dark:text-white/70 italic">
             Any additional page or major screen requested after approval may be
             treated as additional scope.
           </p>
@@ -339,13 +339,13 @@ const sectionBlocks = [
           <SectionControls index={index} total={31} moveUp={moveUp} moveDown={moveDown} />
           <h2 className="font-serif italic text-xl font-bold text-[#1A1A1A] dark:text-[#F4F1EE] border-b border-black dark:border-white/20 pb-1 mb-4 flex items-center justify-between">
             <span>5. USER ROLES &amp; PERMISSIONS</span>
-            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/40 dark:text-white/40 font-bold">
+            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/60 dark:text-white/60 font-bold">
               SEC 05
             </span>
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-            <div className="bg-[#F4F1EE] dark:bg-[#121212] p-3.5 border border-black dark:border-white/10">
+            <div className="bg-neutral-50 dark:bg-white/5 p-3.5 border border-black dark:border-white/10">
               <h3 className="font-bold text-black dark:text-white uppercase tracking-wider text-[10px] mb-1">
                 Guest
               </h3>
@@ -354,7 +354,7 @@ const sectionBlocks = [
               </p>
             </div>
 
-            <div className="bg-[#F4F1EE] dark:bg-[#121212] p-3.5 border border-black dark:border-white/10">
+            <div className="bg-neutral-50 dark:bg-white/5 p-3.5 border border-black dark:border-white/10">
               <h3 className="font-bold text-black dark:text-white uppercase tracking-wider text-[10px] mb-1">
                 Registered User
               </h3>
@@ -363,7 +363,7 @@ const sectionBlocks = [
               </p>
             </div>
 
-            <div className="bg-[#F4F1EE] dark:bg-[#121212] p-3.5 border border-black dark:border-white/10">
+            <div className="bg-neutral-50 dark:bg-white/5 p-3.5 border border-black dark:border-white/10">
               <h3 className="font-bold text-black dark:text-white uppercase tracking-wider text-[10px] mb-1">
                 Admin
               </h3>
@@ -372,7 +372,7 @@ const sectionBlocks = [
               </p>
             </div>
 
-            <div className="bg-[#F4F1EE] dark:bg-[#121212] p-3.5 border border-black dark:border-white/10">
+            <div className="bg-neutral-50 dark:bg-white/5 p-3.5 border border-black dark:border-white/10">
               <h3 className="font-bold text-black dark:text-white uppercase tracking-wider text-[10px] mb-1">
                 Super Admin
               </h3>
@@ -394,14 +394,14 @@ const sectionBlocks = [
           <SectionControls index={index} total={31} moveUp={moveUp} moveDown={moveDown} />
           <h2 className="font-serif italic text-xl font-bold text-[#1A1A1A] dark:text-[#F4F1EE] border-b border-black dark:border-white/20 pb-1 mb-4 flex items-center justify-between">
             <span>6. USER FLOWS</span>
-            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/40 dark:text-white/40 font-bold">
+            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/60 dark:text-white/60 font-bold">
               SEC 06
             </span>
           </h2>
 
           <div className="space-y-4 text-xs">
             <div>
-              <h3 className="font-bold text-black/70 dark:text-white/70 uppercase tracking-wider text-[10px] mb-1">
+              <h3 className="font-bold text-black/90 dark:text-white/90 uppercase tracking-wider text-[10px] mb-1">
                 Registration Flow
               </h3>
               <div className="bg-[#1A1A1A] text-[#F4F1EE] p-3 font-mono text-xs border border-black dark:border-white/30">
@@ -410,7 +410,7 @@ const sectionBlocks = [
             </div>
 
             <div>
-              <h3 className="font-bold text-black/70 dark:text-white/70 uppercase tracking-wider text-[10px] mb-1">
+              <h3 className="font-bold text-black/90 dark:text-white/90 uppercase tracking-wider text-[10px] mb-1">
                 Primary Product Flow
               </h3>
               <div className="bg-[#1A1A1A] text-[#F4F1EE] p-3 font-mono text-xs border border-black dark:border-white/30">
@@ -419,7 +419,7 @@ const sectionBlocks = [
             </div>
 
             <div>
-              <h3 className="font-bold text-black/70 dark:text-white/70 uppercase tracking-wider text-[10px] mb-1">
+              <h3 className="font-bold text-black/90 dark:text-white/90 uppercase tracking-wider text-[10px] mb-1">
                 Admin Flow
               </h3>
               <div className="bg-[#1A1A1A] text-[#F4F1EE] p-3 font-mono text-xs border border-black dark:border-white/30">
@@ -440,48 +440,48 @@ const sectionBlocks = [
           <SectionControls index={index} total={31} moveUp={moveUp} moveDown={moveDown} />
           <h2 className="font-serif italic text-xl font-bold text-[#1A1A1A] dark:text-[#F4F1EE] border-b border-black dark:border-white/20 pb-1 mb-4 flex items-center justify-between">
             <span>7. UI/UX &amp; DESIGN</span>
-            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/40 dark:text-white/40 font-bold">
+            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/60 dark:text-white/60 font-bold">
               SEC 07
             </span>
           </h2>
 
-          <div className="bg-[#F4F1EE] dark:bg-[#121212] p-4 border border-black dark:border-white/10 text-xs mb-4 space-y-1.5">
+          <div className="bg-neutral-50 dark:bg-white/5 p-4 border border-black dark:border-white/10 text-xs mb-4 space-y-1.5">
             <p>
-              <span className="font-bold uppercase text-[10px] text-black/60 dark:text-white/60">
+              <span className="font-bold uppercase text-[10px] text-black/80 dark:text-white/80">
                 Style:
               </span>{" "}
               {d.design.style}
             </p>
             <p>
-              <span className="font-bold uppercase text-[10px] text-black/60 dark:text-white/60">
+              <span className="font-bold uppercase text-[10px] text-black/80 dark:text-white/80">
                 Primary Color:
               </span>{" "}
               {d.design.primaryColor}
             </p>
             <p>
-              <span className="font-bold uppercase text-[10px] text-black/60 dark:text-white/60">
+              <span className="font-bold uppercase text-[10px] text-black/80 dark:text-white/80">
                 Secondary Color:
               </span>{" "}
               {d.design.secondaryColor}
             </p>
             <p>
-              <span className="font-bold uppercase text-[10px] text-black/60 dark:text-white/60">
+              <span className="font-bold uppercase text-[10px] text-black/80 dark:text-white/80">
                 Typography:
               </span>{" "}
               {d.design.typography}
             </p>
             <p>
-              <span className="font-bold uppercase text-[10px] text-black/60 dark:text-white/60">
+              <span className="font-bold uppercase text-[10px] text-black/80 dark:text-white/80">
                 References:
               </span>{" "}
               {d.design.referenceWebsites}
             </p>
           </div>
 
-          <h3 className="text-xs font-bold uppercase tracking-wider text-black/70 dark:text-white/70 mb-2">
+          <h3 className="text-xs font-bold uppercase tracking-wider text-black/90 dark:text-white/90 mb-2">
             Client-Provided Assets
           </h3>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] bg-[#F4F1EE] dark:bg-[#121212] p-3 border border-black dark:border-white/10 mb-2">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] bg-neutral-50 dark:bg-white/5 p-3 border border-black dark:border-white/10 mb-2">
             <label className="flex items-center space-x-2">
               <input
                 type="checkbox"
@@ -550,7 +550,7 @@ const sectionBlocks = [
           <SectionControls index={index} total={31} moveUp={moveUp} moveDown={moveDown} />
           <h2 className="font-serif italic text-xl font-bold text-[#1A1A1A] dark:text-[#F4F1EE] border-b border-black dark:border-white/20 pb-1 mb-4 flex items-center justify-between">
             <span>8. TECHNICAL ARCHITECTURE</span>
-            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/40 dark:text-white/40 font-bold">
+            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/60 dark:text-white/60 font-bold">
               SEC 08
             </span>
           </h2>
@@ -569,43 +569,43 @@ const sectionBlocks = [
               </thead>
               <tbody>
                 <tr className="border-b border-black dark:border-white/10">
-                  <td className="p-2.5 font-bold uppercase text-[10px] bg-[#F4F1EE] dark:bg-[#121212]">
+                  <td className="p-2.5 font-bold uppercase text-[10px] bg-neutral-50 dark:bg-white/5">
                     Frontend
                   </td>
                   <td className="p-2.5">{d.techStack.frontend}</td>
                 </tr>
                 <tr className="border-b border-black dark:border-white/10">
-                  <td className="p-2.5 font-bold uppercase text-[10px] bg-[#F4F1EE] dark:bg-[#121212]">
+                  <td className="p-2.5 font-bold uppercase text-[10px] bg-neutral-50 dark:bg-white/5">
                     Backend
                   </td>
                   <td className="p-2.5">{d.techStack.backend}</td>
                 </tr>
                 <tr className="border-b border-black dark:border-white/10">
-                  <td className="p-2.5 font-bold uppercase text-[10px] bg-[#F4F1EE] dark:bg-[#121212]">
+                  <td className="p-2.5 font-bold uppercase text-[10px] bg-neutral-50 dark:bg-white/5">
                     Database
                   </td>
                   <td className="p-2.5">{d.techStack.database}</td>
                 </tr>
                 <tr className="border-b border-black dark:border-white/10">
-                  <td className="p-2.5 font-bold uppercase text-[10px] bg-[#F4F1EE] dark:bg-[#121212]">
+                  <td className="p-2.5 font-bold uppercase text-[10px] bg-neutral-50 dark:bg-white/5">
                     Authentication
                   </td>
                   <td className="p-2.5">{d.techStack.authentication}</td>
                 </tr>
                 <tr className="border-b border-black dark:border-white/10">
-                  <td className="p-2.5 font-bold uppercase text-[10px] bg-[#F4F1EE] dark:bg-[#121212]">
+                  <td className="p-2.5 font-bold uppercase text-[10px] bg-neutral-50 dark:bg-white/5">
                     Storage
                   </td>
                   <td className="p-2.5">{d.techStack.storage}</td>
                 </tr>
                 <tr className="border-b border-black dark:border-white/10">
-                  <td className="p-2.5 font-bold uppercase text-[10px] bg-[#F4F1EE] dark:bg-[#121212]">
+                  <td className="p-2.5 font-bold uppercase text-[10px] bg-neutral-50 dark:bg-white/5">
                     Hosting
                   </td>
                   <td className="p-2.5">{d.techStack.hosting}</td>
                 </tr>
                 <tr className="border-b border-black dark:border-white/10">
-                  <td className="p-2.5 font-bold uppercase text-[10px] bg-[#F4F1EE] dark:bg-[#121212]">
+                  <td className="p-2.5 font-bold uppercase text-[10px] bg-neutral-50 dark:bg-white/5">
                     Analytics
                   </td>
                   <td className="p-2.5">{d.techStack.analytics}</td>
@@ -626,11 +626,11 @@ const sectionBlocks = [
           <SectionControls index={index} total={31} moveUp={moveUp} moveDown={moveDown} />
           <h2 className="font-serif italic text-xl font-bold text-[#1A1A1A] dark:text-[#F4F1EE] border-b border-black dark:border-white/20 pb-1 mb-4 flex items-center justify-between">
             <span>9. THIRD-PARTY INTEGRATIONS</span>
-            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/40 dark:text-white/40 font-bold">
+            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/60 dark:text-white/60 font-bold">
               SEC 09
             </span>
           </h2>
-          <ul className="list-disc list-inside space-y-1 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] bg-[#F4F1EE] dark:bg-[#121212] p-4 border border-black dark:border-white/10 mb-2">
+          <ul className="list-disc list-inside space-y-1 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] bg-neutral-50 dark:bg-white/5 p-4 border border-black dark:border-white/10 mb-2">
             {d.thirdPartyIntegrations.map((t, idx) => (
               <li key={idx}>{t}</li>
             ))}
@@ -648,11 +648,11 @@ const sectionBlocks = [
           <SectionControls index={index} total={31} moveUp={moveUp} moveDown={moveDown} />
           <h2 className="font-serif italic text-xl font-bold text-[#1A1A1A] dark:text-[#F4F1EE] border-b border-black dark:border-white/20 pb-1 mb-4 flex items-center justify-between">
             <span>10. SECURITY PRACTICES</span>
-            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/40 dark:text-white/40 font-bold">
+            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/60 dark:text-white/60 font-bold">
               SEC 10
             </span>
           </h2>
-          <ul className="list-disc list-inside space-y-1 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] bg-[#F4F1EE] dark:bg-[#121212] p-4 border border-black dark:border-white/10 mb-2">
+          <ul className="list-disc list-inside space-y-1 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] bg-neutral-50 dark:bg-white/5 p-4 border border-black dark:border-white/10 mb-2">
             {d.securityPractices.map((s, idx) => (
               <li key={idx}>{s}</li>
             ))}
@@ -670,11 +670,11 @@ const sectionBlocks = [
           <SectionControls index={index} total={31} moveUp={moveUp} moveDown={moveDown} />
           <h2 className="font-serif italic text-xl font-bold text-[#1A1A1A] dark:text-[#F4F1EE] border-b border-black dark:border-white/20 pb-1 mb-4 flex items-center justify-between">
             <span>11. PERFORMANCE OPTIMIZATION</span>
-            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/40 dark:text-white/40 font-bold">
+            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/60 dark:text-white/60 font-bold">
               SEC 11
             </span>
           </h2>
-          <ul className="list-disc list-inside space-y-1 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] bg-[#F4F1EE] dark:bg-[#121212] p-4 border border-black dark:border-white/10 mb-2">
+          <ul className="list-disc list-inside space-y-1 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] bg-neutral-50 dark:bg-white/5 p-4 border border-black dark:border-white/10 mb-2">
             {d.performanceOptimizations.map((p, idx) => (
               <li key={idx}>{p}</li>
             ))}
@@ -692,11 +692,11 @@ const sectionBlocks = [
           <SectionControls index={index} total={31} moveUp={moveUp} moveDown={moveDown} />
           <h2 className="font-serif italic text-xl font-bold text-[#1A1A1A] dark:text-[#F4F1EE] border-b border-black dark:border-white/20 pb-1 mb-4 flex items-center justify-between">
             <span>12. SEO FEATURES</span>
-            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/40 dark:text-white/40 font-bold">
+            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/60 dark:text-white/60 font-bold">
               SEC 12
             </span>
           </h2>
-          <ul className="list-disc list-inside space-y-1 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] bg-[#F4F1EE] dark:bg-[#121212] p-4 border border-black dark:border-white/10 mb-2">
+          <ul className="list-disc list-inside space-y-1 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] bg-neutral-50 dark:bg-white/5 p-4 border border-black dark:border-white/10 mb-2">
             {d.seoFeatures.map((s, idx) => (
               <li key={idx}>{s}</li>
             ))}
@@ -712,11 +712,11 @@ const sectionBlocks = [
           <SectionControls index={index} total={31} moveUp={moveUp} moveDown={moveDown} />
           <h2 className="font-serif italic text-xl font-bold text-[#1A1A1A] dark:text-[#F4F1EE] border-b border-black dark:border-white/20 pb-1 mb-4 flex items-center justify-between">
             <span>13. DELIVERABLES</span>
-            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/40 dark:text-white/40 font-bold">
+            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/60 dark:text-white/60 font-bold">
               SEC 13
             </span>
           </h2>
-          <ul className="list-disc list-inside space-y-1 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] bg-[#F4F1EE] dark:bg-[#121212] p-4 border border-black dark:border-white/10 mb-2">
+          <ul className="list-disc list-inside space-y-1 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] bg-neutral-50 dark:bg-white/5 p-4 border border-black dark:border-white/10 mb-2">
             {d.deliverables.map((item, idx) => (
               <li key={idx}>{item}</li>
             ))}
@@ -732,7 +732,7 @@ const sectionBlocks = [
           <SectionControls index={index} total={31} moveUp={moveUp} moveDown={moveDown} />
           <h2 className="font-serif italic text-xl font-bold text-[#1A1A1A] dark:text-[#F4F1EE] border-b border-black dark:border-white/20 pb-1 mb-4 flex items-center justify-between">
             <span>14. PROJECT TIMELINE &amp; PHASES</span>
-            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/40 dark:text-white/40 font-bold">
+            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/60 dark:text-white/60 font-bold">
               SEC 14
             </span>
           </h2>
@@ -756,7 +756,7 @@ const sectionBlocks = [
                     className={
                       idx % 2 === 0
                         ? "bg-white dark:bg-[#2A2A2A] border-b border-black dark:border-white/10"
-                        : "bg-[#F4F1EE] dark:bg-[#121212] border-b border-black dark:border-white/10"
+                        : "bg-neutral-50 dark:bg-white/5 border-b border-black dark:border-white/10"
                     }
                   >
                     <td className="p-2.5 font-bold text-[#1A1A1A] dark:text-[#F4F1EE]">
@@ -786,7 +786,7 @@ const sectionBlocks = [
           <SectionControls index={index} total={31} moveUp={moveUp} moveDown={moveDown} />
           <h2 className="font-serif italic text-xl font-bold text-[#1A1A1A] dark:text-[#F4F1EE] border-b border-black dark:border-white/20 pb-1 mb-4 flex items-center justify-between">
             <span>15. PAYMENT TERMS &amp; MILESTONES</span>
-            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/40 dark:text-white/40 font-bold">
+            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/60 dark:text-white/60 font-bold">
               SEC 15
             </span>
           </h2>
@@ -802,7 +802,7 @@ const sectionBlocks = [
             {d.paymentStructure.map((p, idx) => (
               <div
                 key={idx}
-                className="bg-[#F4F1EE] dark:bg-[#121212] p-4 border-l-4 border-black dark:border-white/30 border border-black dark:border-white/10 text-xs"
+                className="bg-neutral-50 dark:bg-white/5 p-4 border-l-4 border-black dark:border-white/30 border border-black dark:border-white/10 text-xs"
               >
                 <span className="font-black uppercase tracking-wider text-[#1A1A1A] dark:text-[#F4F1EE] block">
                   {p.percentage} — {p.milestone}
@@ -824,11 +824,11 @@ const sectionBlocks = [
           <SectionControls index={index} total={31} moveUp={moveUp} moveDown={moveDown} />
           <h2 className="font-serif italic text-xl font-bold text-[#1A1A1A] dark:text-[#F4F1EE] border-b border-black dark:border-white/20 pb-1 mb-4 flex items-center justify-between">
             <span>16. REVISION POLICY</span>
-            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/40 dark:text-white/40 font-bold">
+            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/60 dark:text-white/60 font-bold">
               SEC 16
             </span>
           </h2>
-          <div className="text-xs text-[#1A1A1A] dark:text-[#F4F1EE] space-y-2 mb-3 bg-[#F4F1EE] dark:bg-[#121212] p-4 border border-black dark:border-white/10">
+          <div className="text-xs text-[#1A1A1A] dark:text-[#F4F1EE] space-y-2 mb-3 bg-neutral-50 dark:bg-white/5 p-4 border border-black dark:border-white/10">
             <p>
               <span className="font-bold uppercase text-[10px]">
                 Design Revisions:
@@ -841,7 +841,7 @@ const sectionBlocks = [
               </span>{" "}
               [{d.devRevisions}] rounds
             </p>
-            <p className="text-black/70 dark:text-white/70">
+            <p className="text-black/90 dark:text-white/90">
               {d.revisionPolicyNotes}
             </p>
           </div>
@@ -856,7 +856,7 @@ const sectionBlocks = [
           <SectionControls index={index} total={31} moveUp={moveUp} moveDown={moveDown} />
           <h2 className="font-serif italic text-xl font-bold text-[#1A1A1A] dark:text-[#F4F1EE] border-b border-black dark:border-white/20 pb-1 mb-4 flex items-center justify-between">
             <span>17. CHANGE REQUEST MANAGEMENT</span>
-            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/40 dark:text-white/40 font-bold">
+            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/60 dark:text-white/60 font-bold">
               SEC 17
             </span>
           </h2>
@@ -878,11 +878,11 @@ const sectionBlocks = [
           <SectionControls index={index} total={31} moveUp={moveUp} moveDown={moveDown} />
           <h2 className="font-serif italic text-xl font-bold text-[#1A1A1A] dark:text-[#F4F1EE] border-b border-black dark:border-white/20 pb-1 mb-4 flex items-center justify-between">
             <span>18. CLIENT RESPONSIBILITIES</span>
-            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/40 dark:text-white/40 font-bold">
+            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/60 dark:text-white/60 font-bold">
               SEC 18
             </span>
           </h2>
-          <ul className="list-disc list-inside space-y-1 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] bg-[#F4F1EE] dark:bg-[#121212] p-4 border border-black dark:border-white/10">
+          <ul className="list-disc list-inside space-y-1 text-xs text-[#1A1A1A] dark:text-[#F4F1EE] bg-neutral-50 dark:bg-white/5 p-4 border border-black dark:border-white/10">
             {d.clientResponsibilities.map((c, idx) => (
               <li key={idx}>{c}</li>
             ))}
@@ -898,11 +898,11 @@ const sectionBlocks = [
           <SectionControls index={index} total={31} moveUp={moveUp} moveDown={moveDown} />
           <h2 className="font-serif italic text-xl font-bold text-[#1A1A1A] dark:text-[#F4F1EE] border-b border-black dark:border-white/20 pb-1 mb-4 flex items-center justify-between">
             <span>19. TESTING &amp; QUALITY ASSURANCE</span>
-            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/40 dark:text-white/40 font-bold">
+            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/60 dark:text-white/60 font-bold">
               SEC 19
             </span>
           </h2>
-          <div className="bg-[#F4F1EE] dark:bg-[#121212] p-3 text-center font-bold text-xs text-black dark:text-white border border-black dark:border-white/10 mb-2">
+          <div className="bg-neutral-50 dark:bg-white/5 p-3 text-center font-bold text-xs text-black dark:text-white border border-black dark:border-white/10 mb-2">
             {d.qaProcess}
           </div>
         </section>
@@ -916,11 +916,11 @@ const sectionBlocks = [
           <SectionControls index={index} total={31} moveUp={moveUp} moveDown={moveDown} />
           <h2 className="font-serif italic text-xl font-bold text-[#1A1A1A] dark:text-[#F4F1EE] border-b border-black dark:border-white/20 pb-1 mb-4 flex items-center justify-between">
             <span>20. BUG VS CHANGE REQUEST</span>
-            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/40 dark:text-white/40 font-bold">
+            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/60 dark:text-white/60 font-bold">
               SEC 20
             </span>
           </h2>
-          <div className="text-xs text-[#1A1A1A] dark:text-[#F4F1EE] space-y-2 bg-[#F4F1EE] dark:bg-[#121212] p-4 border border-black dark:border-white/10">
+          <div className="text-xs text-[#1A1A1A] dark:text-[#F4F1EE] space-y-2 bg-neutral-50 dark:bg-white/5 p-4 border border-black dark:border-white/10">
             <p>
               <span className="font-bold uppercase text-[10px]">
                 Bug Definition:
@@ -934,7 +934,7 @@ const sectionBlocks = [
               Occurs when new or modified behavior beyond original PRD is
               requested.
             </p>
-            <p className="text-black/70 dark:text-white/70">
+            <p className="text-black/90 dark:text-white/90">
               {d.bugVsChangePolicy}
             </p>
           </div>
@@ -949,7 +949,7 @@ const sectionBlocks = [
           <SectionControls index={index} total={31} moveUp={moveUp} moveDown={moveDown} />
           <h2 className="font-serif italic text-xl font-bold text-[#1A1A1A] dark:text-[#F4F1EE] border-b border-black dark:border-white/20 pb-1 mb-4 flex items-center justify-between">
             <span>21. CLIENT APPROVAL SLA</span>
-            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/40 dark:text-white/40 font-bold">
+            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/60 dark:text-white/60 font-bold">
               SEC 21
             </span>
           </h2>
@@ -971,7 +971,7 @@ const sectionBlocks = [
           <SectionControls index={index} total={31} moveUp={moveUp} moveDown={moveDown} />
           <h2 className="font-serif italic text-xl font-bold text-[#1A1A1A] dark:text-[#F4F1EE] border-b border-black dark:border-white/20 pb-1 mb-4 flex items-center justify-between">
             <span>22. POST-LAUNCH SUPPORT</span>
-            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/40 dark:text-white/40 font-bold">
+            <span className="text-[10px] font-sans not-italic uppercase tracking-widest text-black/60 dark:text-white/60 font-bold">
               SEC 22
             </span>
           </h2>
@@ -981,7 +981,7 @@ const sectionBlocks = [
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-            <div className="bg-[#F4F1EE] dark:bg-[#121212] p-4 border border-black dark:border-white/10">
+            <div className="bg-neutral-50 dark:bg-white/5 p-4 border border-black dark:border-white/10">
               <h3 className="font-bold text-black dark:text-white uppercase text-[10px] tracking-wider mb-2 border-b border-black dark:border-white/10 pb-1">
                 Included:
               </h3>
@@ -992,7 +992,7 @@ const sectionBlocks = [
               </ul>
             </div>
 
-            <div className="bg-[#F4F1EE] dark:bg-[#121212] p-4 border border-black dark:border-white/10">
+            <div className="bg-neutral-50 dark:bg-white/5 p-4 border border-black dark:border-white/10">
               <h3 className="font-bold text-black dark:text-white uppercase text-[10px] tracking-wider mb-2 border-b border-black dark:border-white/10 pb-1">
                 Not Included:
               </h3>
@@ -1061,21 +1061,21 @@ const sectionBlocks = [
             <h2 className="font-serif italic text-base font-bold text-[#1A1A1A] dark:text-[#F4F1EE] border-b border-black dark:border-white/20 pb-1 mb-2">
               27. DATA &amp; BACKUPS
             </h2>
-            <div className="bg-[#F4F1EE] dark:bg-[#121212] p-3 border border-black dark:border-white/10 text-xs space-y-1">
+            <div className="bg-neutral-50 dark:bg-white/5 p-3 border border-black dark:border-white/10 text-xs space-y-1">
               <p>
-                <span className="font-bold uppercase text-[9px] text-black/60 dark:text-white/60">
+                <span className="font-bold uppercase text-[9px] text-black/80 dark:text-white/80">
                   Backup Provider:
                 </span>{" "}
                 [{d.backupProvider}]
               </p>
               <p>
-                <span className="font-bold uppercase text-[9px] text-black/60 dark:text-white/60">
+                <span className="font-bold uppercase text-[9px] text-black/80 dark:text-white/80">
                   Backup Frequency:
                 </span>{" "}
                 [{d.backupFrequency}]
               </p>
               <p>
-                <span className="font-bold uppercase text-[9px] text-black/60 dark:text-white/60">
+                <span className="font-bold uppercase text-[9px] text-black/80 dark:text-white/80">
                   Retention Period:
                 </span>{" "}
                 [{d.backupRetention}]
@@ -1109,7 +1109,7 @@ const sectionBlocks = [
             <h2 className="font-serif italic text-base font-bold text-[#1A1A1A] dark:text-[#F4F1EE] border-b border-black dark:border-white/20 pb-1 mb-2">
               30. LIMITATIONS
             </h2>
-            <ul className="list-disc list-inside space-y-1 text-xs text-black/80 dark:text-white/80 bg-[#F4F1EE] dark:bg-[#121212] p-3 border border-black dark:border-white/10">
+            <ul className="list-disc list-inside space-y-1 text-xs text-black/80 dark:text-white/80 bg-neutral-50 dark:bg-white/5 p-3 border border-black dark:border-white/10">
               {d.limitations.map((l, idx) => (
                 <li key={idx}>{l}</li>
               ))}
@@ -1125,7 +1125,7 @@ const sectionBlocks = [
             <h2 className="font-serif italic text-base font-bold text-[#1A1A1A] dark:text-[#F4F1EE] border-b border-black dark:border-white/20 pb-1 mb-2">
               31. OUT-OF-SCOPE WORK
             </h2>
-            <ul className="list-disc list-inside space-y-1 text-xs text-black/80 dark:text-white/80 bg-[#F4F1EE] dark:bg-[#121212] p-3 border border-black dark:border-white/10">
+            <ul className="list-disc list-inside space-y-1 text-xs text-black/80 dark:text-white/80 bg-neutral-50 dark:bg-white/5 p-3 border border-black dark:border-white/10">
               {d.outOfScope.map((o, idx) => (
                 <li key={idx}>{o}</li>
               ))}
@@ -1141,7 +1141,7 @@ const sectionBlocks = [
             <h2 className="font-serif italic text-base font-bold text-[#1A1A1A] dark:text-[#F4F1EE] border-b border-black dark:border-white/20 pb-1 mb-2">
               32. FINAL HANDOVER ITEMS
             </h2>
-            <ul className="list-disc list-inside space-y-1 text-xs text-black/80 dark:text-white/80 bg-[#F4F1EE] dark:bg-[#121212] p-3 border border-black dark:border-white/10">
+            <ul className="list-disc list-inside space-y-1 text-xs text-black/80 dark:text-white/80 bg-neutral-50 dark:bg-white/5 p-3 border border-black dark:border-white/10">
               {d.finalHandoverItems.map((h, idx) => (
                 <li key={idx}>{h}</li>
               ))}
@@ -1266,7 +1266,7 @@ export const DocumentView: React.FC<DocumentViewProps> = ({
   const prdSectionClass = printMode === "agreement" ? "hidden" : "mb-8";
 
   return (
-    <div className="bg-[#D9D5CF] p-1 sm:p-6 md:p-8 no-print-bg">
+    <div className="bg-[#D9D5CF] dark:bg-transparent p-1 sm:p-6 md:p-8 no-print-bg">
       {printMode === "full" && (
         <style>{`
           #prd-document-preview {
@@ -1316,7 +1316,7 @@ export const DocumentView: React.FC<DocumentViewProps> = ({
       )}
       <div
         id="prd-document-preview"
-        className="print-container bg-white dark:bg-[#2A2A2A] text-[#1A1A1A] dark:text-[#F4F1EE] p-4 sm:p-8 md:p-12 max-w-4xl mx-auto shadow-2xl border border-black dark:border-white/10 my-2 sm:my-4"
+        className="print-container bg-white dark:bg-[#1C1C1C] text-[#1A1A1A] dark:text-[#E0E0E0] p-4 sm:p-8 md:p-12 max-w-4xl mx-auto shadow-2xl border border-black dark:border-white/10 my-2 sm:my-4"
       >
         {/* ========================================================
             AUTOMATIC HIGH-END COVER PAGE LAYOUT
@@ -1335,14 +1335,14 @@ export const DocumentView: React.FC<DocumentViewProps> = ({
             <div className="inline-block bg-black dark:bg-white text-white dark:text-[#121212] px-3 py-1 text-[10px] font-mono uppercase tracking-[0.25em] font-bold">
               {d.coverBadge || "Confidential & Proprietary"}
             </div>
-            <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-black/60 dark:text-white/60 font-semibold pt-1">
+            <div className="text-[10px] font-mono uppercase tracking-[0.2em] text-black/80 dark:text-white/80 font-semibold pt-1">
               {d.coverDocumentType || "Product Requirement Specification & Development Agreement"}
             </div>
           </div>
 
           {/* Centerpiece Typographic Display */}
           <div className="my-auto py-10 space-y-6 relative z-10 px-4">
-            <div className="text-[11px] uppercase font-mono tracking-[0.3em] text-black/50 dark:text-white/50 font-bold">
+            <div className="text-[11px] uppercase font-mono tracking-[0.3em] text-black/70 dark:text-white/70 font-bold">
               {d.coverSubtitle || "— Official Project Specification —"}
             </div>
 
@@ -1359,7 +1359,7 @@ export const DocumentView: React.FC<DocumentViewProps> = ({
             {/* Centered Metadata Card */}
             <div className="max-w-lg mx-auto bg-white dark:bg-[#2A2A2A] border border-black dark:border-white/20 p-4 sm:p-6 shadow-sm my-6 sm:my-8 text-left grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
               <div>
-                <span className="font-mono text-[9px] uppercase tracking-widest text-black/40 dark:text-white/40 block font-bold">
+                <span className="font-mono text-[9px] uppercase tracking-widest text-black/60 dark:text-white/60 block font-bold">
                   Client / Company
                 </span>
                 <span className="font-bold text-[#1A1A1A] dark:text-[#F4F1EE] text-sm block mt-0.5">
@@ -1367,7 +1367,7 @@ export const DocumentView: React.FC<DocumentViewProps> = ({
                 </span>
               </div>
               <div>
-                <span className="font-mono text-[9px] uppercase tracking-widest text-black/40 dark:text-white/40 block font-bold">
+                <span className="font-mono text-[9px] uppercase tracking-widest text-black/60 dark:text-white/60 block font-bold">
                   Service Provider
                 </span>
                 <span className="font-bold text-[#1A1A1A] dark:text-[#F4F1EE] text-sm block mt-0.5">
@@ -1375,7 +1375,7 @@ export const DocumentView: React.FC<DocumentViewProps> = ({
                 </span>
               </div>
               <div className="border-t border-black dark:border-white/10 pt-2">
-                <span className="font-mono text-[9px] uppercase tracking-widest text-black/40 dark:text-white/40 block font-bold">
+                <span className="font-mono text-[9px] uppercase tracking-widest text-black/60 dark:text-white/60 block font-bold">
                   Document Version
                 </span>
                 <span className="font-bold font-mono text-[#1A1A1A] dark:text-[#F4F1EE] text-xs block mt-0.5">
@@ -1383,7 +1383,7 @@ export const DocumentView: React.FC<DocumentViewProps> = ({
                 </span>
               </div>
               <div className="border-t border-black dark:border-white/10 pt-2">
-                <span className="font-mono text-[9px] uppercase tracking-widest text-black/40 dark:text-white/40 block font-bold">
+                <span className="font-mono text-[9px] uppercase tracking-widest text-black/60 dark:text-white/60 block font-bold">
                   Effective Date
                 </span>
                 <span className="font-bold font-mono text-[#1A1A1A] dark:text-[#F4F1EE] text-xs block mt-0.5">
@@ -1392,7 +1392,7 @@ export const DocumentView: React.FC<DocumentViewProps> = ({
               </div>
               {d.projectCost && (
                 <div className="border-t border-black dark:border-white/10 pt-2">
-                  <span className="font-mono text-[9px] uppercase tracking-widest text-black/40 dark:text-white/40 block font-bold">
+                  <span className="font-mono text-[9px] uppercase tracking-widest text-black/60 dark:text-white/60 block font-bold">
                     Agreed Valuation
                   </span>
                   <span className="font-bold text-black dark:text-white text-xs block mt-0.5">
@@ -1403,7 +1403,7 @@ export const DocumentView: React.FC<DocumentViewProps> = ({
               )}
               {d.estimatedTimeline && (
                 <div className="border-t border-black dark:border-white/10 pt-2">
-                  <span className="font-mono text-[9px] uppercase tracking-widest text-black/40 dark:text-white/40 block font-bold">
+                  <span className="font-mono text-[9px] uppercase tracking-widest text-black/60 dark:text-white/60 block font-bold">
                     Delivery Timeline
                   </span>
                   <span className="font-bold text-black dark:text-white text-xs block mt-0.5">
@@ -1415,7 +1415,7 @@ export const DocumentView: React.FC<DocumentViewProps> = ({
           </div>
 
           {/* Bottom Seal & Handover Footer */}
-          <div className="relative z-10 pb-4 border-t border-black dark:border-white/20 pt-4 flex flex-col sm:flex-row items-center justify-between text-[10px] font-mono text-black/50 dark:text-white/50 uppercase tracking-widest">
+          <div className="relative z-10 pb-4 border-t border-black dark:border-white/20 pt-4 flex flex-col sm:flex-row items-center justify-between text-[10px] font-mono text-black/70 dark:text-white/70 uppercase tracking-widest">
             <span>
               Ref: PRD-{d.docVersion || "1.0"} • {d.projectName || "Document"}
             </span>
@@ -1427,7 +1427,7 @@ export const DocumentView: React.FC<DocumentViewProps> = ({
 
         {/* Header Block / Executive Summary Table (Page 2) */}
         <div className="border-b-2 border-black dark:border-white/30 pb-6 mb-8">
-          <div className="flex items-center justify-between text-[10px] uppercase font-bold tracking-widest text-black/40 dark:text-white/40 mb-3 border-b border-black dark:border-white/10 pb-2">
+          <div className="flex items-center justify-between text-[10px] uppercase font-bold tracking-widest text-black/60 dark:text-white/60 mb-3 border-b border-black dark:border-white/10 pb-2">
             <span>Official Requirement & Agreement Specification</span>
             <span>Ref: {d.docVersion || "1.0"}</span>
           </div>
@@ -1436,9 +1436,9 @@ export const DocumentView: React.FC<DocumentViewProps> = ({
             PRODUCT REQUIREMENTS &amp; PROJECT AGREEMENT
           </h1>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2.5 bg-[#F4F1EE] dark:bg-[#121212] p-5 border border-black dark:border-white/10 text-xs">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2.5 bg-neutral-50 dark:bg-white/5 p-5 border border-black dark:border-white/10 text-xs">
             <div>
-              <span className="font-bold text-black/50 dark:text-white/50 uppercase text-[9px] tracking-wider block">
+              <span className="font-bold text-black/70 dark:text-white/70 uppercase text-[9px] tracking-wider block">
                 Project Name
               </span>
               <span className="font-bold text-[#1A1A1A] dark:text-[#F4F1EE] text-sm">
@@ -1446,7 +1446,7 @@ export const DocumentView: React.FC<DocumentViewProps> = ({
               </span>
             </div>
             <div>
-              <span className="font-bold text-black/50 dark:text-white/50 uppercase text-[9px] tracking-wider block">
+              <span className="font-bold text-black/70 dark:text-white/70 uppercase text-[9px] tracking-wider block">
                 Client Name
               </span>
               <span className="font-bold text-[#1A1A1A] dark:text-[#F4F1EE] text-sm">
@@ -1454,7 +1454,7 @@ export const DocumentView: React.FC<DocumentViewProps> = ({
               </span>
             </div>
             <div>
-              <span className="font-bold text-black/50 dark:text-white/50 uppercase text-[9px] tracking-wider block">
+              <span className="font-bold text-black/70 dark:text-white/70 uppercase text-[9px] tracking-wider block">
                 Service Provider
               </span>
               <span className="font-semibold text-[#1A1A1A] dark:text-[#F4F1EE]">
@@ -1462,7 +1462,7 @@ export const DocumentView: React.FC<DocumentViewProps> = ({
               </span>
             </div>
             <div>
-              <span className="font-bold text-black/50 dark:text-white/50 uppercase text-[9px] tracking-wider block">
+              <span className="font-bold text-black/70 dark:text-white/70 uppercase text-[9px] tracking-wider block">
                 Document Version
               </span>
               <span className="font-semibold text-[#1A1A1A] dark:text-[#F4F1EE]">
@@ -1470,7 +1470,7 @@ export const DocumentView: React.FC<DocumentViewProps> = ({
               </span>
             </div>
             <div>
-              <span className="font-bold text-black/50 dark:text-white/50 uppercase text-[9px] tracking-wider block">
+              <span className="font-bold text-black/70 dark:text-white/70 uppercase text-[9px] tracking-wider block">
                 Effective Date
               </span>
               <span className="font-semibold text-[#1A1A1A] dark:text-[#F4F1EE]">
@@ -1478,7 +1478,7 @@ export const DocumentView: React.FC<DocumentViewProps> = ({
               </span>
             </div>
             <div>
-              <span className="font-bold text-black/50 dark:text-white/50 uppercase text-[9px] tracking-wider block">
+              <span className="font-bold text-black/70 dark:text-white/70 uppercase text-[9px] tracking-wider block">
                 Project Valuation
               </span>
               <span className="font-bold text-black dark:text-white text-sm">
@@ -1487,7 +1487,7 @@ export const DocumentView: React.FC<DocumentViewProps> = ({
               </span>
             </div>
             <div className="md:col-span-2 border-t border-black dark:border-white/10 pt-2 mt-1">
-              <span className="font-bold text-black/50 dark:text-white/50 uppercase text-[9px] tracking-wider block">
+              <span className="font-bold text-black/70 dark:text-white/70 uppercase text-[9px] tracking-wider block">
                 Estimated Delivery Timeline
               </span>
               <span className="font-bold text-[#1A1A1A] dark:text-[#F4F1EE]">
@@ -1524,25 +1524,25 @@ export const DocumentView: React.FC<DocumentViewProps> = ({
           {/* Signatures */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
             {/* CLIENT */}
-            <div className="border border-black dark:border-white/30 p-5 bg-[#F4F1EE] dark:bg-[#121212]">
+            <div className="border border-black dark:border-white/30 p-5 bg-neutral-50 dark:bg-white/5">
               <h3 className="font-black text-black dark:text-white uppercase text-xs tracking-widest mb-4 pb-2 border-b border-black dark:border-white/20">
                 CLIENT REPRESENTATIVE
               </h3>
               <div className="space-y-3 text-xs">
                 <p>
-                  <span className="font-bold text-black/60 dark:text-white/60 uppercase text-[9px] block">
+                  <span className="font-bold text-black/80 dark:text-white/80 uppercase text-[9px] block">
                     Name
                   </span>{" "}
                   {d.clientSignoff.name || "______________________________"}
                 </p>
                 <p>
-                  <span className="font-bold text-black/60 dark:text-white/60 uppercase text-[9px] block">
+                  <span className="font-bold text-black/80 dark:text-white/80 uppercase text-[9px] block">
                     Company
                   </span>{" "}
                   {d.clientSignoff.company || "___________________________"}
                 </p>
                 <p>
-                  <span className="font-bold text-black/60 dark:text-white/60 uppercase text-[9px] block mb-2">
+                  <span className="font-bold text-black/80 dark:text-white/80 uppercase text-[9px] block mb-2">
                     Signature
                   </span>
                   {d.clientSignoff.signatureDataUrl ? (
@@ -1552,7 +1552,7 @@ export const DocumentView: React.FC<DocumentViewProps> = ({
                   )}
                 </p>
                 <p>
-                  <span className="font-bold text-black/60 dark:text-white/60 uppercase text-[9px] block">
+                  <span className="font-bold text-black/80 dark:text-white/80 uppercase text-[9px] block">
                     Date
                   </span>{" "}
                   {d.clientSignoff.signatureDate ||
@@ -1562,25 +1562,25 @@ export const DocumentView: React.FC<DocumentViewProps> = ({
             </div>
 
             {/* SERVICE PROVIDER */}
-            <div className="border border-black dark:border-white/30 p-5 bg-[#F4F1EE] dark:bg-[#121212]">
+            <div className="border border-black dark:border-white/30 p-5 bg-neutral-50 dark:bg-white/5">
               <h3 className="font-black text-black dark:text-white uppercase text-xs tracking-widest mb-4 pb-2 border-b border-black dark:border-white/20">
                 SERVICE PROVIDER
               </h3>
               <div className="space-y-3 text-xs">
                 <p>
-                  <span className="font-bold text-black/60 dark:text-white/60 uppercase text-[9px] block">
+                  <span className="font-bold text-black/80 dark:text-white/80 uppercase text-[9px] block">
                     Name
                   </span>{" "}
                   {d.providerSignoff.name || "______________________________"}
                 </p>
                 <p>
-                  <span className="font-bold text-black/60 dark:text-white/60 uppercase text-[9px] block">
+                  <span className="font-bold text-black/80 dark:text-white/80 uppercase text-[9px] block">
                     Company
                   </span>{" "}
                   {d.providerSignoff.company || "___________________________"}
                 </p>
                 <p>
-                  <span className="font-bold text-black/60 dark:text-white/60 uppercase text-[9px] block mb-2">
+                  <span className="font-bold text-black/80 dark:text-white/80 uppercase text-[9px] block mb-2">
                     Signature
                   </span>
                   {d.providerSignoff.signatureDataUrl ? (
@@ -1590,7 +1590,7 @@ export const DocumentView: React.FC<DocumentViewProps> = ({
                   )}
                 </p>
                 <p>
-                  <span className="font-bold text-black/60 dark:text-white/60 uppercase text-[9px] block">
+                  <span className="font-bold text-black/80 dark:text-white/80 uppercase text-[9px] block">
                     Date
                   </span>{" "}
                   {d.providerSignoff.signatureDate ||
