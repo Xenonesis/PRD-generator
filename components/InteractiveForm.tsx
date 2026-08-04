@@ -1692,7 +1692,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
             </div>
 
             {/* Section Cards Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-3 pt-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-3 pt-2">
               {audits
                 .filter((audit) => {
                   if (summaryFilter === 'incomplete') return !audit.isComplete;
@@ -1710,56 +1710,56 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
                 .map((audit) => (
                   <div
                     key={audit.id}
-                    className={`p-3.5 bg-white dark:bg-[#1A1A1A]/90 border rounded-xl transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md flex flex-col justify-between min-w-0 ${
+                    className={`p-3.5 bg-neutral-50 dark:bg-white/[0.02] border rounded-xl transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg flex flex-col gap-3 min-w-0 ${
                       audit.isComplete
-                        ? 'border-neutral-200/80 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 shadow-2xs'
-                        : 'border-amber-400/80 dark:border-amber-500/40 bg-gradient-to-br from-amber-500/5 to-transparent dark:from-amber-950/20 dark:to-transparent hover:border-amber-500 shadow-2xs'
+                        ? 'border-neutral-200/80 dark:border-white/10 hover:border-neutral-300 dark:hover:border-white/20'
+                        : 'border-amber-400/80 dark:border-amber-500/40 hover:border-amber-500'
                     }`}
                   >
-                    <div>
-                      <div className="flex items-start justify-between gap-2 min-w-0">
-                        <span className="text-xs font-extrabold text-neutral-900 dark:text-neutral-100 tracking-tight leading-snug line-clamp-1 flex-1 min-w-0" title={audit.title}>
-                          {audit.title}
+                    {/* Top Row: Badge & Tab Reference */}
+                    <div className="flex items-center justify-between gap-2 min-w-0">
+                      {audit.isComplete ? (
+                        <span className="shrink-0 text-[10px] bg-emerald-100 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400 font-bold px-2 py-1 rounded-md uppercase tracking-wider flex items-center gap-1.5">
+                          <Check className="w-3 h-3" />
+                          <span>Filled</span>
                         </span>
-                        {audit.isComplete ? (
-                          <span className="shrink-0 text-[10px] bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 font-bold px-2 py-0.5 uppercase tracking-wider flex items-center space-x-1 font-mono rounded-full shadow-2xs">
-                            <Check className="w-3 h-3 inline" />
-                            <span>Filled</span>
-                          </span>
-                        ) : (
-                          <span className="shrink-0 text-[10px] bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30 font-bold px-2 py-0.5 uppercase tracking-wider flex items-center space-x-1 font-mono rounded-full shadow-2xs animate-pulse">
-                            <AlertTriangle className="w-3 h-3 inline text-amber-500" />
-                            <span>Empty</span>
-                          </span>
-                        )}
-                      </div>
+                      ) : (
+                        <span className="shrink-0 text-[10px] bg-amber-100 text-amber-700 dark:bg-amber-500/15 dark:text-amber-400 font-bold px-2 py-1 rounded-md uppercase tracking-wider flex items-center gap-1.5 animate-pulse">
+                          <AlertTriangle className="w-3 h-3" />
+                          <span>Empty</span>
+                        </span>
+                      )}
+                      
+                      <span className="text-[10px] font-mono font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider truncate">
+                        Section {tabs.find((t) => t.id === audit.tab)?.label.split('.')[0] || audit.tab}
+                      </span>
+                    </div>
 
-                      <p className="text-[11px] text-neutral-600 dark:text-neutral-400 mt-2 leading-relaxed min-h-[34px] line-clamp-2">
+                    {/* Middle: Title & Description */}
+                    <div className="flex-1 min-w-0">
+                      <h4 className="text-sm font-bold text-neutral-900 dark:text-white truncate" title={audit.title}>
+                        {audit.title}
+                      </h4>
+                      <p className="text-[11px] text-neutral-500 dark:text-neutral-400 mt-1.5 line-clamp-2 min-h-[32px] leading-relaxed">
                         {audit.isComplete
                           ? 'Section requirement satisfied and validated.'
                           : audit.missingDetail || 'Missing required details.'}
                       </p>
                     </div>
 
-                    <div className="mt-3 pt-2.5 border-t border-neutral-200/80 dark:border-white/10 flex items-center justify-between gap-2 min-w-0">
-                      <span className="text-[10px] font-mono font-medium text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-white/5 border border-neutral-200/60 dark:border-white/10 px-2 py-0.5 rounded-md uppercase tracking-wider truncate max-w-[110px]">
-                        {tabs.find((t) => t.id === audit.tab)?.label.split('.')[0] || audit.tab}
-                      </span>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setActiveTab(audit.tab);
-                        }}
-                        className={`text-[10px] shrink-0 font-bold uppercase tracking-wider px-2.5 py-1 rounded-md flex items-center space-x-1.5 transition-all shadow-2xs ${
-                          audit.isComplete
-                            ? 'text-neutral-800 dark:text-neutral-200 bg-neutral-100 dark:bg-white/10 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black border border-neutral-300/80 dark:border-white/20'
-                            : 'bg-black dark:bg-white text-white dark:text-black hover:opacity-90'
-                        }`}
-                      >
-                        <span>{audit.isComplete ? 'Edit Section' : 'Fix Field'}</span>
-                        <ArrowRight className="w-3 h-3" />
-                      </button>
-                    </div>
+                    {/* Bottom: Action Button */}
+                    <button
+                      type="button"
+                      onClick={() => setActiveTab(audit.tab)}
+                      className={`w-full text-[10px] font-bold uppercase tracking-wider px-3 py-2 rounded-lg flex items-center justify-center gap-2 transition-all ${
+                        audit.isComplete
+                          ? 'bg-white dark:bg-white/5 text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-white/10 hover:bg-neutral-100 dark:hover:bg-white/10'
+                          : 'bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 hover:opacity-90 shadow-sm'
+                      }`}
+                    >
+                      <span>{audit.isComplete ? 'Edit Section' : 'Fix Field'}</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
                   </div>
                 ))}
             </div>
