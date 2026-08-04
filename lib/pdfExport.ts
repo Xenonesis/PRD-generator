@@ -51,14 +51,16 @@ export async function exportToHighFidelityPDF(
   const opt = {
     margin: margin,
     filename: filename,
-    image: { type: 'jpeg' as const, quality: 0.98 },
+    image: { type: 'jpeg' as const, quality: 0.92 },
     html2canvas: {
-      scale: scale,
+      scale: 1.5,
       useCORS: true,
       letterRendering: true,
       logging: false,
       backgroundColor: '#ffffff',
-      windowWidth: 1024,
+      windowWidth: 1200,
+      allowTaint: false,
+      foreignObjectRendering: false,
     },
     jsPDF: { 
       unit: 'mm', 
@@ -67,10 +69,10 @@ export async function exportToHighFidelityPDF(
       compress: true
     },
     pagebreak: { 
-      mode: ['avoid-all', 'css', 'legacy'],
+      mode: ['css', 'legacy'],
       before: '.pdf-page-break-before',
       after: '.pdf-page-break-after',
-      avoid: ['section', 'table', 'tr', '.pdf-keep-together']
+      avoid: ['.pdf-keep-together']
     }
   };
 
@@ -217,37 +219,27 @@ export async function exportToHighFidelityPDF(
       element.appendChild(watermarkContainer);
     }
 
-    reportProgress('Rendering pages (this may take a moment)', 50);
-    const worker = html2pdfModule().set(opt).from(element);
-    await (worker as any)
-      .toPdf()
-      .get('pdf')
-      .then((pdf: any) => {
-        reportProgress('Finalizing PDF', 80);
-        const totalPages = typeof pdf.getNumberOfPages === 'function'
-          ? pdf.getNumberOfPages()
-          : (pdf.internal && typeof pdf.internal.getNumberOfPages === 'function')
-          ? pdf.internal.getNumberOfPages()
-          : 1;
+    reportProgress('Opening system print dialog...', 50);
 
-        for (let i = 1; i <= totalPages; i++) {
-          pdf.setPage(i);
-          pdf.setFont('helvetica', 'normal');
-          pdf.setFontSize(8);
-          pdf.setTextColor(100, 100, 100);
+    // Hide the progress modal so it doesn't get printed
+    const progressModal = document.querySelector('.fixed.inset-0.z-\\[100\\]');
+    const originalDisplay = progressModal ? (progressModal as HTMLElement).style.display : '';
+    if (progressModal) {
+      (progressModal as HTMLElement).style.display = 'none';
+    }
 
-          const pageWidth = pdf.internal.pageSize.getWidth();
-          const pageHeight = pdf.internal.pageSize.getHeight();
+    // Give the browser a tiny tick to apply the style changes and hide the modal
+    await new Promise(resolve => setTimeout(resolve, 150));
 
-          // Left footer: Document label
-          pdf.text('PRD Specification Agreement', 10, pageHeight - 6);
+    // Trigger native browser print dialog
+    // This perfectly supports Tailwind v4's oklch colors, flex, grid, and avoids the html2canvas parsing crashes
+    window.print();
 
-          // Right footer: Page X of Y
-          const pageStr = `Page ${i} of ${totalPages}`;
-          pdf.text(pageStr, pageWidth - 10, pageHeight - 6, { align: 'right' });
-        }
-      });
-    await (worker as any).save();
+    // Restore the modal
+    if (progressModal) {
+      (progressModal as HTMLElement).style.display = originalDisplay;
+    }
+
     reportProgress('Done', 100);
 
   } finally {
