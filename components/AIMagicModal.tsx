@@ -39,7 +39,7 @@ export const AIMagicModal: React.FC<AIMagicModalProps> = ({ isOpen, onClose, onG
       setTimeout(() => setStepText('Generating 33 PRD sections & architecture...'), 1500);
       setTimeout(() => setStepText('Calculating timeline, payment structure & feature priorities...'), 3500);
 
-      const res = await fetch('/api/gemini/generate-prd', {
+      const res = await fetch('/api/groq/generate-prd', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -96,7 +96,7 @@ export const AIMagicModal: React.FC<AIMagicModalProps> = ({ isOpen, onClose, onG
             <div>
               <h3 className="text-lg font-serif font-bold text-[#1A1A1A] dark:text-[#F4F1EE] flex items-center gap-2">
                 AI Magic PRD Generator
-                <span className="text-[10px] bg-black/5 dark:bg-white/5 text-black dark:text-white border border-black dark:border-white/20 px-2 py-0.5 font-sans font-bold uppercase tracking-wider">Gemini 3.6</span>
+                <span className="text-[10px] bg-black/5 dark:bg-white/5 text-black dark:text-white border border-black dark:border-white/20 px-2 py-0.5 font-sans font-bold uppercase tracking-wider">Groq Llama 3.3</span>
               </h3>
               <p className="text-xs text-black/60 dark:text-white/60">Transform a project prompt into a complete 33-section PRD &amp; Agreement</p>
             </div>

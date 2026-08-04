@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getGeminiClient } from '@/lib/gemini';
+import { getGroqClient } from '@/lib/groq';
 import { PRDData, EMPTY_PRD } from '@/types/prd';
 
 export async function POST(req: NextRequest) {
@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Missing PRD data or target language' }, { status: 400 });
     }
 
-    const ai = getGeminiClient();
+    const groq = getGroqClient();
 
     const systemInstruction = `You are a professional technical translator and Product Manager.
 Your task is to translate the provided Product Requirements Document (PRD) JSON into the requested language (${targetLanguage}).
@@ -26,41 +26,39 @@ CRITICAL INSTRUCTIONS:
 
     const userPromptText = `Translate the following PRD JSON into ${targetLanguage}:\n\n${JSON.stringify(prdData)}`;
 
-    const response = await ai.models.generateContent({
-      model: 'gemini-3.6-flash',
-      contents: userPromptText,
-      config: {
-        systemInstruction,
-        responseMimeType: 'application/json',
-        temperature: 0.2, // Low temp for more accurate translation
-      }
+    const completion = await groq.chat.completions.create({
+      messages: [
+        { role: 'system', content: systemInstruction },
+        { role: 'user', content: userPromptText }
+      ],
+      model: 'llama-3.3-70b-versatile',
+      response_format: { type: 'json_object' },
+      temperature: 0.2,
     });
 
-    const responseText = response.text || '';
+    const responseText = completion.choices[0]?.message?.content || '';
     if (!responseText) {
-      throw new Error('Empty response from Gemini API');
+      throw new Error('Empty response from Groq API');
     }
 
     try {
-      // Sometimes models wrap in markdown even with JSON mime type
       const cleanJson = responseText.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
       const parsed = JSON.parse(cleanJson) as PRDData;
       
-      // Merge with EMPTY_PRD to ensure schema safety
       const safeData: PRDData = {
         ...EMPTY_PRD,
         ...parsed,
-        hiddenSections: prdData.hiddenSections // Preserve original hidden sections
+        hiddenSections: prdData.hiddenSections
       };
       
       return NextResponse.json({ prd: safeData });
     } catch (parseError) {
-      console.error('Failed to parse translated PRD JSON:', parseError);
+      console.error('Failed to parse translated PRD JSON from Groq:', parseError);
       return NextResponse.json({ error: 'Failed to generate valid JSON format.' }, { status: 500 });
     }
-
-  } catch (error: any) {
-    console.error('Translation Error:', error);
-    return NextResponse.json({ error: error.message || 'Failed to process request' }, { status: 500 });
+  } catch (error: unknown) {
+    const errMessage = error instanceof Error ? error.message : 'Internal server error';
+    console.error('Error translating PRD with Groq:', errMessage);
+    return NextResponse.json({ error: errMessage }, { status: 500 });
   }
 }

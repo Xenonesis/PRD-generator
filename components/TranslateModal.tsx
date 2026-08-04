@@ -37,7 +37,7 @@ export const TranslateModal: React.FC<TranslateModalProps> = ({ isOpen, onClose,
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch('/api/gemini/translate-prd', {
+      const res = await fetch('/api/groq/translate-prd', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prdData: currentData, targetLanguage }),

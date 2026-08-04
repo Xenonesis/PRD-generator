@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getGeminiClient } from '@/lib/gemini';
+import { getGroqClient } from '@/lib/groq';
 import { PRDData, EMPTY_PRD } from '@/types/prd';
 
 export async function POST(req: NextRequest) {
@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Prompt is required' }, { status: 400 });
     }
 
-    const ai = getGeminiClient();
+    const groq = getGroqClient();
 
     const systemInstruction = `You are a world-class IT Solution Architect and Technical Product Manager. Your task is to generate a comprehensive, highly detailed Product Requirements Document (PRD) & Project Agreement in structured JSON format based on the user's project request.
 
@@ -54,26 +54,25 @@ ${tone ? `Tone of Voice: ${tone}` : ''}
 
 Generate the complete structured JSON PRDData for this project now.`;
 
-    const response = await ai.models.generateContent({
-      model: 'gemini-3.6-flash',
-      contents: userPromptText,
-      config: {
-        systemInstruction,
-        responseMimeType: 'application/json',
-        temperature: 0.7,
-      },
+    const completion = await groq.chat.completions.create({
+      messages: [
+        { role: 'system', content: systemInstruction },
+        { role: 'user', content: userPromptText }
+      ],
+      model: 'llama-3.3-70b-versatile',
+      response_format: { type: 'json_object' },
+      temperature: 0.7,
     });
 
-    const text = response.text || '';
+    const text = completion.choices[0]?.message?.content || '';
     let parsedData: Partial<PRDData> = {};
 
     try {
       parsedData = JSON.parse(text);
     } catch {
-      console.error('Failed to parse Gemini JSON output, falling back to merged data');
+      console.error('Failed to parse Groq JSON output, falling back to merged data');
     }
 
-    // Merge generated data over EMPTY_PRD defaults to ensure full structure integrity
     const finalPRD: PRDData = {
       ...EMPTY_PRD,
       ...parsedData,
@@ -123,7 +122,7 @@ Generate the complete structured JSON PRDData for this project now.`;
     return NextResponse.json({ prd: finalPRD });
   } catch (error: unknown) {
     const errMessage = error instanceof Error ? error.message : 'Internal server error';
-    console.error('Error generating PRD:', errMessage);
+    console.error('Error generating PRD with Groq:', errMessage);
     return NextResponse.json({ error: errMessage }, { status: 500 });
   }
 }

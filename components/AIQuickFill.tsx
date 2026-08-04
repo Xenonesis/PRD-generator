@@ -23,7 +23,7 @@ export const AIQuickFill: React.FC<AIQuickFillProps> = ({ field, schemaDescripti
     setSuccess(false);
 
     try {
-      const res = await fetch('/api/gemini/quick-fill', {
+      const res = await fetch('/api/groq/quick-fill', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

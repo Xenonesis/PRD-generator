@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getGeminiClient } from '@/lib/gemini';
+import { getGroqClient } from '@/lib/groq';
 
 export async function POST(req: NextRequest) {
   try {
@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Field and context are required' }, { status: 400 });
     }
 
-    const ai = getGeminiClient();
+    const groq = getGroqClient();
 
     const systemInstruction = `You are a world-class IT Solution Architect and Technical Product Manager. Your task is to generate specific content for a single section of a Product Requirements Document (PRD).
     
@@ -30,18 +30,18 @@ CRITICAL INSTRUCTIONS:
 2. Do not include markdown formatting like \`\`\`json in the output. Just raw JSON.
 `;
 
-    const response = await ai.models.generateContent({
-      model: 'gemini-3.5-flash',
-      contents: `Generate the JSON object for the field "${field}".`,
-      config: {
-        systemInstruction: systemInstruction,
-        temperature: 0.7,
-        responseMimeType: 'application/json',
-      }
+    const completion = await groq.chat.completions.create({
+      messages: [
+        { role: 'system', content: systemInstruction },
+        { role: 'user', content: `Generate the JSON object for the field "${field}".` }
+      ],
+      model: 'llama-3.3-70b-versatile',
+      response_format: { type: 'json_object' },
+      temperature: 0.7,
     });
 
-    const text = response.text;
-    if (!text) throw new Error('Empty response from AI');
+    const text = completion.choices[0]?.message?.content;
+    if (!text) throw new Error('Empty response from Groq AI');
 
     const json = JSON.parse(text);
 

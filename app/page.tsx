@@ -519,8 +519,8 @@ export default function Home() {
               Project Agreement Builder
             </span>
             <span>
-              Supports PDF Export, Markdown Download &amp; Server-Side Gemini
-              3.6 AI
+              Supports PDF Export, Markdown Download &amp; Server-Side Groq
+              Llama 3.3 AI
             </span>
           </div>
         </footer>

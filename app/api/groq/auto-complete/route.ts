@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getGeminiClient } from '@/lib/gemini';
+import { getGroqClient } from '@/lib/groq';
 
 export async function POST(req: NextRequest) {
   try {
@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Target field is required' }, { status: 400 });
     }
 
-    const ai = getGeminiClient();
+    const groq = getGroqClient();
     
     const systemInstruction = `You are an expert software architect and product manager. Based on the project name and description, suggest industry-standard content for the requested field. Return only valid JSON.`;
     
@@ -24,23 +24,23 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Unsupported target field' }, { status: 400 });
     }
 
-    const response = await ai.models.generateContent({
-      model: 'gemini-3.6-flash',
-      contents: promptText,
-      config: {
-        systemInstruction,
-        responseMimeType: 'application/json',
-        temperature: 0.7,
-      },
+    const completion = await groq.chat.completions.create({
+      messages: [
+        { role: 'system', content: systemInstruction },
+        { role: 'user', content: promptText }
+      ],
+      model: 'llama-3.3-70b-versatile',
+      response_format: { type: 'json_object' },
+      temperature: 0.7,
     });
 
-    const text = response.text || '';
+    const text = completion.choices[0]?.message?.content || '';
     const parsed = JSON.parse(text);
 
     return NextResponse.json(parsed);
   } catch (error: unknown) {
     const errMessage = error instanceof Error ? error.message : 'Failed to generate suggestions';
-    console.error('Error generating autocomplete:', errMessage);
+    console.error('Error generating autocomplete with Groq:', errMessage);
     return NextResponse.json({ error: errMessage }, { status: 500 });
   }
 }
