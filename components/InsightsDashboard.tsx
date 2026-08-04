@@ -10,8 +10,7 @@ interface InsightsDashboardProps {
   data: PRDData;
 }
 
-const COLORS = ['#1A1A1A', '#666666', '#B3B3B3']; // Dark theme colors
-const DARK_COLORS = ['#F4F1EE', '#A3A3A3', '#525252']; // Light theme colors to contrast with dark mode
+const COLORS = ['#3B82F6', '#10B981', '#F59E0B']; // Vibrant modern colors for charts
 
 export const InsightsDashboard: React.FC<InsightsDashboardProps> = ({ data }) => {
   // Completion metrics
@@ -32,13 +31,12 @@ export const InsightsDashboard: React.FC<InsightsDashboardProps> = ({ data }) =>
   ];
 
   // Timeline & Cost estimates
-  // Attempt to parse project cost to a number
   const costString = data.projectCost ? data.projectCost.toString().replace(/[^0-9.]/g, '') : '0';
   const parsedCost = parseFloat(costString);
   const formattedCost = isNaN(parsedCost) ? 'N/A' : new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(parsedCost).replace('$', data.currencySymbol || '$');
 
   return (
-    <div className="bg-[#F4F1EE] dark:bg-[#121212] border border-black dark:border-white/10 shadow-sm p-4 md:p-8 min-h-[calc(100vh-80px)] overflow-y-auto">
+    <div className="bg-[#F4F1EE] dark:bg-[#121212] border border-black dark:border-white/10 shadow-xs p-4 md:p-8 min-h-[calc(100vh-80px)] overflow-y-auto rounded-md">
       <div className="flex items-center space-x-2 mb-8 border-b border-black dark:border-white/20 pb-4">
         <LayoutDashboard className="w-6 h-6 text-black dark:text-white" />
         <h2 className="font-serif font-bold text-xl text-[#1A1A1A] dark:text-[#F4F1EE] uppercase tracking-wider">
@@ -48,7 +46,7 @@ export const InsightsDashboard: React.FC<InsightsDashboardProps> = ({ data }) =>
 
       {/* Metrics Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-        <div className="bg-white dark:bg-[#1E1E1E] p-6 border border-black dark:border-white/20 flex flex-col items-center text-center">
+        <div className="bg-white dark:bg-[#1A1A1A] p-6 border border-black/10 dark:border-white/15 rounded-md flex flex-col items-center text-center shadow-xs">
           <div className="flex items-center justify-center gap-2 mb-3 text-black/60 dark:text-white/60">
             <Target className="w-5 h-5" />
             <span className="text-[11px] font-bold uppercase tracking-wider">Completion</span>
@@ -61,7 +59,7 @@ export const InsightsDashboard: React.FC<InsightsDashboardProps> = ({ data }) =>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-[#1E1E1E] p-6 border border-black dark:border-white/20 flex flex-col items-center text-center">
+        <div className="bg-white dark:bg-[#1A1A1A] p-6 border border-black/10 dark:border-white/15 rounded-md flex flex-col items-center text-center shadow-xs">
           <div className="flex items-center justify-center gap-2 mb-3 text-black/60 dark:text-white/60">
             <DollarSign className="w-5 h-5" />
             <span className="text-[11px] font-bold uppercase tracking-wider">Est. Cost</span>
@@ -74,7 +72,7 @@ export const InsightsDashboard: React.FC<InsightsDashboardProps> = ({ data }) =>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-[#1E1E1E] p-6 border border-black dark:border-white/20 flex flex-col items-center text-center">
+        <div className="bg-white dark:bg-[#1A1A1A] p-6 border border-black/10 dark:border-white/15 rounded-md flex flex-col items-center text-center shadow-xs">
           <div className="flex items-center justify-center gap-2 mb-3 text-black/60 dark:text-white/60">
             <Layers className="w-5 h-5" />
             <span className="text-[11px] font-bold uppercase tracking-wider">Total Features</span>
@@ -95,7 +93,7 @@ export const InsightsDashboard: React.FC<InsightsDashboardProps> = ({ data }) =>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Feature Priority Chart */}
-        <div className="bg-white dark:bg-[#1E1E1E] p-6 border border-black dark:border-white/20">
+        <div className="bg-white dark:bg-[#1A1A1A] p-6 border border-black/10 dark:border-white/15 rounded-md shadow-xs">
           <h3 className="text-xs font-bold uppercase tracking-widest text-[#1A1A1A] dark:text-[#F4F1EE] mb-6 text-center border-b border-black/10 dark:border-white/10 pb-3">
             Feature Distribution
           </h3>
@@ -112,12 +110,11 @@ export const InsightsDashboard: React.FC<InsightsDashboardProps> = ({ data }) =>
                   dataKey="count"
                 >
                   {featureData.map((entry, index) => (
-                    <Cell key={`cell-\${index}`} fill={COLORS[index % COLORS.length]} />
+                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
                 <Tooltip
-                  contentStyle={{ backgroundColor: '#fff', border: '1px solid #000', fontSize: '12px' }}
-                  itemStyle={{ color: '#000' }}
+                  contentStyle={{ backgroundColor: 'var(--tooltip-bg, #1A1A1A)', color: '#F4F1EE', border: '1px solid rgba(255,255,255,0.2)', fontSize: '12px', borderRadius: '4px' }}
                 />
                 <Legend iconType="circle" wrapperStyle={{ fontSize: '11px', paddingTop: '20px' }} />
               </PieChart>
@@ -126,21 +123,21 @@ export const InsightsDashboard: React.FC<InsightsDashboardProps> = ({ data }) =>
         </div>
 
         {/* Priority Bar Chart (Alternative View) */}
-        <div className="bg-white dark:bg-[#1E1E1E] p-6 border border-black dark:border-white/20">
+        <div className="bg-white dark:bg-[#1A1A1A] p-6 border border-black/10 dark:border-white/15 rounded-md shadow-xs">
           <h3 className="text-xs font-bold uppercase tracking-widest text-[#1A1A1A] dark:text-[#F4F1EE] mb-6 text-center border-b border-black/10 dark:border-white/10 pb-3">
             Priority Breakdown
           </h3>
           <div className="h-[300px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={featureData} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e5e5e5" />
-                <XAxis dataKey="name" tick={{ fontSize: 11 }} axisLine={false} tickLine={false} />
-                <YAxis allowDecimals={false} tick={{ fontSize: 11 }} axisLine={false} tickLine={false} />
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(150,150,150,0.2)" />
+                <XAxis dataKey="name" tick={{ fontSize: 11, fill: 'currentColor' }} axisLine={false} tickLine={false} />
+                <YAxis allowDecimals={false} tick={{ fontSize: 11, fill: 'currentColor' }} axisLine={false} tickLine={false} />
                 <Tooltip
-                  cursor={{ fill: 'rgba(0,0,0,0.05)' }}
-                  contentStyle={{ backgroundColor: '#fff', border: '1px solid #000', fontSize: '12px' }}
+                  cursor={{ fill: 'rgba(255,255,255,0.05)' }}
+                  contentStyle={{ backgroundColor: 'var(--tooltip-bg, #1A1A1A)', color: '#F4F1EE', border: '1px solid rgba(255,255,255,0.2)', fontSize: '12px', borderRadius: '4px' }}
                 />
-                <Bar dataKey="count" fill="#1A1A1A" radius={[2, 2, 0, 0]} />
+                <Bar dataKey="count" fill="#3B82F6" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>

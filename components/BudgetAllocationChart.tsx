@@ -126,10 +126,12 @@ export const BudgetAllocationChart: React.FC<BudgetAllocationChartProps> = ({ da
                   `${name} (${item.payload.percentage}%)`
                 ]}
                 contentStyle={{
-                  backgroundColor: '#fff',
-                  border: '1px solid #000',
+                  backgroundColor: '#1A1A1A',
+                  color: '#F4F1EE',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
                   fontSize: '12px',
                   fontWeight: 'bold',
+                  borderRadius: '4px'
                 }}
               />
             </PieChart>
@@ -141,14 +143,11 @@ export const BudgetAllocationChart: React.FC<BudgetAllocationChartProps> = ({ da
           {budgetData.map((item, idx) => (
             <div
               key={idx}
-              className="flex items-center justify-between p-2.5 border border-black/10 dark:border-white/10 bg-[#FAFAFA] dark:bg-[#121212] text-[11px]"
+              className="flex items-center justify-between p-2.5 border border-black/10 dark:border-white/10 bg-[#FAFAFA] dark:bg-[#121212] text-[11px] rounded-xs"
             >
               <div className="flex items-center space-x-2.5 min-w-0 pr-2">
                 <span
-                  className="w-3 h-3 shrink-0 rounded-none border border-black/20 dark:border-white/20"
-                  style={{
-                    backgroundColor: SLICE_COLORS[idx % SLICE_COLORS.length],
-                  }}
+                  className="w-3 h-3 shrink-0 rounded-xs border border-black/20 dark:border-white/20 bg-slate-800 dark:bg-slate-200"
                 />
                 <span className="font-bold text-black dark:text-white truncate" title={item.name}>
                   {item.name}
