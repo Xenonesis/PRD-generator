@@ -3,8 +3,8 @@ import './globals.css'; // Global styles
 import { ThemeProvider } from '@/components/theme-provider';
 
 export const metadata: Metadata = {
-  title: 'My Google AI Studio App',
-  description: 'My Google AI Studio App',
+  title: 'PRD Generator & Agreement Builder',
+  description: 'AI-assisted product requirement document (PRD) generation and agreement building',
 };
 
 export const viewport: Viewport = {
