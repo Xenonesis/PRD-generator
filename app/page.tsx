@@ -17,6 +17,7 @@ import { VersionHistoryDrawer } from "@/components/VersionHistoryDrawer";
 import { DocumentBrandingModal } from "@/components/DocumentBrandingModal";
 import { PRDData, EMPTY_PRD, prdToMarkdown } from "@/types/prd";
 import { PRD_TEMPLATES } from "@/lib/templates";
+import { normalizePRD } from "@/lib/normalize";
 import {
   exportToHighFidelityPDF,
   exportTextSummaryWithJsPDF,
@@ -114,9 +115,10 @@ export default function Home() {
 
   // Save current draft to local storage on change
   const handlePRDChange = (updated: PRDData) => {
-    setPrdData(updated);
+    const normalized = normalizePRD(updated);
+    setPrdData(normalized);
     try {
-      localStorage.setItem("prdforge_current_draft", JSON.stringify(updated));
+      localStorage.setItem("prdforge_current_draft", JSON.stringify(normalized));
     } catch (e) {
       console.error("Failed to save draft", e);
     }
@@ -492,9 +494,9 @@ export default function Home() {
         onClose={() => setIsBrandingOpen(false)}
         prdData={prdData}
         onSave={(updates) => {
-          setPrdData(prev => ({ ...prev, ...updates }));
+          setPrdData(prev => normalizePRD({ ...prev, ...updates }));
           // Add to history
-          setPrdHistory(prev => [...prev, { timestamp: Date.now(), data: { ...prdData, ...updates } }]);
+          setPrdHistory(prev => [...prev, { timestamp: Date.now(), data: normalizePRD({ ...prdData, ...updates }) }]);
         }}
       />
       

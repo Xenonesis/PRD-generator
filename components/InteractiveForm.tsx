@@ -49,7 +49,7 @@ export const getSectionAudits = (d: PRDData): SectionAudit[] => [
     isComplete: Boolean(
       d.projectName?.trim() &&
       d.clientName?.trim() &&
-      d.projectCost?.trim()
+      String(d.projectCost ?? '').trim()
     ),
     missingDetail: 'Fill project name, client name, and project cost'
   },

@@ -8,7 +8,7 @@ export interface PRDTemplate {
   data: PRDData;
 }
 
-export const PRD_TEMPLATES: PRDTemplate[] = [
+const BASE_TEMPLATES: PRDTemplate[] = [
   {
     id: 'ecommerce-marketplace',
     name: 'E-Commerce Marketplace',
@@ -158,13 +158,10 @@ export const PRD_TEMPLATES: PRDTemplate[] = [
         admin: 'Executive management, finance head, and fleet directors'
       }
     }
-  },
-  {
-    id: 'bizbuddy-loan-crm',
-    name: 'BizBuddy Loan CRM & Finance Lead Management (MVP)',
-    description: 'Loan CRM & Finance Lead Management System MVP for BizBuddy with branch, employee, agent, customer lead tracking, and report management.',
-    category: 'Finance & CRM',
-    data: {
+  }
+];
+
+const BIZBUDDY_LOAN_CRM_BASE: PRDData = {
       ...EMPTY_PRD,
       projectName: 'Loan CRM & Finance Lead Management System (MVP)',
       clientName: 'BizBuddy',
@@ -349,6 +346,55 @@ export const PRD_TEMPLATES: PRDTemplate[] = [
         'MySQL Database Dump & Schema Scripts',
         'Admin, Employee & Agent Web Application Deployment',
         'Basic API Documentation & User Manual'
+      ]
+};
+
+export const PRD_TEMPLATES: PRDTemplate[] = [
+  ...BASE_TEMPLATES,
+  {
+    id: 'bizbuddy-loan-crm',
+    name: 'BizBuddy Loan CRM & Finance Lead Management (MVP)',
+    description: 'Loan CRM & Finance Lead Management System MVP for BizBuddy with branch, employee, agent, customer lead tracking, and report management.',
+    category: 'Finance & CRM',
+    data: BIZBUDDY_LOAN_CRM_BASE
+  },
+  {
+    id: 'bizbuddy-loan-crm-3week',
+    name: 'BizBuddy Loan CRM & Finance Lead Management (3-Week MVP)',
+    description: '3-week delivery variant of the Loan CRM MVP: branch, employee, agent, customer lead tracking, documents, follow-ups and reports on a compressed schedule.',
+    category: 'Finance & CRM',
+    data: {
+      ...BIZBUDDY_LOAN_CRM_BASE,
+      docVersion: '1.1',
+      date: '05/08/2026',
+      estimatedTimeline: '3 Weeks',
+      projectDescription: BIZBUDDY_LOAN_CRM_BASE.projectDescription + ' Delivered under an accelerated 3-week schedule with streamlined MVP scope.',
+      documentApproval: {
+        ...BIZBUDDY_LOAN_CRM_BASE.documentApproval,
+        prdVersion: '1.1',
+        expectedDeliveryDate: '26/08/2026'
+      },
+      timelinePhases: [
+        { phase: 'Week 1: Foundation, Auth & Admin Setup', duration: '1 Week (UI Design System, MySQL Schema, JWT Auth & RBAC, Admin Panel Shell, Branch/Employee/Agent Management, Bank & Product Masters)' },
+        { phase: 'Week 2: Lead CRM & Document Management', duration: '1 Week (Lead Management & 9-Stage Workflow, Lead Details & Timeline, Document Upload/Vault, Follow-up CRM & Dashboard Reminders)' },
+        { phase: 'Week 3: Reports, QA & Deployment', duration: '1 Week (Dashboards & Reports with Excel Export, Notifications, Company Settings, Responsive QA, Bug Fixes, UAT & Server Deployment)' }
+      ],
+      paymentStructure: [
+        { percentage: '30%', milestone: 'Advance / Project Kickoff', description: 'Payable upon PRD approval and database setup (Week 1)' },
+        { percentage: '40%', milestone: 'Mid-Term Core Lead CRM', description: 'Payable after completion of Lead Management & Document Vault (Week 2)' },
+        { percentage: '30%', milestone: 'Final Deployment & UAT Handover', description: 'Payable upon successful deployment and UAT signoff (Week 3)' }
+      ],
+      outOfScope: [
+        ...BIZBUDDY_LOAN_CRM_BASE.outOfScope,
+        'Advanced Audit Logs & Detailed Activity History (basic activity logging only)',
+        'Bulk Lead Operations (bulk assign, bulk status update, bulk delete)',
+        'Custom / Ad-hoc Reports beyond the 7 standard reports listed in this PRD'
+      ],
+      limitations: [
+        ...BIZBUDDY_LOAN_CRM_BASE.limitations,
+        '3-week delivery assumes the streamlined MVP scope defined in this PRD; any addition requires a Change Request with revised commercial estimate.',
+        'Client feedback and asset approvals must be provided within 24 hours to hold the 3-week delivery schedule.',
+        'QA runs in parallel with development from Week 2 to protect the compressed timeline.'
       ]
     }
   }
