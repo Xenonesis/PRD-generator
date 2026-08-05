@@ -35,6 +35,19 @@ body {
   .no-print {
     display: none !important;
   }
+  
+  /* Hide common extension injected popups (Monica, Sider, etc.) */
+  monica-content-root, 
+  sider-root, 
+  #monica-content-root, 
+  #sider-root, 
+  [id^="chrome-extension-"],
+  [class*="monica-"],
+  [class*="sider-"],
+  [data-monica-id] {
+    display: none !important;
+  }
+
   .print-container {
     box-shadow: none !important;
     border: none !important;
