@@ -447,6 +447,7 @@ export default function Home() {
               onMarkdownChange={(newMd) => {
                 // If user directly edits markdown
               }}
+              onPRDUpdate={handlePRDChange}
               onCopy={handleCopyMarkdown}
               copied={copied}
             />
