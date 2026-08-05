@@ -58,6 +58,7 @@ export default function Home() {
   const [pendingPdfWatermark, setPendingPdfWatermark] = useState<
     string | undefined
   >();
+  const [isFocusMode, setIsFocusMode] = useState(false);
 
   // Load saved draft from localStorage after hydration (avoids SSR mismatch)
   useEffect(() => {
@@ -311,12 +312,11 @@ export default function Home() {
                 style={{ width: `${pdfExportProgress}%` }}
               />
             </div>
-            <p className="text-xs text-black/40 dark:text-white/40 mt-4 text-center">
-              Please wait, this may take a few moments...
-            </p>
           </div>
         </div>
       )}
+
+      {!isFocusMode && (
 
       <Navbar
         viewMode={viewMode}
@@ -343,11 +343,12 @@ export default function Home() {
         isFullscreen={isFullscreen}
         onToggleFullscreen={handleToggleFullscreen}
       />
+      )}
 
       {/* Main Workspace Area */}
-      <main className="flex-1 w-full mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 pb-6">
+      <main className={`flex-1 w-full mx-auto px-4 sm:px-6 lg:px-8 pb-6 ${isFocusMode ? 'pt-4' : 'pt-20 sm:pt-24'}`}>
         {/* Workflow Stepper */}
-        {!isFullscreen && (
+        {!isFullscreen && !isFocusMode && (
           <WorkflowStepper 
             data={prdData}
             currentStep={currentStep}
@@ -389,25 +390,37 @@ export default function Home() {
 
         {/* View Layouts */}
         {viewMode === "editor" && (
-          <div className="animate-fade-in w-full min-w-0">
-            <InteractiveForm data={prdData} onChange={handlePRDChange} />
+          <div className={`w-full min-w-0 ${isFocusMode ? '' : 'animate-fade-in'}`}>
+            <InteractiveForm 
+              data={prdData} 
+              onChange={handlePRDChange} 
+              isFocusMode={isFocusMode}
+              setIsFocusMode={setIsFocusMode}
+            />
           </div>
         )}
 
         {viewMode === "split" && (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 animate-fade-in w-full min-w-0">
-            <div className="lg:col-span-6 xl:col-span-5 no-print min-w-0">
-              <div className="lg:sticky lg:top-20 min-w-0">
-                <InteractiveForm data={prdData} onChange={handlePRDChange} />
+          <div className={`w-full min-w-0 ${isFocusMode ? '' : 'grid grid-cols-1 lg:grid-cols-12 gap-6 animate-fade-in'}`}>
+            <div className={`${isFocusMode ? '' : 'lg:col-span-6 xl:col-span-5 no-print min-w-0'}`}>
+              <div className={`${isFocusMode ? '' : 'lg:sticky lg:top-20 min-w-0'}`}>
+                <InteractiveForm 
+                  data={prdData} 
+                  onChange={handlePRDChange} 
+                  isFocusMode={isFocusMode}
+                  setIsFocusMode={setIsFocusMode}
+                />
               </div>
             </div>
-            <div className="lg:col-span-6 xl:col-span-7 min-w-0">
-              <DocumentView data={prdData} printMode={printMode} />
-            </div>
+            {!isFocusMode && (
+              <div className="lg:col-span-6 xl:col-span-7 min-w-0">
+                <DocumentView data={prdData} printMode={printMode} />
+              </div>
+            )}
           </div>
         )}
 
-        {viewMode === "preview" && (
+        {!isFocusMode && viewMode === "preview" && (
           <div className="animate-fade-in w-full min-w-0 max-w-[1400px] mx-auto flex gap-6 px-4">
             <div className="hidden lg:block w-64 shrink-0 mt-4">
               <div className="sticky top-20 max-h-[85vh] overflow-y-auto no-scrollbar shadow-lg">
@@ -421,13 +434,13 @@ export default function Home() {
         )}
 
         
-        {viewMode === "insights" && (
+        {!isFocusMode && viewMode === "insights" && (
           <div className="animate-fade-in w-full min-w-0">
             <InsightsDashboard data={prdData} />
           </div>
         )}
 
-        {viewMode === "markdown" && (
+        {!isFocusMode && viewMode === "markdown" && (
           <div className="animate-fade-in w-full min-w-0">
             <MarkdownView
               markdownText={prdToMarkdown(prdData)}
@@ -512,7 +525,7 @@ export default function Home() {
       />
 
       {/* Footer */}
-      {!isFullscreen && (
+      {!isFullscreen && !isFocusMode && (
         <footer className="no-print border-t border-black dark:border-white/10 bg-[#F4F1EE] dark:bg-[#121212] py-6 text-center text-xs text-black/50 dark:text-white/50">
           <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
             <span>

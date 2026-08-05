@@ -31,6 +31,8 @@ import { SignatureCapture } from '@/components/SignatureCapture';
 interface InteractiveFormProps {
   data: PRDData;
   onChange: (updated: PRDData) => void;
+  isFocusMode?: boolean;
+  setIsFocusMode?: (mode: boolean) => void;
 }
 
 export interface SectionAudit {
@@ -370,8 +372,16 @@ export const getSectionAudits = (d: PRDData): SectionAudit[] => [
   }
 ];
 
-export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange }) => {
-  const [isFocusMode, setIsFocusMode] = useState(false);
+export const InteractiveForm: React.FC<InteractiveFormProps> = ({ 
+  data, 
+  onChange, 
+  isFocusMode: externalIsFocusMode,
+  setIsFocusMode: externalSetIsFocusMode
+}) => {
+  const [internalIsFocusMode, setInternalIsFocusMode] = useState(false);
+  const isFocusMode = externalIsFocusMode ?? internalIsFocusMode;
+  const setIsFocusMode = externalSetIsFocusMode ?? setInternalIsFocusMode;
+
   const [activeTab, setActiveTab] = useState<string>('header');
   const [summaryFilter, setSummaryFilter] = useState<'all' | 'incomplete' | 'complete'>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
