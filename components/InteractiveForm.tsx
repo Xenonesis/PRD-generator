@@ -574,7 +574,7 @@ export const InteractiveForm: React.FC<InteractiveFormProps> = ({ data, onChange
   ];
 
   return (
-    <div id="prd-editor-top" className={`bg-white dark:bg-[#141414] border border-neutral-200 dark:border-white/[0.07] text-neutral-900 dark:text-neutral-100 shadow-lg rounded-2xl overflow-hidden w-full min-w-0 no-print flex flex-col ${isFocusMode ? "fixed inset-0 z-[200]" : "h-[calc(100vh-240px)] min-h-[500px]"}`}>
+    <div id="prd-editor-top" className={`bg-white dark:bg-[#141414] border border-neutral-200 dark:border-white/[0.07] text-neutral-900 dark:text-neutral-100 shadow-lg rounded-2xl overflow-hidden w-full min-w-0 no-print flex flex-col ${isFocusMode ? "fixed inset-0 z-[200]" : "h-[calc(100vh-160px)] min-h-[500px]"}`}>
       {isFocusMode && (
         <div className="sticky top-0 z-[210] flex justify-between items-center p-4 bg-[#EFECE7]/90 dark:bg-[#1E1E1E]/90 backdrop-blur-sm border-b border-black/10 dark:border-white/10">
           <div className="flex items-center gap-4">

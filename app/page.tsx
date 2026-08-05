@@ -389,7 +389,7 @@ export default function Home() {
 
         {/* View Layouts */}
         {viewMode === "editor" && (
-          <div className="animate-fade-in max-w-5xl mx-auto w-full min-w-0">
+          <div className="animate-fade-in w-full min-w-0">
             <InteractiveForm data={prdData} onChange={handlePRDChange} />
           </div>
         )}
