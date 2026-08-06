@@ -82,7 +82,7 @@ export const getSectionAudits = (d: PRDData): SectionAudit[] => [
        d.includedPlatforms.androidApp ||
        d.includedPlatforms.iosApp ||
        d.includedPlatforms.apiBackend ||
-       Boolean(d.includedPlatforms.other?.trim()))
+       (typeof d.includedPlatforms.other === 'string' ? Boolean(d.includedPlatforms.other.trim()) : Boolean(d.includedPlatforms.other)))
     ),
     missingDetail: 'Select at least one included target platform'
   },
